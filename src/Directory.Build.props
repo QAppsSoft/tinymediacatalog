@@ -1,0 +1,12 @@
+﻿<Project>
+    <ItemGroup>
+        <PackageReference Include="Roslynator.Analyzers" />
+        <PackageReference Include="SonarAnalyzer.CSharp" />        
+        <PackageReference Include="Meziantou.Analyzer">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>        
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" />
+        <PackageReference Include="ReactiveMarbles.ObservableEvents.SourceGenerator" />
+    </ItemGroup>
+</Project>
