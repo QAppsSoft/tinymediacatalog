@@ -24,7 +24,7 @@ public class Kodi : IOInterface
         movieModel.Title = XRead.GetString(xmlReader, "title");
         
         // Original title
-        movieModel.Title = XRead.GetString(xmlReader, "originaltitle");
+        movieModel.OriginalTitle = XRead.GetString(xmlReader, "originaltitle");
         
         // Year
         movieModel.Year = XRead.GetInt(xmlReader, "year");
