@@ -81,6 +81,7 @@ public class Kodi : IOInterface
         // Tags
         
         // Cast (actors)
+        movieModel.Cast = GetCast(xmlReader);
         
         // Trailer
         
@@ -92,4 +93,26 @@ public class Kodi : IOInterface
         
         // Fileinfo
     }
+
+    private static List<ActorModel> GetCast(XmlDocument xmlReader) =>
+        xmlReader.GetElementsByTagName("actor").Cast<XmlElement>()
+            .Select(node =>
+            {
+                var document = XRead.OpenXml("<x>" + node.InnerXml + "</x>");
+
+                var name = XRead.GetString(document, "name");
+                var role = XRead.GetString(document, "role");
+                var thumb = XRead.GetString(document, "thumb");
+                var profile = XRead.GetString(document, "profile");
+                var tmdbid = XRead.GetInt(document, "tmdbid");
+
+                return new ActorModel
+                {
+                    Name = name,
+                    Role = role,
+                    Thumb = thumb,
+                    Profile = profile,
+                    TmdbId = tmdbid,
+                };
+            }).ToList();
 }

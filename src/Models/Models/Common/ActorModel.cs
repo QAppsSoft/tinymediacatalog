@@ -10,5 +10,5 @@ public class ActorModel
 
     public string Profile { get; set; }
 
-    public string TmdbId { get; set; }
+    public int TmdbId { get; set; }
 }
