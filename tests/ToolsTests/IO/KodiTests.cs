@@ -35,8 +35,6 @@ public class KodiTests
         movieModel.Tmdbid.Should().Be(9799);
 
         movieModel.Premiered.Should().Be(DateTime.Parse("2001-10-05", CultureInfo.InvariantCulture));
-
-        movieModel.Languages.Should().Be("inglés");
         movieModel.DateAdded.Should().Be(DateTime.Parse("2024-03-09 06:14:29", CultureInfo.InvariantCulture));
     }
 
@@ -58,6 +56,19 @@ public class KodiTests
             TmdbId = 8167,
         });
     }
+    
+    [Test]
+    public void LoadMovie_NFO_with_Kodi_should_return_correct_languages_data()
+    {
+        var movieModel = new MovieModel { NfoPathOnDisk = Resources.GetResourceFilePath(Resources.KodiMovieNfo) };
+        var kodi = new Kodi();
+
+        kodi.LoadMovie(movieModel);
+        
+        movieModel.Languages.Count.Should().Be(2);
+        movieModel.Languages.Should().BeEquivalentTo(["inglés", "español"]);
+    }
+    
     [Test]
     public void Empty_NFO_file_should_not_update_MovieModel()
     {

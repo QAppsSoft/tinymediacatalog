@@ -1,4 +1,6 @@
-﻿using Models.MovieModels;
+﻿using System.Xml;
+using Models.Common;
+using Models.MovieModels;
 using Tools.Enums;
 using Tools.XML;
 
@@ -86,7 +88,7 @@ public class Kodi : IOInterface
         // Trailer
         
         // Languages (original)
-        movieModel.Languages = XRead.GetString(xmlReader, "languages");
+        movieModel.Languages = XRead.GetString(xmlReader, "languages").Split(',').ToList();
         
         // Date added
         movieModel.DateAdded = XRead.GetDateTime(xmlReader, "dateadded");

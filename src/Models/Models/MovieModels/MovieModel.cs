@@ -66,7 +66,7 @@ public class MovieModel
 
     public string Trailer { get; set; }
 
-    public string Languages { get; set; }
+    public List<string> Languages { get; set; }
 
     public DateTime DateAdded { get; set; }
 
