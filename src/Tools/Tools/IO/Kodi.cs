@@ -57,7 +57,7 @@ public class Kodi : IOInterface
         movieModel.Id = XRead.GetString(xmlReader, "id");
         
         // TmdbId
-        movieModel.Tmdbid = XRead.GetString(xmlReader, "tmdbid");
+        movieModel.Tmdbid = XRead.GetInt(xmlReader, "tmdbid");
         
         // Uniqueids
         

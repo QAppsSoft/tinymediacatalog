@@ -40,7 +40,7 @@ public class MovieModel
 
     public string Id { get; set; }
 
-    public string Tmdbid { get; set; }
+    public int Tmdbid { get; set; }
 
     public List<UniqueIdModel> UniqueIds { get; set; }
 
