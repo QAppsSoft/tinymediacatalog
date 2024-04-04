@@ -27,6 +27,13 @@ public class StorageFixture : IDisposable
         return path;
     }
 
+    public string GetEmptyFile(string? extension = null)
+    {
+        var emptyFile = GetTemporalFileName(extension);
+        File.Create(emptyFile).Dispose();
+        return emptyFile;
+    }
+
     public void Dispose()
     {
         for (var i = 0; i < 10; i++)
