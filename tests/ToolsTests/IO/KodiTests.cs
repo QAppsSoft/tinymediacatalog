@@ -1,0 +1,41 @@
+﻿using System.Globalization;
+using Models.MovieModels;
+using TestsCommons;
+using Tools.IO;
+
+namespace ToolsTests.IO;
+
+[TestFixture]
+public class KodiTests
+{
+    [Test]
+    public void LoadMovie_NFO_with_Kodi_should_return_correct_basic_data()
+    {
+        var movieModel = new MovieModel { NfoPathOnDisk = Resources.GetResourceFilePath(Resources.KodiMovieNfo) };
+        var kodi = new Kodi();
+
+        kodi.LoadMovie(movieModel);
+        
+        // Assert
+        movieModel.Title.Should().Be("A todo gas");
+        movieModel.OriginalTitle.Should().Be("The Fast and the Furious");
+        movieModel.Year.Should().Be(2001);
+
+        movieModel.Plot.Should().Be(
+            "Una misteriosa banda de delincuentes se dedica a robar camiones en plena marcha desde vehículos deportivos. La policía decide infiltrar a un hombre en el mundo de las carreras ilegales para descubrir posibles sospechosos. El joven y apuesto Brian entra en el mundo del tuning donde conoce a Dominic, rey indiscutible de este mundo y sospechoso número uno, pero todo se complica cuando se enamora de la hermana de éste.");
+        movieModel.Outline.Should().Be(
+            "Una misteriosa banda de delincuentes se dedica a robar camiones en plena marcha desde vehículos deportivos. La policía decide infiltrar a un hombre en el mundo de las carreras ilegales para descubrir posibles sospechosos. El joven y apuesto Brian entra en el mundo del tuning donde conoce a Dominic, rey indiscutible de este mundo y sospechoso número uno, pero todo se complica cuando se enamora de la hermana de éste.");
+        movieModel.Tagline.Should().Be("Cuando el sol se oculta, otro mundo cobra vida.");
+        movieModel.Runtime.Should().Be(109);
+
+        movieModel.Mpaa.Should().Be("12");
+        movieModel.Certification.Should().Be("12");
+        movieModel.Id.Should().Be("tt0232500");
+        movieModel.Tmdbid.Should().Be(9799);
+
+        movieModel.Premiered.Should().Be(DateTime.Parse("2001-10-05", CultureInfo.InvariantCulture));
+
+        movieModel.Languages.Should().Be("inglés");
+        movieModel.DateAdded.Should().Be(DateTime.Parse("2024-03-09 06:14:29", CultureInfo.InvariantCulture));
+    }
+}
