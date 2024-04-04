@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Models.Common;
 using Models.MovieModels;
 using TestsCommons;
 using Tools.IO;
@@ -39,6 +40,24 @@ public class KodiTests
         movieModel.DateAdded.Should().Be(DateTime.Parse("2024-03-09 06:14:29", CultureInfo.InvariantCulture));
     }
 
+    [Test]
+    public void LoadMovie_NFO_with_Kodi_should_return_correct_cast_data()
+    {
+        var movieModel = new MovieModel { NfoPathOnDisk = Resources.GetResourceFilePath(Resources.KodiMovieNfo) };
+        var kodi = new Kodi();
+
+        kodi.LoadMovie(movieModel);
+        
+        movieModel.Cast.Count.Should().NotBe(0);
+        movieModel.Cast[0].Should().BeEquivalentTo(new ActorModel
+        {
+            Name = "Paul Walker",
+            Role = "Brian O'Conner",
+            Thumb = "https://image.tmdb.org/t/p/h632/q2PLqKHYCs35HR7QybaNPH3JT96.jpg",
+            Profile = "https://www.themoviedb.org/person/8167",
+            TmdbId = 8167,
+        });
+    }
     [Test]
     public void Empty_NFO_file_should_not_update_MovieModel()
     {
