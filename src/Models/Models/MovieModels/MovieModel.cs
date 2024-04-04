@@ -14,7 +14,7 @@ public class MovieModel
 
     public string EpBookmark { get; set; }
 
-    public string Year { get; set; }
+    public int Year { get; set; }
 
     public RatingsModel Ratings { get; set; }
 
@@ -30,7 +30,7 @@ public class MovieModel
 
     public string Tagline { get; set; }
 
-    public string Runtime { get; set; }
+    public int Runtime { get; set; }
 
     public ThumbModel Thumb { get; set; }
 
@@ -42,7 +42,7 @@ public class MovieModel
 
     public string Tmdbid { get; set; }
 
-    public List<UniqueIdModel> UniqueId { get; set; }
+    public List<UniqueIdModel> UniqueIds { get; set; }
 
     public List<string> Country { get; set; }
 
@@ -50,17 +50,17 @@ public class MovieModel
 
     public string Code { get; set; }
 
-    public string Premiered { get; set; }
+    public DateTime Premiered { get; set; } // TODO: Use DateOnly
 
     public string Watched { get; set; }
 
     public string PlayCount { get; set; }
 
-    public List<string> Genre { get; set; }
+    public List<string> Genres { get; set; }
 
-    public List<string> Studio { get; set; }
+    public List<string> Studios { get; set; }
 
-    public List<string> Tag { get; set; }
+    public List<string> Tags { get; set; }
 
     public List<ActorModel> Cast { get; set; }
 
@@ -68,7 +68,7 @@ public class MovieModel
 
     public string Languages { get; set; }
 
-    public string DateAdded { get; set; }
+    public DateTime DateAdded { get; set; }
 
     public string LockData { get; set; }
 
