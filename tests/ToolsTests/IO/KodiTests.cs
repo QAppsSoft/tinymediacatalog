@@ -38,4 +38,17 @@ public class KodiTests
         movieModel.Languages.Should().Be("inglés");
         movieModel.DateAdded.Should().Be(DateTime.Parse("2024-03-09 06:14:29", CultureInfo.InvariantCulture));
     }
+
+    [Test]
+    public void Empty_NFO_file_should_not_update_MovieModel()
+    {
+        using var storage = new StorageFixture();
+        var emptyFile = storage.GetEmptyFile(".nfo");
+        var movieModel = new MovieModel { NfoPathOnDisk = emptyFile, Title = "Test title"};
+        var kodi = new Kodi();
+
+        kodi.LoadMovie(movieModel);
+
+        movieModel.Title.Should().Be("Test title");
+    }
 }
