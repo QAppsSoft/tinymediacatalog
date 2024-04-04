@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--created on 2024-04-02 10:11:21 - tinyMediaManager 5.0.2-->
+<movie>
+  <title>A todo gas</title>
+  <originaltitle>The Fast and the Furious</originaltitle>
+  <sorttitle/>
+  <epbookmark/>
+  <year>2001</year>
+  <ratings>
+    <rating default="false" max="10" name="themoviedb">
+      <value>7.0</value>
+      <votes>9572</votes>
+    </rating>
+  </ratings>
+  <userrating>0</userrating>
+  <top250>0</top250>
+  <set>
+    <name>A todo gas - Colección</name>
+    <overview>Películas de acción donde el origen es dar caza a unos corredores ilegales que cometen robos. La historia avanza y las tornas cambian y forman un equipo para ayudar al FBI, pero... ¿seguirán así por mucho tiempo?</overview>
+  </set>
+  <plot>Una misteriosa banda de delincuentes se dedica a robar camiones en plena marcha desde vehículos deportivos. La policía decide infiltrar a un hombre en el mundo de las carreras ilegales para descubrir posibles sospechosos. El joven y apuesto Brian entra en el mundo del tuning donde conoce a Dominic, rey indiscutible de este mundo y sospechoso número uno, pero todo se complica cuando se enamora de la hermana de éste.</plot>
+  <outline>Una misteriosa banda de delincuentes se dedica a robar camiones en plena marcha desde vehículos deportivos. La policía decide infiltrar a un hombre en el mundo de las carreras ilegales para descubrir posibles sospechosos. El joven y apuesto Brian entra en el mundo del tuning donde conoce a Dominic, rey indiscutible de este mundo y sospechoso número uno, pero todo se complica cuando se enamora de la hermana de éste.</outline>
+  <tagline>Cuando el sol se oculta, otro mundo cobra vida.</tagline>
+  <runtime>109</runtime>
+  <thumb aspect="poster">https://image.tmdb.org/t/p/original/rCdEN70nBLJfrzE7NwPtCSxjjrA.jpg</thumb>
+  <mpaa>12</mpaa>
+  <certification>12</certification>
+  <id>tt0232500</id>
+  <tmdbid>9799</tmdbid>
+  <uniqueid default="false" type="tmdb">9799</uniqueid>
+  <uniqueid default="false" type="tmdbSet">9485</uniqueid>
+  <uniqueid default="true" type="imdb">tt0232500</uniqueid>
+  <uniqueid default="false" type="wikidata">Q155476</uniqueid>
+  <country>Alemania</country>
+  <country>Estados Unidos</country>
+  <status/>
+  <code/>
+  <premiered>2001-10-05</premiered>
+  <watched>false</watched>
+  <playcount>0</playcount>
+  <genre>Acción</genre>
+  <genre>Crimen</genre>
+  <genre>Thriller</genre>
+  <studio>Ardustry Entertainment</studio>
+  <studio>Universal Pictures</studio>
+  <studio>Original Film</studio>
+  <studio>Mediastream Film GmbH &amp; Co. Productions KG</studio>
+  <tag>street gang</tag>
+  <tag>undercover</tag>
+  <tag>car race</tag>
+  <tag>auto-tuning</tag>
+  <tag>street race</tag>
+  <tag>los angeles, california</tag>
+  <tag>aftercreditsstinger</tag>
+  <tag>duringcreditsstinger</tag>
+  <tag>based on magazine, newspaper or article</tag>
+  <actor>
+    <name>Paul Walker</name>
+    <role>Brian O'Conner</role>
+    <thumb>https://image.tmdb.org/t/p/h632/q2PLqKHYCs35HR7QybaNPH3JT96.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/8167</profile>
+    <tmdbid>8167</tmdbid>
+  </actor>
+  <actor>
+    <name>Vin Diesel</name>
+    <role>Dominic Toretto</role>
+    <thumb>https://image.tmdb.org/t/p/h632/7rwSXluNWZAluYMOEWBxkPmckES.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/12835</profile>
+    <tmdbid>12835</tmdbid>
+  </actor>
+  <actor>
+    <name>Michelle Rodriguez</name>
+    <role>Letty Ortiz</role>
+    <thumb>https://image.tmdb.org/t/p/h632/xSvkVrLz6xas1mCeOR9i4QtmhnQ.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/17647</profile>
+    <tmdbid>17647</tmdbid>
+  </actor>
+  <actor>
+    <name>Jordana Brewster</name>
+    <role>Mia Toretto</role>
+    <thumb>https://image.tmdb.org/t/p/h632/8VzFsSfT7NnMGyH5JQBQdTxDHcO.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/22123</profile>
+    <tmdbid>22123</tmdbid>
+  </actor>
+  <actor>
+    <name>Rick Yune</name>
+    <role>Johnny Tran</role>
+    <thumb>https://image.tmdb.org/t/p/h632/7m5r6pUvRiva6ybimn1XqxY4J85.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/10883</profile>
+    <tmdbid>10883</tmdbid>
+  </actor>
+  <actor>
+    <name>Chad Lindberg</name>
+    <role>Jesse</role>
+    <thumb>https://image.tmdb.org/t/p/h632/pBiIQrPTg55VOpBfdVJqVoEYqBN.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/9186</profile>
+    <tmdbid>9186</tmdbid>
+  </actor>
+  <actor>
+    <name>Johnny Strong</name>
+    <role>Leon</role>
+    <thumb>https://image.tmdb.org/t/p/h632/zMe5hbmaMA5Jr6uVwtojusANaCg.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/12796</profile>
+    <tmdbid>12796</tmdbid>
+  </actor>
+  <actor>
+    <name>Matt Schulze</name>
+    <role>Vince</role>
+    <thumb>https://image.tmdb.org/t/p/h632/wFOVJr3dxEs5kC2rtS5iV3XbU0C.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/31841</profile>
+    <tmdbid>31841</tmdbid>
+  </actor>
+  <actor>
+    <name>Ja Rule</name>
+    <role>Edwin</role>
+    <thumb>https://image.tmdb.org/t/p/h632/jiYEwuTCkp0vW14eHLFDRJ9v111.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/61658</profile>
+    <tmdbid>61658</tmdbid>
+  </actor>
+  <actor>
+    <name>Ted Levine</name>
+    <role>Sgt. Tanner</role>
+    <thumb>https://image.tmdb.org/t/p/h632/qRFq8y842T1uq51iQCwsEmQI3UT.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/15854</profile>
+    <tmdbid>15854</tmdbid>
+  </actor>
+  <actor>
+    <name>Thom Barry</name>
+    <role>Agent Bilkins</role>
+    <thumb>https://image.tmdb.org/t/p/h632/9XhXqoqKqfQHZ5kGtuSkldcKYSF.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/8175</profile>
+    <tmdbid>8175</tmdbid>
+  </actor>
+  <actor>
+    <name>Vyto Ruginis</name>
+    <role>Harry</role>
+    <thumb>https://image.tmdb.org/t/p/h632/les4ZXAb2TL1Crqa8DzGwLvwns5.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/61216</profile>
+    <tmdbid>61216</tmdbid>
+  </actor>
+  <actor>
+    <name>Stanton Rutledge</name>
+    <role>Muse</role>
+    <thumb>https://image.tmdb.org/t/p/h632/3TEla7z2aAsegy2QZcIch0p9DOO.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/1479424</profile>
+    <tmdbid>1479424</tmdbid>
+  </actor>
+  <actor>
+    <name>Noel Gugliemi</name>
+    <role>Hector</role>
+    <thumb>https://image.tmdb.org/t/p/h632/8jujXofjpSroMQ1R2JLB0GWIPor.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/53252</profile>
+    <tmdbid>53252</tmdbid>
+  </actor>
+  <actor>
+    <name>R.J. de Vera</name>
+    <role>Danny Yamato (as RJ De Vera)</role>
+    <thumb>https://image.tmdb.org/t/p/h632/l8l0bITBHyrsJ0zA3T6BoDgR41g.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/1479425</profile>
+    <tmdbid>1479425</tmdbid>
+  </actor>
+  <actor>
+    <name>Beau Holden</name>
+    <role>Ted Gassner</role>
+    <thumb>https://image.tmdb.org/t/p/h632/xX7z8gaCFbDVg0h1ftNATMV7Ss0.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/1005339</profile>
+    <tmdbid>1005339</tmdbid>
+  </actor>
+  <actor>
+    <name>Reggie Lee</name>
+    <role>Lance Nguyen</role>
+    <thumb>https://image.tmdb.org/t/p/h632/93my9HnsFT5DFq9oY1nCJ8Ttv22.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/22075</profile>
+    <tmdbid>22075</tmdbid>
+  </actor>
+  <actor>
+    <name>David Douglas</name>
+    <role>Rasta Racer</role>
+    <thumb>https://image.tmdb.org/t/p/h632/lDdmA75f7irhs9kq0s3W3WbvL5w.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/100538</profile>
+    <tmdbid>100538</tmdbid>
+  </actor>
+  <actor>
+    <name>Peter Navy Tuiasosopo</name>
+    <role>Samoan Guard</role>
+    <thumb>https://image.tmdb.org/t/p/h632/Aw70Db9jBi3bNElc8qExuiH6dus.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/84757</profile>
+    <tmdbid>84757</tmdbid>
+  </actor>
+  <actor>
+    <name>Neal H. Moritz</name>
+    <role>Ferrari Driver</role>
+    <thumb>https://image.tmdb.org/t/p/h632/pPvK5xZTp1PymWL5OGc7dtqvx9Q.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/11874</profile>
+    <tmdbid>11874</tmdbid>
+  </actor>
+  <actor>
+    <name>Doria Anselmo</name>
+    <role>Ferrari Passenger</role>
+    <thumb>https://image.tmdb.org/t/p/h632/nbxN8YuL1ayxeANtaT7JyedcZjO.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/1479427</profile>
+    <tmdbid>1479427</tmdbid>
+  </actor>
+  <actor>
+    <name>Glenn K. Ota</name>
+    <role>Johnny's Father</role>
+    <profile>https://www.themoviedb.org/person/1479428</profile>
+    <tmdbid>1479428</tmdbid>
+  </actor>
+  <actor>
+    <name>F. Valentino Morales</name>
+    <role>Dispatcher</role>
+    <thumb>https://image.tmdb.org/t/p/h632/3rqEJlOs5qdfxb1P4OYKGHiYzDO.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/84064</profile>
+    <tmdbid>84064</tmdbid>
+  </actor>
+  <actor>
+    <name>Mike White</name>
+    <role>Night Truck Driver</role>
+    <profile>https://www.themoviedb.org/person/1479429</profile>
+    <tmdbid>1479429</tmdbid>
+  </actor>
+  <actor>
+    <name>Delphine Pacific</name>
+    <role>Racer's Edge Clerk</role>
+    <profile>https://www.themoviedb.org/person/106885</profile>
+    <tmdbid>106885</tmdbid>
+  </actor>
+  <actor>
+    <name>Monica Tamayo</name>
+    <role>Monica</role>
+    <profile>https://www.themoviedb.org/person/2077760</profile>
+    <tmdbid>2077760</tmdbid>
+  </actor>
+  <actor>
+    <name>Megan Baker</name>
+    <role>Gimel</role>
+    <profile>https://www.themoviedb.org/person/1479431</profile>
+    <tmdbid>1479431</tmdbid>
+  </actor>
+  <actor>
+    <name>Tammy Monica Gegamian</name>
+    <role>Edwin's Babe</role>
+    <profile>https://www.themoviedb.org/person/1479432</profile>
+    <tmdbid>1479432</tmdbid>
+  </actor>
+  <actor>
+    <name>Rob Cohen</name>
+    <role>Pizza Hut Delivery Guy</role>
+    <thumb>https://image.tmdb.org/t/p/h632/kVbB8Q0g8eXsn8l81flyC6TgMPW.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/18878</profile>
+    <tmdbid>18878</tmdbid>
+  </actor>
+  <actor>
+    <name>Kevin Smith</name>
+    <role>Big Rig Driver</role>
+    <thumb>https://image.tmdb.org/t/p/h632/ofD6H52wDnkuGHNwT9T41IOxq9s.jpg</thumb>
+    <profile>https://www.themoviedb.org/person/80406</profile>
+    <tmdbid>80406</tmdbid>
+  </actor>
+  <trailer/>
+  <languages>inglés</languages>
+  <dateadded>2024-03-09 06:14:29</dateadded>
+  <lockdata>true</lockdata>
+  <fileinfo>
+    <streamdetails>
+      <video>
+        <codec>HEVC</codec>
+        <aspect>2.35</aspect>
+        <width>1920</width>
+        <height>816</height>
+        <durationinseconds>6411</durationinseconds>
+        <stereomode/>
+      </video>
+      <audio>
+        <codec>AAC</codec>
+        <language>spa</language>
+        <channels>2</channels>
+      </audio>
+      <audio>
+        <codec>AAC</codec>
+        <language>eng</language>
+        <channels>2</channels>
+      </audio>
+      <subtitle>
+        <language>spa</language>
+      </subtitle>
+    </streamdetails>
+  </fileinfo>
+  <!--tinyMediaManager meta data-->
+  <source>UNKNOWN</source>
+  <edition>NONE</edition>
+  <original_filename>Rapido Y Furioso 1 (2001) [Latino].mkv</original_filename>
+  <user_note/>
+</movie>

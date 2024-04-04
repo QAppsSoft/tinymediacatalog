@@ -4,4 +4,13 @@
     <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" />
+  </ItemGroup>
+
+  <ItemGroup Label="Implicit usings">
+    <Using Include="FluentAssertions" />
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
+
 </Project>
