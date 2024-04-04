@@ -2,7 +2,7 @@
 using TestsCommons;
 using Tools.XML;
 
-namespace IOTests.XML;
+namespace ToolsTests.XML;
 
 [TestFixture]
 public class XReadTests
