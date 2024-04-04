@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using Models.Common;
 using TestsCommons;
 using Tools.XML;
 
@@ -64,6 +65,37 @@ public class XReadTests
     }
 
     #endregion
+
+    #region GetRatings Tests
+
+    [Test]
+    public void Get_ratings_should_return_correct_values()
+    {
+        var xml = GetXmlDocument();
+
+        var result = XRead.GetRatings(xml);
+
+        result.Count.Should().Be(2);
+        result[0].Should().BeEquivalentTo(new RatingModel
+        {
+            Name = "themoviedb",
+            Default = false,
+            Max = 10,
+            Value = 7.0,
+            Votes = 9572,
+        });
+        result[1].Should().BeEquivalentTo(new RatingModel
+        {
+            Name = "imdb",
+            Default = true,
+            Max = 10,
+            Value = 3.2,
+            Votes = 10000,
+        });
+    }
+
+    #endregion
+    
     
     private XmlDocument GetXmlDocument()
     {

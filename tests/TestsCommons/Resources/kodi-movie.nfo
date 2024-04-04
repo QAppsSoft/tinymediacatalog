@@ -11,6 +11,10 @@
       <value>7.0</value>
       <votes>9572</votes>
     </rating>
+    <rating default="true" max="10" name="imdb">
+      <value>3.2</value>
+      <votes>10000</votes>
+    </rating>
   </ratings>
   <userrating>0</userrating>
   <top250>0</top250>

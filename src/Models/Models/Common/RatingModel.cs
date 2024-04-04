@@ -2,13 +2,13 @@ namespace Models.Common;
 
 public class RatingModel
 {
-    public string Value { get; set; }
+    public double Value { get; set; }
 
-    public string Votes { get; set; }
+    public int Votes { get; set; }
 
-    public string Default { get; set; }
+    public bool Default { get; set; }
 
-    public string Max { get; set; }
+    public int Max { get; set; }
 
     public string Name { get; set; }
 }

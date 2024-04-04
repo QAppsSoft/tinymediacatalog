@@ -11,6 +11,7 @@ public class Kodi : IOInterface
     public string IOHandlerName { get; set; } = "KODI";
     public string IOHandlerDescription { get; set; } = "IO handler for KODI";
     public Uri IOHandlerUri { get; set; } = new("https://kodi.tv/");
+    
     public void LoadMovie(MovieModel movieModel)
     {
         var xmlReader = XRead.OpenPath(movieModel.NfoPathOnDisk);
@@ -30,8 +31,10 @@ public class Kodi : IOInterface
         movieModel.Year = XRead.GetInt(xmlReader, "year");
         
         // Ratings
-        
+        movieModel.Ratings = XRead.GetRatings(xmlReader);
+
         // Sets
+        
         
         // Plot
         movieModel.Plot = XRead.GetString(xmlReader, "plot");
@@ -46,6 +49,7 @@ public class Kodi : IOInterface
         movieModel.Runtime = XRead.GetInt(xmlReader, "runtime");
         
         // Thumb
+        
         
         // Mpaa
         movieModel.Mpaa = XRead.GetString(xmlReader, "mpaa");

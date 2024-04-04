@@ -1,6 +1,8 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Text;
 using System.Xml;
+using Models.Common;
 
 namespace Tools.XML
 {
@@ -102,6 +104,25 @@ namespace Tools.XML
             string value = GetString(doc, tag);
             double outValue;
             double.TryParse(value, out outValue);
+            return outValue;
+        }
+        
+        /// <summary>
+        /// Gets a float value from an XmlDocument.
+        /// </summary>
+        /// <param name="doc">
+        /// The XMlDocument Object
+        /// </param>
+        /// <param name="tag">
+        /// The tag to extract
+        /// </param>
+        /// <returns>
+        /// The get float.
+        /// </returns>
+        public static float GetFloat(XmlDocument doc, string tag)
+        {
+            var value = GetString(doc, tag);
+            float.TryParse(value, CultureInfo.InvariantCulture, out var outValue);
             return outValue;
         }
 
@@ -211,6 +232,62 @@ namespace Tools.XML
         }
 
         /// <summary>
+        /// Get a list of RatingModel
+        /// </summary>
+        /// <param name="doc">
+        /// The doc.
+        /// </param>
+        /// <returns></returns>
+        public static List<RatingModel> GetRatings(XmlDocument doc)
+        {
+            var sets = doc.GetElementsByTagName("rating");
+
+            if (sets.Count == 0)
+            {
+                return [];
+            }
+
+            var ratings = new List<RatingModel>(sets.Count);
+
+            foreach (XmlElement node in sets)
+            {
+                var document = OpenXml("<x>" + node.InnerXml + "</x>");
+                
+                var name = string.Empty;
+                if (TryGetAttribute(node, "name" , out var nameValue))
+                {
+                    name = nameValue;
+                }
+                
+                var isDefault = false;
+                if (TryGetAttribute(node, "default" , out var defaultResult) && bool.TryParse(defaultResult, out var defaultValue))
+                {
+                    isDefault = defaultValue;
+                }
+                
+                var max = 0;
+                if (TryGetAttribute(node, "max" , out var defaultMax) && int.TryParse(defaultMax, CultureInfo.InvariantCulture, out var maxValue))
+                {
+                    max = maxValue;
+                }
+
+                var value = Math.Round(GetFloat(document, "value"), 1);
+                var votes = GetInt(document, "votes");
+
+                ratings.Add(new RatingModel
+                {
+                    Name = name,
+                    Default = isDefault,
+                    Max = max,
+                    Value = value,
+                    Votes = votes,
+                });
+            }
+
+            return ratings;
+        }
+
+        /// <summary>
         /// The open path.
         /// </summary>
         /// <param name="path">
@@ -249,5 +326,17 @@ namespace Tools.XML
         }
 
         #endregion
+        
+        private static bool TryGetAttribute(XmlNode node, string tag, [NotNullWhen(true)] out string? value)
+        {
+            value = null;
+                    
+            var attribute = node.Attributes?[tag];
+                
+            if (attribute == null) return false;
+                
+            value = attribute.Value;
+            return true;
+        }
     }
 }

@@ -16,7 +16,7 @@ public class MovieModel
 
     public int Year { get; set; }
 
-    public RatingsModel Ratings { get; set; }
+    public List<RatingModel> Ratings { get; set; }
 
     public string UserRating { get; set; }
 
