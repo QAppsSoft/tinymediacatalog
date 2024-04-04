@@ -32,7 +32,7 @@ public class XReadTests
     [Test]
     public void OpenPath_with_xml_path_should_return_xml_document()
     {
-        var xmlPath = Resources.GetResourceFilePath("movie.nfo");
+        var xmlPath = Resources.GetResourceFilePath("kodi-movie.nfo");
 
         var xml = XRead.OpenPath(xmlPath);
 
@@ -67,7 +67,7 @@ public class XReadTests
     
     private XmlDocument GetXmlDocument()
     {
-        var xmlPath = Resources.GetResourceFilePath("movie.nfo");
+        var xmlPath = Resources.GetResourceFilePath("kodi-movie.nfo");
 
         var xml = XRead.OpenPath(xmlPath);
         

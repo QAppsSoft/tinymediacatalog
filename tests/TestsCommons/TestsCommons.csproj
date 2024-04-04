@@ -18,10 +18,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Resources\movie.nfo">
+      <None Update="Resources\kodi-movie.nfo">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Resources\tvshow.nfo">
+      <None Update="Resources\kodi-tvshow.nfo">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
