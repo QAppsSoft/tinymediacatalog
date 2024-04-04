@@ -10,7 +10,7 @@ public class StorageFixture : IDisposable
         Directory.CreateDirectory(TempDirPath);
     }
 
-    public string GetTempFileName(string extension = null)
+    public string GetTemporalFileName(string? extension = null)
     {
         if (extension != null)
         {
@@ -20,7 +20,7 @@ public class StorageFixture : IDisposable
         return Path.Combine(TempDirPath, $"{Guid.NewGuid()}");
     }
 
-    public string GetTempDirectory()
+    public string GetTemporalDirectory()
     {
         var path = Path.Combine(TempDirPath, $"{Guid.NewGuid()}");
         Directory.CreateDirectory(path);
