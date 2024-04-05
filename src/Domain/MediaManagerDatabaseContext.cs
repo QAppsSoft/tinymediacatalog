@@ -1,4 +1,5 @@
 ﻿using Domain.Extensions;
+using Domain.Models;
 using Domain.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,8 @@ public class MediaManagerDatabaseContext : DbContext
 
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
+    
+    public DbSet<MovieControl> MovieControls { get; set; }
     
     private void HandleModified()
     {
