@@ -5,13 +5,13 @@
              xmlns:views="clr-namespace:MediaManager.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MediaManager.Views.MainView">
-    <Grid ColumnDefinitions="200 *" RowDefinitions="30 *">
+    <Grid ColumnDefinitions="Auto *" RowDefinitions="30 *">
 
         <!-- Title Bar -->
         <views:TitleBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
 
         <!-- Left Pane -->
-        <views:LeftPane Grid.Column="0" Grid.Row="1" />
+        <views:LeftPane Grid.Column="0" Grid.Row="1" MinWidth="50" />
 
         <!-- Right Pane -->
         <views:RightPane Grid.Column="1" Grid.Row="1" />
