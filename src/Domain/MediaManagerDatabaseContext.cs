@@ -17,6 +17,14 @@ public class MediaManagerDatabaseContext : DbContext
     
     public DbSet<MovieControl> MovieControls { get; set; }
     
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(modelBuilder);
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(MediaManagerDatabaseContext).Assembly);
+        base.OnModelCreating(modelBuilder);
+    }
+    
     private void HandleModified()
     {
         var modified = ChangeTracker.Entries<ITrackedEntity>().Where(e => e.IsModified());
