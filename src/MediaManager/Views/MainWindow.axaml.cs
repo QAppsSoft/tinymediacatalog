@@ -6,6 +6,8 @@ public partial class MainWindow : AppWindow
 {
     public MainWindow()
     {
+        TitleBar.ExtendsContentIntoTitleBar = true;
+        
         InitializeComponent();
     }
 }
