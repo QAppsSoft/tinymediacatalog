@@ -1,10 +1,14 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:styling="clr-namespace:FluentAvalonia.Styling;assembly=FluentAvalonia"
+             xmlns:mediaManager="clr-namespace:MediaManager"
              x:Class="MediaManager.App"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-  
+
+    <Application.Resources>
+        <mediaManager:Composition x:Key="Composition" />
+    </Application.Resources>
+
     <Application.Styles>
         <styling:FluentAvaloniaTheme PreferSystemTheme="True" PreferUserAccentColor="True" />
     </Application.Styles>
