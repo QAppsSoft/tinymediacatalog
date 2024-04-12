@@ -6,7 +6,7 @@ using MediaManager.ViewModels;
 
 namespace MediaManager.Views;
 
-public partial class RightPane : ReactiveUserControl<RightPaneViewModel>
+public partial class RightPane : UserControl
 {
     public RightPane()
     {

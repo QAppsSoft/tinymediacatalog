@@ -1,6 +1,7 @@
 ﻿using Common;
 using MediaManager.Infrastructure;
 using MediaManager.ViewModels;
+using MediaManager.ViewModels.Interfaces;
 using Pure.DI;
 
 namespace MediaManager;
@@ -11,9 +12,8 @@ internal partial class Composition
 
         // View Models
         .Bind().As(Lifetime.Singleton).To<MainViewViewModel>()
-        .Bind().As(Lifetime.Singleton).To<LeftPaneViewModel>()
-        .Bind().As(Lifetime.Singleton).To<RightPaneViewModel>()
         .Bind().As(Lifetime.Singleton).To<TitleBarViewModel>()
+        .Bind<IPageViewModel>().As(Lifetime.Singleton).To<MoviesViewModel>()
 
         // Models
 

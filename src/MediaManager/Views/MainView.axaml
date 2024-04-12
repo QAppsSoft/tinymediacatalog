@@ -11,7 +11,7 @@
         <views:TitleBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
 
         <!-- Left Pane -->
-        <views:LeftPane Grid.Column="0" Grid.Row="1" MinWidth="50" />
+        <views:LeftPane Grid.Column="0" Grid.Row="1" />
 
         <!-- Right Pane -->
         <views:RightPane Grid.Column="1" Grid.Row="1" />
