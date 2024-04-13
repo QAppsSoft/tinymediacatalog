@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MediaManager.ViewModels.Interfaces;
+using ReactiveUI.Fody.Helpers;
 
 namespace MediaManager.ViewModels;
 
@@ -12,6 +13,7 @@ public class MainViewViewModel : ViewModelBase
         Current = Pages[0];
     }
 
+    [Reactive]
     public IPageViewModel Current { get; set; }
     
     public IPageViewModel[] Pages { get; set; }
