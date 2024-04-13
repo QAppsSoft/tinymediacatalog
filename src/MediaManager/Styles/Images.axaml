@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <DrawingImage x:Key="MovieIcon">
+    <DrawingImage x:Key="MoviesIcon">
         <DrawingGroup>
             <GeometryDrawing Brush="Transparent" Geometry="F1M0,0L48,0L48,48L0,48z" />
             <GeometryDrawing
