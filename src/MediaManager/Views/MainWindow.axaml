@@ -8,7 +8,7 @@
         x:Class="MediaManager.Views.MainWindow"
         x:DataType="vm:MainViewViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="MediaManager">
+        Title="{Binding  Current.Name, StringFormat='Media Manager - {0}'}">
     <Panel>
         <views:MainView />
     </Panel>
