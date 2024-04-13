@@ -9,7 +9,7 @@
         <ResourceDictionary>
             <mediaManager:Composition x:Key="Composition" />
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="Styles/Images.axaml" />    
+                <ResourceInclude Source="Styles/MainMenuIcons.axaml" />    
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
