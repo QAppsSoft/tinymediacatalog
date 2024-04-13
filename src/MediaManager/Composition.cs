@@ -12,7 +12,6 @@ internal partial class Composition
 
         // View Models
         .Bind().As(Lifetime.Singleton).To<MainViewViewModel>()
-        .Bind().As(Lifetime.Singleton).To<TitleBarViewModel>()
         
         // Main menú
         .Bind<IPageViewModel>(1).As(Lifetime.Singleton).To<MoviesViewModel>()

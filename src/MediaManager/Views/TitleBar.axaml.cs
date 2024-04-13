@@ -1,12 +1,8 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
-using MediaManager.ViewModels;
+﻿using Avalonia.Controls;
 
 namespace MediaManager.Views;
 
-public partial class TitleBar : ReactiveUserControl<TitleBarViewModel>
+public partial class TitleBar : UserControl
 {
     public TitleBar()
     {
