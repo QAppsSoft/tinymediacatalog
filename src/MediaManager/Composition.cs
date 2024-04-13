@@ -13,7 +13,10 @@ internal partial class Composition
         // View Models
         .Bind().As(Lifetime.Singleton).To<MainViewViewModel>()
         .Bind().As(Lifetime.Singleton).To<TitleBarViewModel>()
+        
+        // Main menú
         .Bind<IPageViewModel>().As(Lifetime.Singleton).To<MoviesViewModel>()
+        .Bind<IPageViewModel>(2).As(Lifetime.Singleton).To<TvShowsViewModel>()
 
         // Models
 

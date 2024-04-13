@@ -4,6 +4,6 @@ namespace MediaManager.ViewModels;
 
 public class MoviesViewModel : ViewModelBase, IPageViewModel
 {
-    public string Name => "Movies";
-    public string IconKey => "Home";
+    public string Name => "Películas";
+    public string IconKey => "MovieIcon";
 }

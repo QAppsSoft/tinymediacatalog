@@ -6,7 +6,12 @@
              RequestedThemeVariant="Default">
 
     <Application.Resources>
-        <mediaManager:Composition x:Key="Composition" />
+        <ResourceDictionary>
+            <mediaManager:Composition x:Key="Composition" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="Styles/Images.axaml" />    
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 
     <Application.Styles>

@@ -1,0 +1,85 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DrawingImage x:Key="MovieIcon">
+        <DrawingGroup>
+            <GeometryDrawing Brush="Transparent" Geometry="F1M0,0L48,0L48,48L0,48z" />
+            <GeometryDrawing
+                Geometry="F1 M43 41L5 41C3.895 41 3 40.105 3 39L3 10C3 8.895 3.895 8 5 8L43 8C44.105 8 45 8.895 45 10L45 39C45 40.105 44.105 41 43 41Z">
+                <GeometryDrawing.Brush>
+                    <RadialGradientBrush Center="37.525,-665.292" GradientOrigin="37.525,-665.292"
+                                         Radius="0.5673095">
+                        <RadialGradientBrush.Transform>
+                            <MatrixTransform Matrix="1.0244,0,0,-1.0645,12.444,-673.716" />
+                        </RadialGradientBrush.Transform>
+                        <RadialGradientBrush.GradientStops>
+                            <GradientStop Offset="0" Color="#FFBD8AF5" />
+                            <GradientStop Offset="0.137" Color="#FFB88BF5" />
+                            <GradientStop Offset="0.30899996" Color="#FFA88FF3" />
+                            <GradientStop Offset="0.499" Color="#FF8F96F2" />
+                            <GradientStop Offset="0.702" Color="#FF6B9EEF" />
+                            <GradientStop Offset="0.9129999" Color="#FF3EAAEC" />
+                            <GradientStop Offset="1" Color="#FF29AFEA" />
+                        </RadialGradientBrush.GradientStops>
+                    </RadialGradientBrush>
+                </GeometryDrawing.Brush>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="#FFFFFFFF"
+                             Geometry="F1 M41 16L39 16C38.448 16 38 15.552 38 15L38 13C38 12.448 38.448 12 39 12L41 12C41.552 12 42 12.448 42 13L42 15C42 15.552 41.552 16 41 16Z" />
+            <GeometryDrawing Brush="#FFFFFFFF"
+                             Geometry="F1 M41 23L39 23C38.448 23 38 22.552 38 22L38 20C38 19.448 38.448 19 39 19L41 19C41.552 19 42 19.448 42 20L42 22C42 22.552 41.552 23 41 23Z" />
+            <GeometryDrawing Brush="#FFFFFFFF"
+                             Geometry="F1 M41 30L39 30C38.448 30 38 29.552 38 29L38 27C38 26.448 38.448 26 39 26L41 26C41.552 26 42 26.448 42 27L42 29C42 29.552 41.552 30 41 30Z" />
+            <GeometryDrawing Brush="#FFFFFFFF"
+                             Geometry="F1 M41 37L39 37C38.448 37 38 36.552 38 36L38 34C38 33.448 38.448 33 39 33L41 33C41.552 33 42 33.448 42 34L42 36C42 36.552 41.552 37 41 37Z" />
+            <GeometryDrawing Brush="#FFFFFFFF"
+                             Geometry="F1 M9 16L7 16C6.448 16 6 15.552 6 15L6 13C6 12.448 6.448 12 7 12L9 12C9.552 12 10 12.448 10 13L10 15C10 15.552 9.552 16 9 16Z" />
+            <GeometryDrawing Brush="#FFFFFFFF"
+                             Geometry="F1 M9 23L7 23C6.448 23 6 22.552 6 22L6 20C6 19.448 6.448 19 7 19L9 19C9.552 19 10 19.448 10 20L10 22C10 22.552 9.552 23 9 23Z" />
+            <GeometryDrawing Brush="#FFFFFFFF"
+                             Geometry="F1 M9 30L7 30C6.448 30 6 29.552 6 29L6 27C6 26.448 6.448 26 7 26L9 26C9.552 26 10 26.448 10 27L10 29C10 29.552 9.552 30 9 30Z" />
+            <GeometryDrawing Brush="#FFFFFFFF"
+                             Geometry="F1 M9 37L7 37C6.448 37 6 36.552 6 36L6 34C6 33.448 6.448 33 7 33L9 33C9.552 33 10 33.448 10 34L10 36C10 36.552 9.552 37 9 37Z" />
+        </DrawingGroup>
+    </DrawingImage>
+    
+  <DrawingImage x:Key="TvShowsIcon">
+    <DrawingGroup>
+      <GeometryDrawing Brush="Transparent" Geometry="F1M0,0L48,0L48,48L0,48z" />
+      <GeometryDrawing Geometry="F1 M4 37L44 37C45.105 37 46 36.105 46 35L46 9C46 7.895 45.105 7 44 7L4 7C2.895 7 2 7.895 2 9L2 35C2 36.105 2.895 37 4 37Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="6.68,7.387" EndPoint="39.947,35.455">
+            <LinearGradientBrush.Transform>
+              <MatrixTransform Matrix="-1,0,0,1,48,0" />
+            </LinearGradientBrush.Transform>
+            <LinearGradientBrush.GradientStops>
+              <GradientStop Offset="0" Color="#FFA1AAB3" />
+              <GradientStop Offset="1" Color="#FF8F979E" />
+            </LinearGradientBrush.GradientStops>
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="F1 M4 9L44 9L44 35L4 35L4 9Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="19.999,9.109" EndPoint="28.44,36.308">
+            <LinearGradientBrush.GradientStops>
+              <GradientStop Offset="0" Color="#FF6D7479" />
+              <GradientStop Offset="1" Color="#FF323538" />
+            </LinearGradientBrush.GradientStops>
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="F1 M37.5 39L30 39L30 37L18 37L18 39L10.5 39C10.224 39 10 39.224 10 39.5L10 40.5C10 40.776 10.224 41 10.5 41L37.5 41C37.776 41 38 40.776 38 40.5L38 39.5C38 39.224 37.776 39 37.5 39Z">
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="24,36.992" EndPoint="24,41.008">
+            <LinearGradientBrush.GradientStops>
+              <GradientStop Offset="0" Color="#FF484B4F" />
+              <GradientStop Offset="0.23" Color="#FF656D75" />
+              <GradientStop Offset="0.367" Color="#FF727D86" />
+            </LinearGradientBrush.GradientStops>
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+      </GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage>
+</ResourceDictionary>
