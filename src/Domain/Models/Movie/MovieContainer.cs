@@ -10,21 +10,21 @@ public class MovieContainer : GuidEntityBase, ITrackedEntity
     public DateTime Updated { get; set; }
     
     [StringLength(500)]
-    public string NfoPath { get; set; } = null!;
+    public string NfoPath { get; set; } = string.Empty;
     
-    public string Title { get; set; }
-    public string OriginalTitle { get; set; }
-    public string Slogan { get; set; }
-    public string Overview { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string OriginalTitle { get; set; } = string.Empty;
+    public string Slogan { get; set; } = string.Empty;
+    public string Overview { get; set; } = string.Empty;
     public int Year { get; set; }
     public DateOnly ReleaseDate { get; set; }
-    public MovieCollection? Collection { get; set; }
-    public string ProductionCompanies { get; set; }
-    public string OriginCountry { get; set; }
-    public string OriginalLanguage { get; set; }
-    public IList<Rating> Ratings { get; set; }
-    public string Note { get; set; }
-    public IList<Genre> Genres { get; set; }
-    public IList<ServiceId> ServicesId { get; set; }
-    public IList<Actor> Cast { get; set; }
+    public MovieCollection? Collection { get; set; } = null;
+    public string ProductionCompanies { get; set; } = string.Empty;
+    public string OriginCountry { get; set; } = string.Empty;
+    public string OriginalLanguage { get; set; } = string.Empty;
+    public IList<Rating> Ratings { get; set; } = new List<Rating>();
+    public string Note { get; set; } = string.Empty;
+    public IList<Genre> Genres { get; set; } = new List<Genre>();
+    public IList<ServiceId> ServicesId { get; set; } = new List<ServiceId>();
+    public IList<Actor> Cast { get; set; } = new List<Actor>();
 }

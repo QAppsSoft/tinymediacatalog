@@ -8,18 +8,9 @@ public abstract class MultimediaFile : GuidEntityBase, ITrackedEntity
     public DateTime Created { get; set; }
     public DateTime Updated { get; set; }
     
-    public string FileName { get; set; }
-    public string FilePath { get; set; }
+    public string FileName { get; set; } = string.Empty;
+    public string FilePath { get; set; } = string.Empty;
     public abstract Kind Kind { get; set; }
     
     public long Size { get; set; }
-}
-
-public enum Kind
-{
-    Video,
-    Nfo,
-    Image,
-    Audio,
-    Subtitle,
 }

@@ -2,6 +2,6 @@
 
 public class AudioStream : Stream
 {
-    public string Channels { get; set; }
+    public string Channels { get; set; } = string.Empty;
     public int BitRate { get; set; }
 }

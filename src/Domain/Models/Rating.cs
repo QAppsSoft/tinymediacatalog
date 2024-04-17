@@ -11,7 +11,7 @@ public abstract class Rating
     // tomatometerallcritics
     // tomatometeravgcritics
     // trakt
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     public long Value { get; set; }
     public long Votes { get; set; }
     public int Max { get; set; }
