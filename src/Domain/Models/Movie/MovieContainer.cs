@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Domain.Models.BaseObjects;
+﻿using Domain.Models.BaseObjects;
 using Domain.Models.Interfaces;
 
 namespace Domain.Models.Movie;
@@ -9,7 +8,6 @@ public class MovieContainer : GuidEntityBase, ITrackedEntity
     public DateTime Created { get; set; } = DateTime.Now;
     public DateTime Updated { get; set; }
     
-    [StringLength(500)]
     public string NfoPath { get; set; } = string.Empty;
     
     public string Title { get; set; } = string.Empty;
