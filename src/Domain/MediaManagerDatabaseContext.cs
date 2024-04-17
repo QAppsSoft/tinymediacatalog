@@ -7,6 +7,14 @@ namespace Domain;
 
 public class MediaManagerDatabaseContext : DbContext
 {
+    public MediaManagerDatabaseContext()
+    {
+    }
+
+    public MediaManagerDatabaseContext(DbContextOptions<MediaManagerDatabaseContext> options) : base(options)
+    {
+    }
+    
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
         HandleAdded();
