@@ -14,8 +14,8 @@ public class MediaManagerDatabaseContext : DbContext
 
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
-    
-    public DbSet<MovieControl> MovieControls { get; set; }
+
+    public DbSet<MovieControl> MovieControls { get; set; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
