@@ -1,4 +1,4 @@
-﻿namespace EnvironmentVars;
+﻿namespace Common.Vars;
 
 public static class PathProvider
 {
