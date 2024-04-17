@@ -11,11 +11,12 @@ public sealed class DbContextFactory : IDbContextFactory<MediaManagerDatabaseCon
         var builder = new SqliteConnectionStringBuilder
         {
             DataSource = PathProvider.DatabasePath,
-            //Password = 
+            //Password = // TODO: set password for database encryption 
         };
         
         var options = new DbContextOptionsBuilder<MediaManagerDatabaseContext>();
         options.UseSqlite(builder.ConnectionString);
+        SQLitePCL.Batteries.Init();
 
         return new MediaManagerDatabaseContext(options.Options);
     }
