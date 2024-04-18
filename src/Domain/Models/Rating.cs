@@ -14,6 +14,7 @@ public sealed class Rating : GuidEntityBase
     // tomatometeravgcritics
     // trakt
     public string Name { get; set; } = string.Empty;
+    public bool Default { get; set; }
     public long Value { get; set; }
     public long Votes { get; set; }
     public int Max { get; set; }
