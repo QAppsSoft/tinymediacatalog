@@ -1,6 +1,4 @@
-﻿using Domain.Models.Movie;
-
-namespace Domain.Models;
+﻿namespace Domain.Models.Movie;
 
 public sealed class ActorMovie
 {
