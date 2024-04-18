@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models.Multimedia;
 
-public class VideoFile : MultimediaFile
+public sealed class VideoFile : MultimediaFile
 {
     public override Kind Kind { get; set; } = Kind.Video;
     public TimeSpan Duration { get; set; }

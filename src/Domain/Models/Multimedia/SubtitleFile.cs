@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models.Multimedia;
 
-public class SubtitleFile : MultimediaFile
+public sealed class SubtitleFile : MultimediaFile
 {
     public override Kind Kind { get; set; } = Kind.Subtitle;
     public string Codec { get; set; } = string.Empty;
