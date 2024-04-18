@@ -2,6 +2,13 @@
 
 public static class PathProvider
 {
+    private static readonly bool IsDebug =
+#if DEBUG
+        true;
+#else
+        false;
+#endif   
+    
     private static string DataDirectoryName { get; } = "Data";
     private static string BackupDirectoryName { get; } = "Backup";
     private static string PortableMarkName { get; } = ".portable";
@@ -16,6 +23,8 @@ public static class PathProvider
 
     public static string PortableFilePath { get; } = Path.Combine(CurrentAppPath, PortableMarkName);
 
-    public static string DatabasePath { get; } = Path.Combine(FullDataDirectory, DataBaseFileName);
+    public static string DatabasePath { get; } = IsDebug ?
+        DataBaseFileName :
+        Path.Combine(FullDataDirectory, DataBaseFileName);
     public static string DatabaseBackupPath { get; } = Path.Combine(FullDataDirectory, BackupDirectoryName);
 }
