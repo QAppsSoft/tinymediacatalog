@@ -9,6 +9,6 @@ public class VideoFile : MultimediaFile
     public string FrameRate { get; set; } = string.Empty;
     public int BitRate { get; set; }
 
-    public IList<AudioStream> Audios { get; set; } = new List<AudioStream>();
-    public IList<SubtitleStream> Subtitles { get; set; } = new List<SubtitleStream>();
+    public ICollection<AudioStream> Audios { get; set; } = new List<AudioStream>();
+    public ICollection<SubtitleStream> Subtitles { get; set; } = new List<SubtitleStream>();
 }

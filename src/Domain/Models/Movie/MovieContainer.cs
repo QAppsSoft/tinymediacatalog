@@ -20,9 +20,9 @@ public class MovieContainer : GuidEntityBase, ITrackedEntity
     public string ProductionCompanies { get; set; } = string.Empty;
     public string OriginCountry { get; set; } = string.Empty;
     public string OriginalLanguage { get; set; } = string.Empty;
-    public IList<Rating> Ratings { get; set; } = new List<Rating>();
+    public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
     public string Note { get; set; } = string.Empty;
-    public IList<Genre> Genres { get; set; } = new List<Genre>();
-    public IList<ServiceId> ServicesId { get; set; } = new List<ServiceId>();
-    public IList<Actor> Cast { get; set; } = new List<Actor>();
+    public ICollection<Genre> Genres { get; set; } = new List<Genre>();
+    public ICollection<ServiceId> ServicesId { get; set; } = new List<ServiceId>();
+    public ICollection<Actor> Cast { get; set; } = new List<Actor>();
 }
