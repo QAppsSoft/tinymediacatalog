@@ -3,12 +3,9 @@
 namespace Domain.Models.Multimedia;
 
 [ComplexType]
-public record Resolution
+public record Resolution(int Width, int Height)
 {
-    private static readonly Resolution ZeroResolution = new() { Width = 0, Height = 0 };
-    
-    public int Width { get; init; }
-    public int Height { get; init; }
+    private static readonly Resolution ZeroResolution = new(0, 0);
 
     public static Resolution Zero() => ZeroResolution;
 }
