@@ -1,6 +1,8 @@
-﻿namespace Domain.Models.Multimedia;
+﻿using Domain.Models.BaseObjects;
 
-public abstract class Stream
+namespace Domain.Models.Multimedia;
+
+public abstract class Stream : GuidEntityBase
 {
     public string Title { get; set; } = string.Empty;
     public Source Source { get; set; }
