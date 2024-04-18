@@ -16,7 +16,7 @@ public class MovieContainer : GuidEntityBase, ITrackedEntity
     public string Overview { get; set; } = string.Empty;
     public int Year { get; set; }
     public DateOnly ReleaseDate { get; set; }
-    public MovieCollection? Collection { get; set; } = null;
+    public MovieCollection? Collection { get; set; }
     public string ProductionCompanies { get; set; } = string.Empty;
     public string OriginCountry { get; set; } = string.Empty;
     public string OriginalLanguage { get; set; } = string.Empty;
