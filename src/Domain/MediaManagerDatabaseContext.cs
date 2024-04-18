@@ -1,6 +1,7 @@
 ﻿using Domain.Extensions;
 using Domain.Models;
 using Domain.Models.Interfaces;
+using Domain.Models.Movie;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain;
@@ -24,6 +25,10 @@ public class MediaManagerDatabaseContext : DbContext
     }
 
     public DbSet<MovieControl> MovieControls { get; set; } = null!;
+    
+    public DbSet<MovieCollection> MovieCollections { get; set; } = null!;
+    public DbSet<MovieContainer> Movies { get; set; } = null!;
+    public DbSet<Person> Persons { get; set; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
