@@ -2,5 +2,5 @@
 
 public sealed class NfoFile : MultimediaFile
 {
-    public override Kind Kind { get; set; } = Kind.Nfo;
+    public override Kind Kind => Kind.Nfo;
 }

@@ -2,7 +2,7 @@
 
 public sealed class AudioFile : MultimediaFile
 {
-    public override Kind Kind { get; set; } = Kind.Audio;
+    public override Kind Kind => Kind.Audio;
     public TimeSpan Duration { get; set; }
     public string Codec { get; set; } = string.Empty;
     public int BitRate { get; set; }

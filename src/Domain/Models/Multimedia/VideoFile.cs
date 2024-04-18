@@ -2,7 +2,7 @@
 
 public sealed class VideoFile : MultimediaFile
 {
-    public override Kind Kind { get; set; } = Kind.Video;
+    public override Kind Kind => Kind.Video;
     public TimeSpan Duration { get; set; }
     public string Codec { get; set; } = string.Empty;
     public Resolution Resolution { get; set; } = Resolution.Zero();

@@ -10,7 +10,7 @@ public abstract class MultimediaFile : GuidEntityBase, ITrackedEntity
     
     public string FileName { get; set; } = string.Empty;
     public string FilePath { get; set; } = string.Empty;
-    public abstract Kind Kind { get; set; }
+    public abstract Kind Kind { get; }
     
     public long Size { get; set; }
 }
