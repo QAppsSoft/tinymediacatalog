@@ -1,9 +1,9 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models.Multimedia;
 
-[StructLayout(LayoutKind.Auto)]
-public readonly struct Resolution
+[ComplexType]
+public record Resolution
 {
     private static readonly Resolution ZeroResolution = new() { Width = 0, Height = 0 };
     
