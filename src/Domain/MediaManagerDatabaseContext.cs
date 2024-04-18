@@ -29,6 +29,7 @@ public class MediaManagerDatabaseContext : DbContext
     public DbSet<MovieCollection> MovieCollections { get; set; } = null!;
     public DbSet<MovieContainer> Movies { get; set; } = null!;
     public DbSet<Person> Persons { get; set; } = null!;
+    public DbSet<Genre> Genres { get; set; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
