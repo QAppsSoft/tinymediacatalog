@@ -11,7 +11,7 @@ public sealed class DbContextFactory : IDbContextFactory<MediaManagerDatabaseCon
         var builder = new SqliteConnectionStringBuilder
         {
             DataSource = PathProvider.DatabasePath,
-            //Password = // TODO: set password for database encryption 
+            // Password = // TODO: set password for database encryption 
         };
         
         var options = new DbContextOptionsBuilder<MediaManagerDatabaseContext>();
