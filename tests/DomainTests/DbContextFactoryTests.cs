@@ -15,6 +15,7 @@ public class DbContextFactoryTests
         
         try
         {
+            context.Database.EnsureDeleted(); // Fix test fail if database file already present
             created = context.Database.EnsureCreated();
         }
         finally
