@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public abstract class ActorMovie
+public sealed class ActorMovie
 {
     public string Role { get; set; } = string.Empty;
     public Person Person { get; set; } = null!;

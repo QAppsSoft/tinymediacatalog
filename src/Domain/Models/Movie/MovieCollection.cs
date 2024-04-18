@@ -2,7 +2,7 @@
 
 namespace Domain.Models.Movie;
 
-public abstract class MovieCollection : GuidEntityBase
+public sealed class MovieCollection : GuidEntityBase
 {
     public string Name { get; set; } = string.Empty;
     public int TmdbId { get; set; }

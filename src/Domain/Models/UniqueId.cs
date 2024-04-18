@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public abstract class UniqueId
+public sealed class UniqueId
 {
     // anidb
     // imdb

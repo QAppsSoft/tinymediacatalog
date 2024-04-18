@@ -1,6 +1,8 @@
-﻿namespace Domain.Models;
+﻿using Domain.Models.BaseObjects;
 
-public abstract class Rating
+namespace Domain.Models;
+
+public sealed class Rating : GuidEntityBase
 {
     // imdb 
     // letterboxd

@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public abstract class Person : GuidEntityBase
+public sealed class Person : GuidEntityBase
 {
     public string Name { get; set; } = string.Empty;
     public string Role { get; set; } = string.Empty;

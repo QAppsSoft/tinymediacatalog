@@ -2,7 +2,7 @@
 
 namespace Domain.Models.Movie;
 
-public abstract class MovieCollectionPart : GuidEntityBase
+public sealed class MovieCollectionPart : GuidEntityBase
 {
     public string Title { get; set; } = string.Empty;
     public string OriginalTitle { get; set; } = string.Empty;

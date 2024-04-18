@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public abstract class Genre : GuidEntityBase
+public sealed class Genre : GuidEntityBase
 {
     public string Name { get; set; } = string.Empty;
 }
