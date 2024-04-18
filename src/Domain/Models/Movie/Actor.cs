@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models.Movie;
 
-public sealed class ActorMovie
+public sealed class Actor
 {
     public string Role { get; set; } = string.Empty;
     public Guid PersonId { get; set; }

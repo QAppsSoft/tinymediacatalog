@@ -25,7 +25,7 @@ public class MovieContainer : GuidEntityBase, ITrackedEntity
     public string Note { get; set; } = string.Empty;
     public ICollection<Genre> Genres { get; set; } = new List<Genre>();
     public ICollection<UniqueId> UniqueIds { get; set; } = new List<UniqueId>();
-    public ICollection<ActorMovie> Cast { get; set; } = new List<ActorMovie>();
+    public ICollection<Actor> Cast { get; set; } = new List<Actor>();
     
     public ICollection<MultimediaFile> Files { get; set; } = new List<MultimediaFile>();
 }

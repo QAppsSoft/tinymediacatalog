@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Domain.Configurations;
 
-public sealed class ActorMovieEntityTypeConfiguration : IEntityTypeConfiguration<ActorMovie>
+public sealed class ActorEntityTypeConfiguration : IEntityTypeConfiguration<Actor>
 {
-    public void Configure(EntityTypeBuilder<ActorMovie> builder)
+    public void Configure(EntityTypeBuilder<Actor> builder)
     {
         ArgumentNullException.ThrowIfNull(builder);
-
+        builder.ToTable("Actors");
         builder.HasKey(e => new { e.PersonId, e.MovieContainerId });
     }
 }
