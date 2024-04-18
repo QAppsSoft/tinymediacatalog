@@ -18,4 +18,17 @@ public sealed class Rating : GuidEntityBase
     public long Value { get; set; }
     public long Votes { get; set; }
     public int Max { get; set; }
+
+    public static class ValidNames
+    {
+        public static string Imdb => "imdb";
+        public static string LetterBoxd => "letterboxd";
+        public static string MetaCrittic => "metacrittic";
+        public static string MyAnimeList => "myanimelist";
+        public static string RogerEbert => "rogerebert";
+        public static string Tmdb => "tmdb";
+        public static string TomatoMeterAllCritics => "tomatometerallcritics";
+        public static string TomatoMeterAvgCritics => "tomatometeravgcritics";
+        public static string Trakt => "trakt";
+    }
 }
