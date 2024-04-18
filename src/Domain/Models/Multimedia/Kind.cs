@@ -2,6 +2,7 @@
 
 public enum Kind
 {
+    Other,
     Video,
     Nfo,
     Image,
