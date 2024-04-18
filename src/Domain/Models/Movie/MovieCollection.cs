@@ -8,7 +8,6 @@ public abstract class MovieCollection : GuidEntityBase
     public int TmdbId { get; set; }
     public string Overview { get; set; } = string.Empty;
 
-
     public string PosterPath { get; set; } = string.Empty;
     public string BackdropPath { get; set; } = string.Empty;
     public string Note { get; set; } = string.Empty;
