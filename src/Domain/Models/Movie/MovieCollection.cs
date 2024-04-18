@@ -12,5 +12,5 @@ public sealed class MovieCollection : GuidEntityBase
     public string BackdropPath { get; set; } = string.Empty;
     public string Note { get; set; } = string.Empty;
 
-    public virtual ICollection<MovieCollectionPart> Parts { get; set; } = new List<MovieCollectionPart>();
+    public ICollection<MovieCollectionPart> Parts { get; set; } = new List<MovieCollectionPart>();
 }
