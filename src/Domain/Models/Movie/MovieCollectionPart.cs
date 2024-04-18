@@ -11,7 +11,7 @@ public abstract class MovieCollectionPart : GuidEntityBase
     public string PosterPath { get; set; } = string.Empty;
     public string BackdropPath { get; set; } = string.Empty;
 
-    public ICollection<ServiceId> ServicesId { get; set; } = new List<ServiceId>();
+    public ICollection<UniqueId> UniqueIds { get; set; } = new List<UniqueId>();
     public ICollection<Genre> Genres { get; set; } = new List<Genre>();
     public DateOnly ReleaseDate { get; set; }
 

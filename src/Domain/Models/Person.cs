@@ -8,5 +8,5 @@ public abstract class Person : GuidEntityBase
     public string Role { get; set; } = string.Empty;
     public string Thumb { get; set; } = string.Empty;
     public string Profile { get; set; } = string.Empty;
-    public ICollection<ServiceId> ServicesId { get; set; } = new List<ServiceId>();
+    public ICollection<UniqueId> UniqueIds { get; set; } = new List<UniqueId>();
 }

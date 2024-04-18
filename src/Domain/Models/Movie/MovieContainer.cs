@@ -23,6 +23,6 @@ public class MovieContainer : GuidEntityBase, ITrackedEntity
     public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
     public string Note { get; set; } = string.Empty;
     public ICollection<Genre> Genres { get; set; } = new List<Genre>();
-    public ICollection<ServiceId> ServicesId { get; set; } = new List<ServiceId>();
+    public ICollection<UniqueId> UniqueIds { get; set; } = new List<UniqueId>();
     public ICollection<Actor> Cast { get; set; } = new List<Actor>();
 }
