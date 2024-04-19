@@ -1,0 +1,1 @@
+dotnet publish "src\MediaManager\MediaManager.csproj" -r win-x64 -c Release -p:DebugType=None -p:DebugSymbols=false -p:InvariantGlobalization=true -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishAot=true -o "publish\NativeAOT"
