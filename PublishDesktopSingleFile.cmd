@@ -1,0 +1,1 @@
+dotnet publish "src\MediaManager\MediaManager.csproj" -p:DebugType=None -p:DebugSymbols=false -p:PublishSingleFile=true  -r win-x64 -c Release --self-contained false -p:IncludeNativeLibrariesForSelfExtract=true -o "publish\"
