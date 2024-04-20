@@ -9,4 +9,8 @@
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" />
         <PackageReference Include="ReactiveMarbles.ObservableEvents.SourceGenerator" />
     </ItemGroup>
+    
+    <PropertyGroup>
+        <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    </PropertyGroup>
 </Project>
