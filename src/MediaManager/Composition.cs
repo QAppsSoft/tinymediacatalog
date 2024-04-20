@@ -60,8 +60,7 @@ internal partial class Composition
         // Database
         .Bind<IDbContextFactory<MediaManagerDatabaseContext>>().As(Lifetime.Singleton).To<DbContextFactory>()
 
-        .Root<MainViewViewModel>("MainViewViewModel")
-        .Root<Program>("Root");
+        .Root<MainViewViewModel>("MainViewViewModel");
 
     private static string GetLogFileName(IAppInfo appInfo, LoggingConfiguration config) =>
         Path.Combine(appInfo.LogsPath, config.LogFileName);
