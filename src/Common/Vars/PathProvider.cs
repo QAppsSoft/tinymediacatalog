@@ -11,6 +11,8 @@ public static class PathProvider
     
     private static string DataDirectoryName { get; } = "Data";
     private static string BackupDirectoryName { get; } = "Backup";
+    private static string SettingsDirectoryName { get; } = "Settings";
+    private static string LogsDirectoryName { get; } = "Logs";
     private static string PortableMarkName { get; } = ".portable";
 
     public static string CurrentAppPath { get; } = AppContext.BaseDirectory;
@@ -26,5 +28,8 @@ public static class PathProvider
     public static string DatabasePath { get; } = IsDebug ?
         DataBaseFileName :
         Path.Combine(FullDataDirectory, DataBaseFileName);
+    
     public static string DatabaseBackupPath { get; } = Path.Combine(FullDataDirectory, BackupDirectoryName);
+    public static string SettingsPath { get; } = Path.Combine(FullDataDirectory, SettingsDirectoryName);
+    public static string LogsPath { get; } = Path.Combine(FullDataDirectory, LogsDirectoryName);
 }
