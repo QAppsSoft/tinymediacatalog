@@ -58,6 +58,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Abstractions", "Abstraction
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.SettingsFixtures", "tests\Services.SettingsFixtures\Services.SettingsFixtures.csproj", "{B7E83618-A6EF-4BF2-9185-F8BB2D5488F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Extensions", "src\Common.Extensions\Common.Extensions.csproj", "{3EF8C7A0-0E28-4F91-8D0A-57D30AE51A3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,7 @@ Global
 		{1ECCEC11-D976-4AE5-8635-B8CC27D940BF} = {726A5679-B2B9-42E7-A22D-3F938FD54A1F}
 		{FBD42526-9E1C-4122-99F8-E08FB89DEB8C} = {C7514221-4C5A-4F4F-87DA-79654BB0D865}
 		{B7E83618-A6EF-4BF2-9185-F8BB2D5488F5} = {FE1F5C38-3826-4EE8-B297-CA995B1E9A57}
+		{3EF8C7A0-0E28-4F91-8D0A-57D30AE51A3B} = {87780B4A-4292-47D2-8EE2-CF0D853B0B5C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4914F4A5-51F6-4C4E-9F7A-CC3F89496058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -140,5 +143,9 @@ Global
 		{B7E83618-A6EF-4BF2-9185-F8BB2D5488F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7E83618-A6EF-4BF2-9185-F8BB2D5488F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7E83618-A6EF-4BF2-9185-F8BB2D5488F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF8C7A0-0E28-4F91-8D0A-57D30AE51A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF8C7A0-0E28-4F91-8D0A-57D30AE51A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF8C7A0-0E28-4F91-8D0A-57D30AE51A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF8C7A0-0E28-4F91-8D0A-57D30AE51A3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
