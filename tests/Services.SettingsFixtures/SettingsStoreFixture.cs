@@ -1,8 +1,6 @@
 using System.Text.Json;
-using Microsoft.Extensions.Logging.Abstractions;
 using Services.Abstractions.Settings;
-using Services.Settings;
-using TestsCommons;
+using TestsCommons.Helpers;
 
 namespace Services.SettingsFixtures;
 
@@ -13,11 +11,8 @@ public class SettingsStoreFixture
     {
         const string key = "WriteCustomStateTestFile";
         const string testJsonValue = "{\"TestValue\" : 1}";
-        using StorageFixture storageFixture = new();
-        
-        var settingFilePath = storageFixture.GetTemporalFileName(".setting", key);
+        using var _ = MocksFixture.BuildFileSettingsStore(key, out var store);
         var state = new State(1, testJsonValue);
-        var store = new FileSettingsStore(NullLogger<FileSettingsStore>.Instance, settingFilePath);
 
         store.Save(key, state);
         var restored = store.Load(key);
@@ -30,13 +25,10 @@ public class SettingsStoreFixture
     {
         const string key = "WriteCustomRecordStructTestFile";
         var value = new TestStruct("None", 10);
-        using StorageFixture storageFixture = new();
+        using var _ = MocksFixture.BuildFileSettingsStore(key, out var store);
         
         var jsonValue = JsonSerializer.Serialize(value, new JsonSerializerOptions { WriteIndented = true });
         var state = new State(1, jsonValue);
-
-        var settingFilePath = storageFixture.GetTemporalFileName(".setting", key);
-        var store = new FileSettingsStore(NullLogger<FileSettingsStore>.Instance, settingFilePath);
 
         store.Save(key, state);
         var restored = store.Load(key);

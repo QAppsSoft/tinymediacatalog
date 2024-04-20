@@ -9,10 +9,10 @@ public sealed class FileSettingsStore : ISettingsStore
 {
     private readonly ILogger<FileSettingsStore> _logger;
 
-    public FileSettingsStore(ILogger<FileSettingsStore> logger, string? path = null)
+    public FileSettingsStore(ILogger<FileSettingsStore> logger, IAppInfo appInfo)
     {
         _logger = logger;
-        Location = path ?? Path.Combine(PathProvider.SettingsPath, "MultiConverter");
+        Location = appInfo.SettingsPath;
 
         var directory = new DirectoryInfo(Location);
         if (!directory.Exists)

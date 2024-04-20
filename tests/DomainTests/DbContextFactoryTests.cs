@@ -1,6 +1,6 @@
-﻿using Common.Vars;
-using Domain.Factories;
+﻿using Domain.Factories;
 using Microsoft.EntityFrameworkCore;
+using TestsCommons.Helpers;
 
 namespace DomainTests;
 
@@ -10,7 +10,9 @@ public class DbContextFactoryTests
     public void Database_should_be_created()
     {
         bool created;
-        var dbcFactory = new DbContextFactory();
+        
+        using var _ = MocksFixture.BuildAppInfo(out var appInfo);
+        var dbcFactory = new DbContextFactory(appInfo);
         using var context = dbcFactory.CreateDbContext();
         
         try
@@ -29,11 +31,12 @@ public class DbContextFactoryTests
     [Test]
     public void Correct_connection_string()
     {
-        var dbcFactory = new DbContextFactory();
+        using var _ = MocksFixture.BuildAppInfo(out var appInfo);
+        var dbcFactory = new DbContextFactory(appInfo);
         using var context = dbcFactory.CreateDbContext();
 
         var connectionString = context.Database.GetConnectionString();
 
-        connectionString.Should().Contain(PathProvider.DataBaseFileName);
+        connectionString.Should().Contain(appInfo.DataBaseFileName);
     }
 }

@@ -4,13 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Factories;
 
-public sealed class DbContextFactory : IDbContextFactory<MediaManagerDatabaseContext>
+public sealed class DbContextFactory(IAppInfo appInfo) : IDbContextFactory<MediaManagerDatabaseContext>
 {
+    private readonly IAppInfo _appInfo = appInfo ?? throw new ArgumentNullException(nameof(appInfo));
+
     public MediaManagerDatabaseContext CreateDbContext()
     {
         var builder = new SqliteConnectionStringBuilder
         {
-            DataSource = PathProvider.DatabasePath,
+            DataSource = _appInfo.DatabasePath,
             // Password = // TODO: set password for database encryption 
         };
         
