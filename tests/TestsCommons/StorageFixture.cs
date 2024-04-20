@@ -9,17 +9,12 @@ public class StorageFixture : IDisposable
         TempDirPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
         Directory.CreateDirectory(TempDirPath);
     }
-
-    public string GetTemporalFileName(string? extension = null)
+    
+    public string GetTemporalFileName(string? extension = null, string? fileName = null)
     {
-        if (extension != null)
-        {
-            return Path.Combine(TempDirPath, $"{Guid.NewGuid()}{extension}");
-        }
-
-        return Path.Combine(TempDirPath, $"{Guid.NewGuid()}");
+        return Path.Combine(TempDirPath, $"{fileName ?? Guid.NewGuid().ToString()}{extension ?? string.Empty}");
     }
-
+    
     public string GetTemporalDirectory()
     {
         var path = Path.Combine(TempDirPath, $"{Guid.NewGuid()}");
