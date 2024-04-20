@@ -18,4 +18,11 @@
     <ItemGroup>
       <ProjectReference Include="..\MediaManager\MediaManager.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+        <RdXmlFile Include="Avalonia.rd.xml" />
+        <RdXmlFile Include="Microsoft.EntityFrameworkCore.rd.xml" />
+        <RdXmlFile Include="Microsoft.EntityFrameworkCore.Sqlite.rd.xml" />
+        <RdXmlFile Include="System.Linq.Queryable.rd.xml" />
+    </ItemGroup>
 </Project>
