@@ -10,7 +10,7 @@ public interface IAppInfo
     string PortableFilePath { get; }
     string DataBaseFileName { get; }
     string DatabasePath { get; }
-    string DatabaseBackupPath { get; }
+    string BackupPath { get; }
     string SettingsPath { get; }
     string LogsPath { get; }
 }

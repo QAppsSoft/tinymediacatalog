@@ -1,6 +1,6 @@
 ﻿namespace Common.Vars;
 
-public class AppInfo : IAppInfo
+public sealed class AppInfo : IAppInfo
 {
 #if DEBUG
     private const bool IsDebug = true;
@@ -13,20 +13,22 @@ public class AppInfo : IAppInfo
     private static string SettingsDirectoryName => "Settings";
     private static string LogsDirectoryName => "Logs";
     private static string PortableMarkName => ".portable";
-    
+
     public AppInfo()
     {
         CurrentAppPath = AppContext.BaseDirectory;
+
+        var applicationBaseDataPath = IsPortable
+            ? CurrentAppPath
+            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
         
-        FullDataDirectory = IsPortable
-            ? Path.Combine(CurrentAppPath, DataDirectoryName)
-            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName, DataDirectoryName);
+        FullDataDirectory = Path.Combine(applicationBaseDataPath, DataDirectoryName);
 
         PortableFilePath = Path.Combine(CurrentAppPath, PortableMarkName);
 
         DatabasePath = IsDebug ? DataBaseFileName : Path.Combine(FullDataDirectory, DataBaseFileName);
-        
-        DatabaseBackupPath = Path.Combine(FullDataDirectory, BackupDirectoryName);
+
+        BackupPath = Path.Combine(applicationBaseDataPath, BackupDirectoryName);
         
         SettingsPath = Path.Combine(FullDataDirectory, SettingsDirectoryName);
         
@@ -39,9 +41,9 @@ public class AppInfo : IAppInfo
     public string CurrentAppPath { get; }
     public string FullDataDirectory { get; }
     public string PortableFilePath { get; }
-    public string DataBaseFileName => "MediaManager.mmdb";
+    public string DataBaseFileName => IsDebug ? "MediaManager-debug.mmdb" : "MediaManager.mmdb";
     public string DatabasePath { get; }
-    public string DatabaseBackupPath { get; }
+    public string BackupPath { get; }
     public string SettingsPath { get; }
     public string LogsPath { get; }
 }
