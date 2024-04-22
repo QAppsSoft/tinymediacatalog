@@ -1,4 +1,5 @@
-﻿using Domain.Extensions;
+﻿using Domain.Configurations;
+using Domain.Extensions;
 using Domain.Models;
 using Domain.Models.Interfaces;
 using Domain.Models.Movie;
@@ -35,7 +36,16 @@ public class MediaManagerDatabaseContext : DbContext
     {
         ArgumentNullException.ThrowIfNull(modelBuilder);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(MediaManagerDatabaseContext).Assembly);
+        modelBuilder.ApplyConfiguration(new ActorEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new AudioFileEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new ImageFileEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new MovieControlEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new MultimediaFileEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new NfoFileEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new OtherFileEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new SubtitleFileEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new VideoFileEntityTypeConfiguration());
+        
         base.OnModelCreating(modelBuilder);
     }
     
