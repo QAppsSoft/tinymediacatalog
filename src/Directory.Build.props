@@ -12,5 +12,6 @@
     
     <PropertyGroup>
         <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+        <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
     </PropertyGroup>
 </Project>
