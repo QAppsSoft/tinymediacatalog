@@ -17,4 +17,8 @@
     <ItemGroup>
       <ProjectReference Include="..\MediaManager\MediaManager.csproj" />
     </ItemGroup>
+
+    <Target Name="DeleteFiles" AfterTargets="Build">        
+        <Exec Command="del /F /S /Q *e_sqlite3.*"/>
+    </Target>
 </Project>
