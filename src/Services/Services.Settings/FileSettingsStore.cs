@@ -39,7 +39,7 @@ public sealed class FileSettingsStore : ISettingsStore
 
         var value = File.ReadAllText(file);
 
-        var state = JsonSerializer.Deserialize<State>(value);
+        var state = JsonSerializer.Deserialize(value, SourceGenerationContext.Default.State);
 
         _logger.LogDebug("{Key} has the value {State}", key, state);
         return state;
@@ -51,7 +51,7 @@ public sealed class FileSettingsStore : ISettingsStore
 
         _logger.LogInformation("Creating setting for {Key}", key);
 
-        var fileText = JsonSerializer.Serialize(state);
+        var fileText = JsonSerializer.Serialize(state, SourceGenerationContext.Default.State);
 
         _logger.LogInformation("Writing settings for {Key} to {File}", key, file);
         File.WriteAllText(file, fileText);
