@@ -37,6 +37,12 @@ internal partial class Composition
         .Bind<IConfiguration>().As(Lifetime.Singleton).To(_ => new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
             .Build())
+        .Bind<LoggingConfiguration>().As(Lifetime.Singleton).To(x =>
+        {
+            x.Inject<IConfiguration>(out var configuration);
+
+            return configuration.GetSection(LoggingConfiguration.Logging).Get<LoggingConfiguration>();
+        })
         
         // Logging
         .Bind<ILoggerFactory>().As(Lifetime.Singleton).To(x =>
@@ -56,6 +62,11 @@ internal partial class Composition
                 .CreateLogger();
 
             return new SerilogLoggerFactory(logger);
+        })
+        .Bind<ILogger<TT>>().As(Lifetime.Transient).To(x =>
+        {
+            x.Inject<ILoggerFactory>(out var factory);
+            return factory.CreateLogger<TT>();
         })
         
         // Database
