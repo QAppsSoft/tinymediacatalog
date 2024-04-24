@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -13,9 +16,10 @@ public class InternalAppBuilder(Func<AppBuilder> builder)
 
     public void Run(string[] args)
     {
-        RxApp.DefaultExceptionHandler = new ReactiveUiObservableExceptionHandler();
+        // Catch global unhandled exceptions
+        RxApp.DefaultExceptionHandler = Observer.Create<Exception>(OnException);
         TaskScheduler.UnobservedTaskException += (_, eventArgs) => LogAndClose(eventArgs.Exception);
-
+        
         try
         {
             // prepare and run your App here
@@ -31,6 +35,15 @@ public class InternalAppBuilder(Func<AppBuilder> builder)
             // Use the finally-block if you need to clean things up or similar
             Log.CloseAndFlush();
         }
+    }
+
+    private static void OnException(Exception exception)
+    {
+        if (Debugger.IsAttached) Debugger.Break();
+
+        Log.Fatal(exception, "A global non caught exception happened");
+
+        RxApp.MainThreadScheduler.Schedule(() => throw exception) ;
     }
 
     private static void LogAndClose(Exception exception)
