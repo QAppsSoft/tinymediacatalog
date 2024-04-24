@@ -6,7 +6,7 @@ public interface IAppInfo
     string AppFriendlyName { get; }
     bool IsPortable { get; }
     string CurrentAppPath { get; }
-    string FullDataDirectory { get; }
+    string DataDirectoryPath { get; }
     string PortableFilePath { get; }
     string DataBaseFileName { get; }
     string DatabasePath { get; }

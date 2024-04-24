@@ -17,31 +17,31 @@ public sealed class AppInfo : IAppInfo
     public AppInfo()
     {
         CurrentAppPath = AppContext.BaseDirectory;
+        
+        PortableFilePath = Path.Combine(CurrentAppPath, PortableMarkName);
 
         var applicationBaseDataPath = IsPortable
             ? CurrentAppPath
             : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
-        
-        FullDataDirectory = Path.Combine(applicationBaseDataPath, DataDirectoryName);
 
-        PortableFilePath = Path.Combine(CurrentAppPath, PortableMarkName);
+        DataDirectoryPath = Path.Combine(applicationBaseDataPath, DataDirectoryName);
 
-        DatabasePath = IsDebug ? DataBaseFileName : Path.Combine(FullDataDirectory, DataBaseFileName);
+        DatabasePath = IsDebug ? DataBaseFileName : Path.Combine(DataDirectoryPath, DataBaseFileName);
 
         BackupPath = Path.Combine(applicationBaseDataPath, BackupDirectoryName);
         
-        SettingsPath = Path.Combine(FullDataDirectory, SettingsDirectoryName);
+        SettingsPath = Path.Combine(DataDirectoryPath, SettingsDirectoryName);
         
-        LogsPath = Path.Combine(FullDataDirectory, LogsDirectoryName);
+        LogsPath = Path.Combine(applicationBaseDataPath, LogsDirectoryName);
     }
 
-    public string AppName => "MediaManager";
+    public string AppName => IsDebug ? "MediaManager-Debug" : "MediaManager";
     public string AppFriendlyName => "Media Manager";
     public bool IsPortable => File.Exists(PortableFilePath);
     public string CurrentAppPath { get; }
-    public string FullDataDirectory { get; }
+    public string DataDirectoryPath { get; }
     public string PortableFilePath { get; }
-    public string DataBaseFileName => IsDebug ? "MediaManager-debug.mmdb" : "MediaManager.mmdb";
+    public string DataBaseFileName => "MediaManager.mmdb";
     public string DatabasePath { get; }
     public string BackupPath { get; }
     public string SettingsPath { get; }
