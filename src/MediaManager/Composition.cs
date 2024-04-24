@@ -30,6 +30,7 @@ internal partial class Composition
         .Bind<IPageViewModel>(3).As(Lifetime.Singleton).To<TvShowsViewModel>()
         
         // Models
+        .Bind<IAppInfo>().As(Lifetime.Singleton).To<AppInfo>()
 
         // Infrastructure
         .Bind<ISchedulerProvider>().As(Lifetime.Singleton).To<SchedulerProvider>()
