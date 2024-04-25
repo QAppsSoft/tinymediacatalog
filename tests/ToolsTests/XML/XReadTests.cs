@@ -25,7 +25,7 @@ public class XReadTests
     {
         const string xmlPath = null!;
 
-        var action = () => _ = XRead.OpenPath(xmlPath);
+        var action = () => _ = XRead.OpenPath(xmlPath!); // Ignored for testing
 
         action.Should().Throw<ArgumentNullException>();
     }
@@ -103,6 +103,6 @@ public class XReadTests
 
         var xml = XRead.OpenPath(xmlPath);
         
-        return xml;
+        return xml!; // Will never be null
     }
 }
