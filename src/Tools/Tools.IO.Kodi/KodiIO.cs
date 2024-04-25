@@ -74,13 +74,7 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         //movieModel.Certification = movie.Certification;
         
         // UniqueIds
-        movieModel.UniqueIds = new List<UniqueId>
-        {
-            new() { Id = movie.Id, Name = UniqueId.ValidNames.Imdb },
-            new() { Id = movie.Tmdbid, Name = UniqueId.ValidNames.Tmdb },
-        };
-        
-        // Uniqueids
+        movieModel.UniqueIds = movie.UniqueIds.ConvertAll(value => new UniqueId { Name = value.Type, Id = value.Text });
         
         // Countries
         
