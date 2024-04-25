@@ -30,11 +30,11 @@ public class KodiTests
     }
     
     [Test]
-    public void LoadMovie_NFO_with_Kodi_should_return_correct_basic_data()
+    public async Task LoadMovie_NFO_with_Kodi_should_return_correct_basic_data_Async()
     {
         var kodi = new KodiIO(_xmlRead, _factory);
 
-        kodi.LoadMovie(_movieModel);
+        await kodi.LoadMovieAsync(_movieModel);
         
         // Assert
         _movieModel.Title.Should().Be("A todo gas");
@@ -49,11 +49,11 @@ public class KodiTests
     }
 
     [Test]
-    public void LoadMovie_NFO_with_Kodi_should_return_correct_cast_data()
+    public async Task LoadMovie_NFO_with_Kodi_should_return_correct_cast_data_Async()
     {
         var kodi = new KodiIO(_xmlRead, _factory);
 
-        kodi.LoadMovie(_movieModel);
+        await kodi.LoadMovieAsync(_movieModel);
         
         // Assert
         _movieModel.Cast.Count.Should().NotBe(0);
@@ -69,18 +69,18 @@ public class KodiTests
     }
     
     [Test]
-    public void LoadMovie_NFO_with_Kodi_should_return_correct_languages_data()
+    public async Task LoadMovie_NFO_with_Kodi_should_return_correct_languages_data_Async()
     {
         var kodi = new KodiIO(_xmlRead, _factory);
 
-        kodi.LoadMovie(_movieModel);
+        await kodi.LoadMovieAsync(_movieModel);
 
         // Assert
         _movieModel.OriginalLanguage.Should().Be("inglés,español");
     }
     
     [Test]
-    public void Empty_NFO_file_should_not_update_MovieModel()
+    public async Task Empty_NFO_file_should_not_update_MovieModel_Async()
     {
         using var storage = new StorageFixture();
         var emptyFile = storage.GetEmptyFile(".nfo");
@@ -88,7 +88,7 @@ public class KodiTests
         _movieModel.Title = "Test title";
         var kodi = new KodiIO(_xmlRead, _factory);
 
-        kodi.LoadMovie(_movieModel);
+        await kodi.LoadMovieAsync(_movieModel);
 
         // Assert
         _movieModel.Title.Should().Be("Test title");

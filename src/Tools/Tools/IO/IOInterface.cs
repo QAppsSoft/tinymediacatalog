@@ -22,11 +22,11 @@ public interface IOInterface
     /// Loads the movie.
     /// </summary>
     /// <param name="movieModel">The movie model.</param>
-    void LoadMovie(MovieContainer movieModel);
+    Task LoadMovieAsync(MovieContainer movieModel);
     
     /// <summary>
     /// Save the movie.
     /// </summary>
     /// <param name="movieModel">The movie model.</param>
-    void SaveMovie(MovieContainer movieModel);
+    Task SaveMovieAsync(MovieContainer movieModel);
 }

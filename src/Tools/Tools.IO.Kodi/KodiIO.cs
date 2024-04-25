@@ -20,7 +20,7 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
     public string IOHandlerDescription { get; set; } = "IO handler for KODI";
     public Uri IOHandlerUri { get; set; } = new("https://kodi.tv/");
 
-    public void LoadMovie(MovieContainer movieModel)
+    public async Task LoadMovieAsync(MovieContainer movieModel)
     {
         Movie? movie;
 
@@ -95,7 +95,11 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         
         // Cast (actors)
         movieModel.Cast.Clear();
-        movieModel.Cast = movie.Cast.ConvertAll(castMember => GetActor(movieModel, castMember));
+        foreach (var castMember in movie.Cast)
+        {
+            var actor = await GetActorAsync(movieModel, castMember).ConfigureAwait(false);
+            movieModel.Cast.Add(actor);
+        }
         
         // Trailer
         
@@ -108,14 +112,14 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         // Fileinfo
     }
 
-    public void SaveMovie(MovieContainer movieModel)
+    public Task SaveMovieAsync(MovieContainer movieModel)
     {
         throw new NotImplementedException();
     }
 
-    private Actor GetActor(MovieContainer movieModel, Models.Actor castMember)
+    private async Task<Actor> GetActorAsync(MovieContainer movieModel, Models.Actor castMember)
     {
-        var person = GetPerson(castMember);
+        var person = await GetPersonAsync(castMember).ConfigureAwait(false);
         var actor = new Actor
         {
             Movie = movieModel, MovieContainerId = movieModel.Id, Person = person, PersonId = person.Id,
@@ -125,29 +129,32 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         return actor;
     }
 
-    private Person GetPerson(Tools.IO.Kodi.Models.Actor actor)
+    private async Task<Person> GetPersonAsync(Tools.IO.Kodi.Models.Actor actor)
     {
-        using var context = _databaseContextFactory.CreateDbContext();
-
-        var person = context.Persons
-            .FirstOrDefault(x =>
+        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var person = await context.Persons
+            .FirstOrDefaultAsync(x =>
                 x.UniqueIds.Any(y =>
                     y.Name == UniqueId.ValidNames.Tmdb &&
-                    y.Id == actor.Tmdbid.ToString(CultureInfo.InvariantCulture)));
+                    y.Id == actor.Tmdbid.ToString(CultureInfo.InvariantCulture)))
+            .ConfigureAwait(false);
 
-        return person ?? new Person
-        {
-            Name = actor.Name,
-            Profile = actor.Profile,
-            Thumb = actor.Thumb,
-            UniqueIds = new List<UniqueId>
+            return person ?? new Person
             {
-                new()
+                Name = actor.Name,
+                Profile = actor.Profile,
+                Thumb = actor.Thumb,
+                UniqueIds = new List<UniqueId>
                 {
-                    Id = actor.Tmdbid.ToString(CultureInfo.InvariantCulture),
-                    Name = UniqueId.ValidNames.Tmdb,
+                    new()
+                    {
+                        Id = actor.Tmdbid.ToString(CultureInfo.InvariantCulture),
+                        Name = UniqueId.ValidNames.Tmdb,
+                    },
                 },
-            },
-        };
+            };
+        }
     }
 }
