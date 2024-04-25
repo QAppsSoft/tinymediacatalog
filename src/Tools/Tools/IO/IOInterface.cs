@@ -1,4 +1,4 @@
-﻿using Models.MovieModels;
+﻿using Domain.Models.Movie;
 using Tools.Enums;
 
 namespace Tools.IO;
@@ -22,11 +22,11 @@ public interface IOInterface
     /// Loads the movie.
     /// </summary>
     /// <param name="movieModel">The movie model.</param>
-    void LoadMovie(MovieModel movieModel);
+    void LoadMovie(MovieContainer movieModel);
     
     /// <summary>
     /// Save the movie.
     /// </summary>
     /// <param name="movieModel">The movie model.</param>
-    void SaveMovie(MovieModel movieModel);
+    void SaveMovie(MovieContainer movieModel);
 }

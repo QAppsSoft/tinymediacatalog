@@ -28,4 +28,5 @@ public class MovieContainer : GuidEntityBase, ITrackedEntity
     public ICollection<Actor> Cast { get; set; } = new List<Actor>();
     
     public ICollection<MultimediaFile> Files { get; set; } = new List<MultimediaFile>();
+    public DateTime DateAdded { get; set; }
 }

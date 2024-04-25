@@ -5,7 +5,7 @@ namespace Tools.IO.Kodi.Models;
 [XmlRoot(ElementName="rating")]
 public class Rating {
     [XmlElement(ElementName="value")]
-    public double Value { get; set; }
+    public long Value { get; set; }
     [XmlElement(ElementName="votes")]
     public int Votes { get; set; }
     [XmlAttribute(AttributeName="default")]

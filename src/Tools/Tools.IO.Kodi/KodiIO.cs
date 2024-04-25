@@ -1,29 +1,32 @@
 ﻿using System.Globalization;
-using Models.Common;
-using Models.MovieModels;
+using Domain;
+using Domain.Models;
+using Domain.Models.Movie;
+using Microsoft.EntityFrameworkCore;
 using Tools.Enums;
-using Tools.IO.Kodi.Models;
 using Tools.XML.Interfaces;
+using Movie = Tools.IO.Kodi.Models.Movie;
 
 namespace Tools.IO.Kodi;
 
-public class KodiIO(IXmlRead xmlRead) : IOInterface
+public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseContext> databaseContextFactory) : IOInterface
 {
     private readonly IXmlRead _xmlRead = xmlRead ?? throw new ArgumentNullException(nameof(xmlRead));
+    private readonly IDbContextFactory<MediaManagerDatabaseContext> _databaseContextFactory = databaseContextFactory ?? throw new ArgumentNullException(nameof(databaseContextFactory));
+    
     public bool ShowInSettings { get; set; } = true;
     public NfoType Type { get; set; } = NfoType.KODI;
     public string IOHandlerName { get; set; } = "KODI";
     public string IOHandlerDescription { get; set; } = "IO handler for KODI";
     public Uri IOHandlerUri { get; set; } = new("https://kodi.tv/");
 
-    public void LoadMovie(MovieModel movieModel)
+    public void LoadMovie(MovieContainer movieModel)
     {
-
         Movie? movie;
 
         try
         {
-            movie = _xmlRead.ParseXml<Movie>(movieModel.NfoPathOnDisk);
+            movie = _xmlRead.ParseXml<Movie>(movieModel.NfoPath);
         }
         catch (InvalidOperationException _)
         {
@@ -45,7 +48,7 @@ public class KodiIO(IXmlRead xmlRead) : IOInterface
         movieModel.Year = movie.Year;
         
         // Ratings
-        movieModel.Ratings = movie.RatingsContainer.Rating.ConvertAll(rating => new RatingModel
+        movieModel.Ratings = movie.RatingsContainer.Rating.ConvertAll(rating => new Rating
         {
             Default = rating.Default,
             Max = rating.Max,
@@ -58,38 +61,39 @@ public class KodiIO(IXmlRead xmlRead) : IOInterface
         
         
         // Plot
-        movieModel.Plot = movie.Plot;
+        //movieModel.Plot = movie.Plot;
         
         // Outline
-        movieModel.Outline = movie.Outline;
+        //movieModel.Outline = movie.Outline;
         
         // Tagline
-        movieModel.Tagline = movie.TagLine;
+        //movieModel.Tagline = movie.TagLine;
         
         // Runtime
-        movieModel.Runtime = movie.Runtime;
+        //movieModel.Runtime = movie.Runtime;
         
         // Thumb
         
         
         // Mpaa
-        movieModel.Mpaa = movie.Mpaa;
+        //movieModel.Mpaa = movie.Mpaa;
         
         // Certification
-        movieModel.Certification = movie.Certification;
+        //movieModel.Certification = movie.Certification;
         
-        // Id
-        movieModel.Id = movie.Id;
-        
-        // TmdbId
-        movieModel.Tmdbid = movie.Tmdbid;
+        // UniqueIds
+        movieModel.UniqueIds = new List<UniqueId>
+        {
+            new() { Id = movie.Id, Name = UniqueId.ValidNames.Imdb },
+            new() { Id = movie.Tmdbid, Name = UniqueId.ValidNames.Tmdb },
+        };
         
         // Uniqueids
         
         // Countries
         
         // Premiered
-        movieModel.Premiered = DateTime.Parse(movie.Premiered, CultureInfo.InvariantCulture);
+        movieModel.ReleaseDate = DateOnly.Parse(movie.Premiered, CultureInfo.InvariantCulture);
         
         // Watched
         
@@ -102,19 +106,13 @@ public class KodiIO(IXmlRead xmlRead) : IOInterface
         // Tags
         
         // Cast (actors)
-        movieModel.Cast = movie.Cast.ConvertAll(cast => new ActorModel
-        {
-            Name = cast.Name,
-            Profile = cast.Profile,
-            Role = cast.Role,
-            Thumb = cast.Thumb,
-            TmdbId = cast.Tmdbid,
-        });
+        movieModel.Cast.Clear();
+        movieModel.Cast = movie.Cast.ConvertAll(castMember => GetActor(movieModel, castMember));
         
         // Trailer
         
         // Languages (original)
-        movieModel.Languages = movie.Languages.Split(',').ToList();
+        movieModel.OriginalLanguage = movie.Languages;
         
         // Date added
         movieModel.DateAdded = DateTime.Parse(movie.DateAdded, CultureInfo.InvariantCulture);
@@ -122,8 +120,42 @@ public class KodiIO(IXmlRead xmlRead) : IOInterface
         // Fileinfo
     }
 
-    public void SaveMovie(MovieModel movieModel)
+    public void SaveMovie(MovieContainer movieModel)
     {
         throw new NotImplementedException();
+    }
+
+    private Actor GetActor(MovieContainer movieModel, Models.Actor castMember)
+    {
+        var person = GetPerson(castMember);
+        var actor = new Actor
+            { Movie = movieModel, MovieContainerId = movieModel.Id, Person = person, PersonId = person.Id };
+        return actor;
+    }
+
+    private Person GetPerson(Tools.IO.Kodi.Models.Actor actor)
+    {
+        using var context = _databaseContextFactory.CreateDbContext();
+
+        var person = context.Persons
+            .FirstOrDefault(x =>
+                x.UniqueIds.Any(y =>
+                    y.Name == UniqueId.ValidNames.Tmdb &&
+                    y.Id == actor.Tmdbid.ToString(CultureInfo.InvariantCulture)));
+
+        return person ?? new Person
+        {
+            Name = actor.Name,
+            Profile = actor.Profile,
+            Thumb = actor.Thumb,
+            UniqueIds = new List<UniqueId>
+            {
+                new()
+                {
+                    Id = actor.Tmdbid.ToString(CultureInfo.InvariantCulture),
+                    Name = actor.Name,
+                },
+            },
+        };
     }
 }

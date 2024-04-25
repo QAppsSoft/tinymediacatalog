@@ -39,7 +39,7 @@ public class Movie {
 	[XmlElement(ElementName="id")]
 	public string Id { get; set; }
 	[XmlElement(ElementName="tmdbid")]
-	public int Tmdbid { get; set; }
+	public string Tmdbid { get; set; }
 	[XmlElement(ElementName="uniqueid")]
 	public List<Uniqueid> UniqueIds { get; set; }
 	[XmlElement(ElementName="country")]
