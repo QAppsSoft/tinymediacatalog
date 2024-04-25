@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Pure.DI;
 using Serilog;
 using Serilog.Extensions.Logging;
+using Tools.XML;
+using Tools.XML.Interfaces;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace MediaManager;
@@ -43,6 +45,7 @@ internal partial class Composition
 
             return configuration.GetSection(LoggingConfiguration.Logging).Get<LoggingConfiguration>();
         })
+        .Bind<IXmlRead>().As(Lifetime.Singleton).To<XmlRead>()
         
         // Logging
         .Bind<ILoggerFactory>().As(Lifetime.Singleton).To(x =>
