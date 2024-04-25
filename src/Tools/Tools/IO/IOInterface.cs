@@ -23,4 +23,10 @@ public interface IOInterface
     /// </summary>
     /// <param name="movieModel">The movie model.</param>
     void LoadMovie(MovieModel movieModel);
+    
+    /// <summary>
+    /// Save the movie.
+    /// </summary>
+    /// <param name="movieModel">The movie model.</param>
+    void SaveMovie(MovieModel movieModel);
 }

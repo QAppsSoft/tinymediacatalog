@@ -96,6 +96,11 @@ public class Kodi : IOInterface
         // Fileinfo
     }
 
+    public void SaveMovie(MovieModel movieModel)
+    {
+        throw new NotImplementedException();
+    }
+
     private static List<ActorModel> GetCast(XmlDocument xmlReader) =>
         xmlReader.GetElementsByTagName("actor").Cast<XmlElement>()
             .Select(node =>
