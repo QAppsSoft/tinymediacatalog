@@ -19,10 +19,10 @@ public static class ReactiveExtensions
                     var subscription = source
                         .Do(
                             i => logger.LogTrace("{Name}.OnNext({@Value})", name, i),
-                            ex => logger.LogError(ex, $"{{Name}}.OnError({ex.GetType()})", name),
+                            ex => logger.LogError(ex, "{Name}.OnError({Type})", name, ex.GetType()),
                             () => logger.LogDebug("{Name}.OnCompleted()", name))
                         .Subscribe(o);
-                    var disposal = Disposable.Create(() => logger.LogDebug("{0}.Dispose()", name));
+                    var disposal = Disposable.Create(() => logger.LogDebug("{Name}.Dispose()", name));
                     return new CompositeDisposable(subscription, disposal);
                 })
         );
