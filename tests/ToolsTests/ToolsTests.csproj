@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Tools\Tools\Tools.csproj" />
+      <ProjectReference Include="..\..\src\Tools\Tools.IO.Kodi\Tools.IO.Kodi.csproj" />
       <ProjectReference Include="..\TestsCommons\TestsCommons.csproj" />
     </ItemGroup>
 

@@ -64,6 +64,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaManager.Desktop", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaManager.DesktopAot", "src\MediaManager.DesktopAot\MediaManager.DesktopAot.csproj", "{9ED540E3-802C-4DAB-9119-6F4ACDBE3CD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools.IO.Kodi", "src\Tools\Tools.IO.Kodi\Tools.IO.Kodi.csproj", "{E5FF7AA4-E7B1-4F90-95A0-9057C5472604}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,7 @@ Global
 		{3EF8C7A0-0E28-4F91-8D0A-57D30AE51A3B} = {87780B4A-4292-47D2-8EE2-CF0D853B0B5C}
 		{9998E39A-3218-400D-9586-D6A3A48DB084} = {D7147423-2CD8-4E2A-9BD0-536352723581}
 		{9ED540E3-802C-4DAB-9119-6F4ACDBE3CD1} = {D7147423-2CD8-4E2A-9BD0-536352723581}
+		{E5FF7AA4-E7B1-4F90-95A0-9057C5472604} = {C2F67F1D-33AB-4ACD-B8B8-FC42B0D5DFDA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4914F4A5-51F6-4C4E-9F7A-CC3F89496058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -161,5 +164,9 @@ Global
 		{9ED540E3-802C-4DAB-9119-6F4ACDBE3CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ED540E3-802C-4DAB-9119-6F4ACDBE3CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ED540E3-802C-4DAB-9119-6F4ACDBE3CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5FF7AA4-E7B1-4F90-95A0-9057C5472604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5FF7AA4-E7B1-4F90-95A0-9057C5472604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5FF7AA4-E7B1-4F90-95A0-9057C5472604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5FF7AA4-E7B1-4F90-95A0-9057C5472604}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
