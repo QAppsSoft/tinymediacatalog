@@ -66,7 +66,7 @@ public class KodiTests
         kodi.LoadMovie(movieModel);
         
         movieModel.Languages.Count.Should().Be(2);
-        movieModel.Languages.Should().BeEquivalentTo(["inglés", "español"]);
+        movieModel.Languages.Should().BeEquivalentTo("inglés", "español");
     }
     
     [Test]
