@@ -121,7 +121,11 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
     {
         var person = GetPerson(castMember);
         var actor = new Actor
-            { Movie = movieModel, MovieContainerId = movieModel.Id, Person = person, PersonId = person.Id };
+        {
+            Movie = movieModel, MovieContainerId = movieModel.Id, Person = person, PersonId = person.Id,
+            Role = castMember.Role,
+        };
+        
         return actor;
     }
 
