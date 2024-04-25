@@ -149,7 +149,7 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
                 new()
                 {
                     Id = actor.Tmdbid.ToString(CultureInfo.InvariantCulture),
-                    Name = actor.Name,
+                    Name = UniqueId.ValidNames.Tmdb,
                 },
             },
         };
