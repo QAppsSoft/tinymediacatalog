@@ -13,7 +13,7 @@ public class Video {
     [XmlElement(ElementName="height")]
     public string Height { get; set; }
     [XmlElement(ElementName="durationinseconds")]
-    public string Durationinseconds { get; set; }
+    public string DurationInSeconds { get; set; }
     [XmlElement(ElementName="stereomode")]
-    public string Stereomode { get; set; }
+    public string StereoMode { get; set; }
 }

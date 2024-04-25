@@ -3,7 +3,7 @@
 namespace Tools.IO.Kodi.Models;
 
 [XmlRoot(ElementName="set")]
-public class Set {
+public class SetContainer {
     [XmlElement(ElementName="name")]
     public string Name { get; set; }
     [XmlElement(ElementName="overview")]

@@ -39,13 +39,13 @@ public class KodiIO : IOInterface
         movieModel.Title = movie.Title;
         
         // Original title
-        movieModel.OriginalTitle = movie.Originaltitle;
+        movieModel.OriginalTitle = movie.OriginalTitle;
         
         // Year
         movieModel.Year = movie.Year;
         
         // Ratings
-        movieModel.Ratings = movie.Ratings.Rating.ConvertAll(rating => new RatingModel
+        movieModel.Ratings = movie.RatingsContainer.Rating.ConvertAll(rating => new RatingModel
         {
             Default = rating.Default,
             Max = rating.Max,
@@ -64,7 +64,7 @@ public class KodiIO : IOInterface
         movieModel.Outline = movie.Outline;
         
         // Tagline
-        movieModel.Tagline = movie.Tagline;
+        movieModel.Tagline = movie.TagLine;
         
         // Runtime
         movieModel.Runtime = movie.Runtime;
@@ -102,7 +102,7 @@ public class KodiIO : IOInterface
         // Tags
         
         // Cast (actors)
-        movieModel.Cast = movie.Actor.ConvertAll(cast => new ActorModel
+        movieModel.Cast = movie.Cast.ConvertAll(cast => new ActorModel
         {
             Name = cast.Name,
             Profile = cast.Profile,
@@ -117,7 +117,7 @@ public class KodiIO : IOInterface
         movieModel.Languages = movie.Languages.Split(',').ToList();
         
         // Date added
-        movieModel.DateAdded = DateTime.Parse(movie.Dateadded, CultureInfo.InvariantCulture);
+        movieModel.DateAdded = DateTime.Parse(movie.DateAdded, CultureInfo.InvariantCulture);
 
         // Fileinfo
     }
