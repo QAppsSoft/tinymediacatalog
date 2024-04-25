@@ -40,10 +40,8 @@ public class KodiTests
         _movieModel.Title.Should().Be("A todo gas");
         _movieModel.OriginalTitle.Should().Be("The Fast and the Furious");
         _movieModel.Year.Should().Be(2001);
-
         _movieModel.Slogan.Should().Be("Cuando el sol se oculta, otro mundo cobra vida.");
         _movieModel.Runtime.Should().Be(109);
-
         _movieModel.UniqueIds.First(x=>x.Name==UniqueId.ValidNames.Imdb).Id.Should().Be("tt0232500");
         _movieModel.UniqueIds.First(x => x.Name == UniqueId.ValidNames.Tmdb).Id.Should().Be("9799");
         _movieModel.ReleaseDate.Should().Be(DateOnly.Parse("2001-10-05", CultureInfo.InvariantCulture));
@@ -57,9 +55,9 @@ public class KodiTests
 
         kodi.LoadMovie(_movieModel);
         
+        // Assert
         _movieModel.Cast.Count.Should().NotBe(0);
         _movieModel.Cast.First().Role.Should().Be("Brian O'Conner");
-
         _movieModel.Cast.First().Person.Name.Should().Be("Paul Walker");
         _movieModel.Cast.First().Person.Thumb.Should().Be("https://image.tmdb.org/t/p/h632/q2PLqKHYCs35HR7QybaNPH3JT96.jpg");
         _movieModel.Cast.First().Person.Profile.Should().Be("https://www.themoviedb.org/person/8167");
@@ -77,6 +75,7 @@ public class KodiTests
 
         kodi.LoadMovie(_movieModel);
 
+        // Assert
         _movieModel.OriginalLanguage.Should().Be("inglés,español");
     }
     
@@ -91,6 +90,7 @@ public class KodiTests
 
         kodi.LoadMovie(_movieModel);
 
+        // Assert
         _movieModel.Title.Should().Be("Test title");
     }
 }
