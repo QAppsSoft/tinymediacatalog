@@ -10,15 +10,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" />
-        <PackageReference Include="NUnit" />
-        <PackageReference Include="NUnit3TestAdapter" />
-        <PackageReference Include="NUnit.Analyzers" />
-        <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="NUnit"/>
+        <PackageReference Include="NUnit3TestAdapter"/>
+        <PackageReference Include="NUnit.Analyzers"/>
+        <PackageReference Include="coverlet.collector"/>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Tools\Tools.IO.Kodi\Tools.IO.Kodi.csproj" />
+      <ProjectReference Include="..\..\src\Tools\Tools\Tools.csproj" />
       <ProjectReference Include="..\TestsCommons\TestsCommons.csproj" />
     </ItemGroup>
 
