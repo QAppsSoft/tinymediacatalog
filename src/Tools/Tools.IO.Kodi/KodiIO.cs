@@ -59,21 +59,13 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         
         // Sets
         
-        
-        // Plot
-        //movieModel.Plot = movie.Plot;
-        
-        // Outline
-        //movieModel.Outline = movie.Outline;
-        
-        // Tagline
-        //movieModel.Tagline = movie.TagLine;
+        // Slogan
+        movieModel.Slogan = movie.TagLine;
         
         // Runtime
-        //movieModel.Runtime = movie.Runtime;
+        movieModel.Runtime = movie.Runtime;
         
         // Thumb
-        
         
         // Mpaa
         //movieModel.Mpaa = movie.Mpaa;
