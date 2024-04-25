@@ -48,6 +48,7 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         movieModel.Year = movie.Year;
         
         // Ratings
+        movieModel.Ratings.Clear();
         movieModel.Ratings = movie.RatingsContainer.Rating.ConvertAll(rating => new Rating
         {
             Default = rating.Default,
@@ -74,6 +75,7 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         //movieModel.Certification = movie.Certification;
         
         // UniqueIds
+        movieModel.UniqueIds.Clear();
         movieModel.UniqueIds = movie.UniqueIds.ConvertAll(value => new UniqueId { Name = value.Type, Id = value.Text });
         
         // Countries
