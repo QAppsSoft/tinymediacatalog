@@ -1,21 +1,21 @@
 ﻿using System.Globalization;
-using System.Xml;
 using Models.Common;
 using Models.MovieModels;
 using Tools.Enums;
 using Tools.IO.Kodi.Models;
-using Tools.XML;
+using Tools.XML.Interfaces;
 
 namespace Tools.IO.Kodi;
 
-public class KodiIO : IOInterface
+public class KodiIO(IXmlRead xmlRead) : IOInterface
 {
+    private readonly IXmlRead _xmlRead = xmlRead ?? throw new ArgumentNullException(nameof(xmlRead));
     public bool ShowInSettings { get; set; } = true;
     public NfoType Type { get; set; } = NfoType.KODI;
     public string IOHandlerName { get; set; } = "KODI";
     public string IOHandlerDescription { get; set; } = "IO handler for KODI";
     public Uri IOHandlerUri { get; set; } = new("https://kodi.tv/");
-    
+
     public void LoadMovie(MovieModel movieModel)
     {
 
@@ -23,7 +23,7 @@ public class KodiIO : IOInterface
 
         try
         {
-            movie = XRead.ParseXml<Movie>(movieModel.NfoPathOnDisk);
+            movie = _xmlRead.ParseXml<Movie>(movieModel.NfoPathOnDisk);
         }
         catch (InvalidOperationException _)
         {

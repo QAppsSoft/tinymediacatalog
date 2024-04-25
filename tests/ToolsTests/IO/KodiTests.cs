@@ -3,17 +3,21 @@ using Models.Common;
 using Models.MovieModels;
 using TestsCommons;
 using Tools.IO.Kodi;
+using Tools.XML;
+using Tools.XML.Interfaces;
 
 namespace ToolsTests.IO;
 
 [TestFixture]
 public class KodiTests
 {
+    private readonly IXmlRead _xmlRead = new XmlRead();
+    
     [Test]
     public void LoadMovie_NFO_with_Kodi_should_return_correct_basic_data()
     {
         var movieModel = new MovieModel { NfoPathOnDisk = Resources.GetResourceFilePath(Resources.KodiMovieNfo) };
-        var kodi = new KodiIO();
+        var kodi = new KodiIO(_xmlRead);
 
         kodi.LoadMovie(movieModel);
         
@@ -42,7 +46,7 @@ public class KodiTests
     public void LoadMovie_NFO_with_Kodi_should_return_correct_cast_data()
     {
         var movieModel = new MovieModel { NfoPathOnDisk = Resources.GetResourceFilePath(Resources.KodiMovieNfo) };
-        var kodi = new KodiIO();
+        var kodi = new KodiIO(_xmlRead);
 
         kodi.LoadMovie(movieModel);
         
@@ -61,7 +65,7 @@ public class KodiTests
     public void LoadMovie_NFO_with_Kodi_should_return_correct_languages_data()
     {
         var movieModel = new MovieModel { NfoPathOnDisk = Resources.GetResourceFilePath(Resources.KodiMovieNfo) };
-        var kodi = new KodiIO();
+        var kodi = new KodiIO(_xmlRead);
 
         kodi.LoadMovie(movieModel);
         
@@ -75,7 +79,7 @@ public class KodiTests
         using var storage = new StorageFixture();
         var emptyFile = storage.GetEmptyFile(".nfo");
         var movieModel = new MovieModel { NfoPathOnDisk = emptyFile, Title = "Test title"};
-        var kodi = new KodiIO();
+        var kodi = new KodiIO(_xmlRead);
 
         kodi.LoadMovie(movieModel);
 
