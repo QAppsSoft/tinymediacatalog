@@ -44,8 +44,6 @@ public class KodiTests
         _movieModel.Slogan.Should().Be("Cuando el sol se oculta, otro mundo cobra vida.");
         _movieModel.Runtime.Should().Be(109);
 
-        // _movieModel.Mpaa.Should().Be("12");
-        // _movieModel.Certification.Should().Be("12");
         _movieModel.UniqueIds.First(x=>x.Name==UniqueId.ValidNames.Imdb).Id.Should().Be("tt0232500");
         _movieModel.UniqueIds.First(x => x.Name == UniqueId.ValidNames.Tmdb).Id.Should().Be("9799");
         _movieModel.ReleaseDate.Should().Be(DateOnly.Parse("2001-10-05", CultureInfo.InvariantCulture));
