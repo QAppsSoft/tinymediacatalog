@@ -1,8 +1,8 @@
 ﻿namespace TestsCommons;
 
-public class StorageFixture : IDisposable
+public sealed class StorageFixture : IDisposable
 {
-    public string TempDirPath { get; private set; }
+    public string TempDirPath { get; }
 
     public StorageFixture()
     {
