@@ -56,51 +56,62 @@ public static class ReactiveExtensions
     }
     
     // Only intended for Debug
-    public static IObservable<T> Spy<T>(IObservable<T> source, string? opName, Action<string> logger)
+    public static IObservable<T> Spy<T>(IObservable<T> source, string? operationName, ILogger logger)
     {
-        opName ??= "IObservable";
-        logger(
-            $"{opName}: Observable obtained on Thread: {Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)}");
+        operationName ??= "IObservable";
+        logger.LogDebug("{OperationName}: Observable obtained on Thread: {Thread}",
+            operationName, Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture));
 
         var count = 0;
 
-        return Observable.Create<T>(obs =>
+        return Observable.Create<T>(observer =>
         {
-            logger(
-                $"{opName}: Subscribed to on Thread: {Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)}");
+            logger.LogDebug("{OperationName}: Subscribed to on Thread: {Thread}",
+                operationName, Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture));
             try
             {
                 var subscription = source
                     .Do(
-                        x => logger($"{opName}: OnNext({x}) on Thread: {Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)}"),
-                        ex => logger($"{opName}: OnError({ex}) on Thread: {Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)}"),
-                        () => logger($"{opName}: OnCompleted()  on Thread: {Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)}"))
-                    .Subscribe(t =>
+                        value => logger.LogTrace("{OperationName}: OnNext({Value}) on Thread: {Thread}",
+                            operationName, value, Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)),
+                        exception => logger.LogError(exception,
+                            "{OperationName}: OnError({Exception}) on Thread: {Thread}",
+                            operationName, exception.GetType(), Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)),
+                        () => logger.LogDebug("{OperationName}: OnCompleted()  on Thread: {Thread}",
+                            operationName, Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)))
+                    .Subscribe(value =>
                     {
                         try
                         {
-                            obs.OnNext(t);
+                            observer.OnNext(value);
                         }
-                        catch (Exception ex)
+                        catch (Exception exception)
                         {
-                            logger($"{opName}: Downstream exception({ex}) on Thread: {Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)}");
+                            logger.LogError(exception,
+                                "{OperationName}: Downstream exception({Exception}) on Thread: {Thread}",
+                                operationName, exception.GetType(),
+                                Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture));
                             throw;
                         }
-                    }, obs.OnError, obs.OnCompleted);
+                    }, observer.OnError, observer.OnCompleted);
 
                 return new CompositeDisposable(
-                    Disposable.Create(() =>
-                        logger($"{opName}: Dispose (Unsubscribe or Observable finished) on Thread: {Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture)}")),
+                    Disposable.Create(operationName, opName =>
+                        logger.LogDebug(
+                            "{OperationName}: Dispose (Unsubscribe or Observable finished) on Thread: {Thread}",
+                            opName, Environment.CurrentManagedThreadId.ToString(CultureInfo.InvariantCulture))),
                     subscription,
                     Disposable.Create(() => Interlocked.Decrement(ref count)),
                     Disposable.Create(count,
-                        x => logger(
-                            $"{opName}: Dispose (Unsubscribe or Observable finished) completed, {x.ToString(CultureInfo.InvariantCulture)} subscriptions")));
+                        number => logger.LogDebug(
+                            "{OperationName}: Dispose (Unsubscribe or Observable finished) completed, {Count} subscriptions",
+                            operationName, number.ToString(CultureInfo.InvariantCulture))));
             }
             finally
             {
                 Interlocked.Increment(ref count);
-                logger($"{opName}: Subscription completed, {count.ToString(CultureInfo.InvariantCulture)} subscriptions.");
+                logger.LogDebug("{OperationName}: Subscription completed, {Count} subscriptions.",
+                    operationName, count.ToString(CultureInfo.InvariantCulture));
             }
         });
     }
