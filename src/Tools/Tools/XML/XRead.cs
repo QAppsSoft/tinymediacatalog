@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 using Models.Common;
 
 namespace Tools.XML
@@ -11,8 +12,14 @@ namespace Tools.XML
     /// </summary>
     public static class XRead
     {
-        #region Public Methods
-
+        [RequiresUnreferencedCode("XmlSerializer")]
+        public static T? ParseXml<T>(string fileName)
+        {
+            var reader = new XmlSerializer(typeof(T));
+            using var file = XmlReader.Create(fileName);
+            return (T?)reader.Deserialize(file);
+        }
+        
         /// <summary>
         /// The get bool.
         /// </summary>
@@ -325,8 +332,6 @@ namespace Tools.XML
             return doc;
         }
 
-        #endregion
-        
         private static bool TryGetAttribute(XmlNode node, string tag, [NotNullWhen(true)] out string? value)
         {
             value = null;
