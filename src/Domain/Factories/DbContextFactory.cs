@@ -4,9 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Factories;
 
-public sealed class DbContextFactory(IAppInfo appInfo) : IDbContextFactory<MediaManagerDatabaseContext>
+public sealed class DbContextFactory : IDbContextFactory<MediaManagerDatabaseContext>
 {
-    private readonly IAppInfo _appInfo = appInfo ?? throw new ArgumentNullException(nameof(appInfo));
+    private readonly IAppInfo _appInfo;
+
+    public DbContextFactory(IAppInfo appInfo)
+    {
+        _appInfo = appInfo ?? throw new ArgumentNullException(nameof(appInfo));
+        SQLitePCL.Batteries.Init();
+    }
+
 
     public MediaManagerDatabaseContext CreateDbContext()
     {
@@ -18,7 +25,6 @@ public sealed class DbContextFactory(IAppInfo appInfo) : IDbContextFactory<Media
         
         var options = new DbContextOptionsBuilder<MediaManagerDatabaseContext>();
         options.UseSqlite(builder.ConnectionString);
-        SQLitePCL.Batteries.Init();
 
         return new MediaManagerDatabaseContext(options.Options);
     }
