@@ -22,14 +22,14 @@ public static class ReactiveExtensions
                             ex => logger.LogError(ex, "{Name}.OnError({Type})", name, ex.GetType()),
                             () => logger.LogDebug("{Name}.OnCompleted()", name))
                         .Subscribe(o);
-                    var disposal = Disposable.Create(() => logger.LogDebug("{Name}.Dispose()", name));
+                    var disposal = Disposable.Create((Logger: logger, Name: name),tuple => tuple.Logger.LogDebug("{Name}.Dispose()", tuple.Name));
                     return new CompositeDisposable(subscription, disposal);
                 })
         );
     }
     
     [DebuggerStepThrough]
-    public static IDisposable Time(this ILogger logger, string name)
+    private static IDisposable Time(this ILogger logger, string name)
     {
         return new Timer(logger, name);
     }
