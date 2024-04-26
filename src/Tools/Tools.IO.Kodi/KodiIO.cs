@@ -138,7 +138,7 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
             .FirstOrDefaultAsync(x =>
                 x.UniqueIds.Any(y =>
                     y.Name == UniqueId.ValidNames.Tmdb &&
-                    y.Id == actor.Tmdbid.ToString(CultureInfo.InvariantCulture)))
+                    y.Id == actor.TmdbId.ToString(CultureInfo.InvariantCulture)))
             .ConfigureAwait(false);
 
             return person ?? new Person
@@ -150,7 +150,7 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
                 {
                     new()
                     {
-                        Id = actor.Tmdbid.ToString(CultureInfo.InvariantCulture),
+                        Id = actor.TmdbId.ToString(CultureInfo.InvariantCulture),
                         Name = UniqueId.ValidNames.Tmdb,
                     },
                 },

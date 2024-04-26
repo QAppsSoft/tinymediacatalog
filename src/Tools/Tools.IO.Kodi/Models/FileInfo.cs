@@ -3,8 +3,8 @@
 namespace Tools.IO.Kodi.Models;
 
 [XmlRoot(ElementName = "fileinfo")]
-public class Fileinfo
+public class FileInfo
 {
     [XmlElement(ElementName = "streamdetails")]
-    public Streamdetails Streamdetails { get; set; }
+    public StreamDetails? StreamDetails { get; set; }
 }
