@@ -2,16 +2,21 @@
 
 namespace Tools.IO.Kodi.Models;
 
-[XmlRoot(ElementName="actor")]
-public class Actor {
-    [XmlElement(ElementName="name")]
+[XmlRoot(ElementName = "actor")]
+public class Actor
+{
+    [XmlElement(ElementName = "name")]
     public string Name { get; set; }
-    [XmlElement(ElementName="role")]
+
+    [XmlElement(ElementName = "role")]
     public string Role { get; set; }
-    [XmlElement(ElementName="thumb")]
+
+    [XmlElement(ElementName = "thumb")]
     public string Thumb { get; set; }
-    [XmlElement(ElementName="profile")]
+
+    [XmlElement(ElementName = "profile")]
     public string Profile { get; set; }
-    [XmlElement(ElementName="tmdbid")]
+
+    [XmlElement(ElementName = "tmdbid")]
     public int Tmdbid { get; set; }
 }

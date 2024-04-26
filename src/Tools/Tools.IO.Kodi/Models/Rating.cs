@@ -2,16 +2,21 @@
 
 namespace Tools.IO.Kodi.Models;
 
-[XmlRoot(ElementName="rating")]
-public class Rating {
-    [XmlElement(ElementName="value")]
+[XmlRoot(ElementName = "rating")]
+public class Rating
+{
+    [XmlElement(ElementName = "value")]
     public double Value { get; set; }
-    [XmlElement(ElementName="votes")]
+
+    [XmlElement(ElementName = "votes")]
     public int Votes { get; set; }
-    [XmlAttribute(AttributeName="default")]
+
+    [XmlAttribute(AttributeName = "default")]
     public bool Default { get; set; }
-    [XmlAttribute(AttributeName="max")]
+
+    [XmlAttribute(AttributeName = "max")]
     public int Max { get; set; }
-    [XmlAttribute(AttributeName="name")]
+
+    [XmlAttribute(AttributeName = "name")]
     public string Name { get; set; }
 }

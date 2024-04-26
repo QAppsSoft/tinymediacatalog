@@ -2,18 +2,24 @@
 
 namespace Tools.IO.Kodi.Models;
 
-[XmlRoot(ElementName="video")]
-public class Video {
-    [XmlElement(ElementName="codec")]
+[XmlRoot(ElementName = "video")]
+public class Video
+{
+    [XmlElement(ElementName = "codec")]
     public string Codec { get; set; }
-    [XmlElement(ElementName="aspect")]
+
+    [XmlElement(ElementName = "aspect")]
     public string Aspect { get; set; }
-    [XmlElement(ElementName="width")]
+
+    [XmlElement(ElementName = "width")]
     public string Width { get; set; }
-    [XmlElement(ElementName="height")]
+
+    [XmlElement(ElementName = "height")]
     public string Height { get; set; }
-    [XmlElement(ElementName="durationinseconds")]
+
+    [XmlElement(ElementName = "durationinseconds")]
     public string DurationInSeconds { get; set; }
-    [XmlElement(ElementName="stereomode")]
+
+    [XmlElement(ElementName = "stereomode")]
     public string StereoMode { get; set; }
 }
