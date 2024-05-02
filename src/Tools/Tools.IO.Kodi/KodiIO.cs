@@ -2,6 +2,7 @@
 using Domain;
 using Domain.Models;
 using Domain.Models.Movie;
+using Domain.Models.Multimedia;
 using Microsoft.EntityFrameworkCore;
 using Tools.Enums;
 using Tools.XML.Interfaces;
@@ -20,13 +21,19 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
     public string IOHandlerDescription { get; set; } = "IO handler for KODI";
     public Uri IOHandlerUri { get; set; } = new("https://kodi.tv/");
 
-    public async Task LoadMovieAsync(MovieContainer movieModel)
+    public async Task LoadMovieAsync(Guid movieContainerId)
     {
         Movie? movie;
-
+        
+        var nfoPath = await GetNfoPathAsync(movieContainerId, _databaseContextFactory).ConfigureAwait(false);
+        if (nfoPath is null)
+        {
+            return;
+        }
+        
         try
         {
-            movie = _xmlRead.ParseXml<Movie>(movieModel.NfoPath);
+            movie = _xmlRead.ParseXml<Movie>(nfoPath);
         }
         catch (InvalidOperationException _)
         {
@@ -37,84 +44,131 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         {
             return;
         }
-        
-        // Title
-        movieModel.Title = movie.Title;
-        
-        // Original title
-        movieModel.OriginalTitle = movie.OriginalTitle;
-        
-        // Year
-        movieModel.Year = movie.Year;
-        
-        // Ratings
-        movieModel.Ratings.Clear();
-        movieModel.Ratings = movie.RatingsContainer.Rating.ConvertAll(rating => new Rating
-        {
-            Default = rating.Default,
-            Max = rating.Max,
-            Name = rating.Name,
-            Value = rating.Value,
-            Votes = rating.Votes,
-        });
-        
-        // Sets
-        
-        // Slogan
-        movieModel.Slogan = movie.TagLine;
-        
-        // Runtime
-        movieModel.Runtime = movie.Runtime;
-        
-        // Thumb
-        
-        // Mpaa
-        //movieModel.Mpaa = movie.Mpaa;
-        
-        // Certification
-        //movieModel.Certification = movie.Certification;
-        
-        // UniqueIds
-        movieModel.UniqueIds.Clear();
-        movieModel.UniqueIds = movie.UniqueIds.ConvertAll(value => new UniqueId { Name = value.Type, Id = value.Text });
-        
-        // Countries
-        
-        // Premiered
-        movieModel.ReleaseDate = DateOnly.Parse(movie.Premiered, CultureInfo.InvariantCulture);
-        
-        // Watched
-        
-        // Play count
-        
-        // Genres
-        
-        // Studios
-        
-        // Tags
-        
-        // Cast (actors)
-        movieModel.Cast.Clear();
-        foreach (var castMember in movie.Cast)
-        {
-            var actor = await GetActorAsync(movieModel, castMember).ConfigureAwait(false);
-            movieModel.Cast.Add(actor);
-        }
-        
-        // Trailer
-        
-        // Languages (original)
-        movieModel.OriginalLanguage = movie.Languages;
-        
-        // Date added
-        movieModel.DateAdded = DateTime.Parse(movie.DateAdded, CultureInfo.InvariantCulture);
 
-        // Fileinfo
+        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var movieContainer = await context.Movies
+                .FirstOrDefaultAsync(x => x.Id == movieContainerId)
+                .ConfigureAwait(false);
+
+            if (movieContainer is null)
+            {
+                return;
+            }
+        }
+
+        await UpdateSingleInfoAsync(movieContainerId, movie).ConfigureAwait(false);
+
+        // UniqueIds
+        await UpdateUniqueIdsAsync(movieContainerId, movie).ConfigureAwait(false);
+
+        // Ratings
+        await UpdateRatingsAsync(movieContainerId, movie).ConfigureAwait(false);
+
+        // Cast (actors)
+        await UpdateCastAsync(movieContainerId, movie).ConfigureAwait(false);
+
+        //     await context.SaveChangesAsync().ConfigureAwait(false);
+        // }
     }
 
-    public Task SaveMovieAsync(MovieContainer movieModel)
+    private async Task UpdateSingleInfoAsync(Guid movieContainerId, Movie movie)
+    {
+        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var movieContainer = await context.Movies
+                .FirstAsync(x => x.Id == movieContainerId)
+                .ConfigureAwait(false);
+
+            // Title
+            movieContainer.Title = movie.Title;
+
+            // Original title
+            movieContainer.OriginalTitle = movie.OriginalTitle;
+
+            // Year
+            movieContainer.Year = movie.Year;
+
+            // Sets
+
+            // Slogan
+            movieContainer.Slogan = movie.TagLine;
+
+            // Runtime
+            movieContainer.Runtime = movie.Runtime;
+
+            // Thumb
+
+            // Mpaa
+            //movieContainer.Mpaa = movie.Mpaa;
+
+            // Certification
+            //movieModel.Certification = movie.Certification;
+
+            // Countries
+
+            // Premiered
+            movieContainer.ReleaseDate = DateOnly.Parse(movie.Premiered, CultureInfo.InvariantCulture);
+
+            // Watched
+
+            // Play count
+
+            // Genres
+
+            // Studios
+
+            // Tags
+
+            // Trailer
+
+            // Languages (original)
+            movieContainer.OriginalLanguage = movie.Languages;
+
+            // Date added
+            movieContainer.DateAdded = DateTime.Parse(movie.DateAdded, CultureInfo.InvariantCulture);
+
+            // Fileinfo
+
+            await context.SaveChangesAsync().ConfigureAwait(false);
+        }
+    }
+
+    public Task SaveMovieAsync(Guid movieContainerId)
     {
         throw new NotImplementedException();
+    }
+
+    private async Task UpdateCastAsync(Guid movieContainerId, Movie movie)
+    {
+        if (movie.Cast.Count == 0)
+        {
+            return;
+        }
+        
+        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var movieContainer = await context.Movies
+                .Include(x => x.Cast)
+                .FirstAsync(x => x.Id == movieContainerId)
+                .ConfigureAwait(false);
+            
+            var order = 0;
+            movieContainer.Cast.Clear();
+            foreach (var castMember in movie.Cast)
+            {
+                ++order;
+                var actor = await GetActorAsync(movieContainer, castMember).ConfigureAwait(false);
+                actor.Order = order;
+                context.Add(actor);
+                movieContainer.Cast.Add(actor);
+            }
+
+            await context.SaveChangesAsync().ConfigureAwait(false);
+        }
     }
 
     private async Task<Actor> GetActorAsync(MovieContainer movieModel, Models.Actor castMember)
@@ -122,7 +176,10 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         var person = await GetPersonAsync(castMember).ConfigureAwait(false);
         var actor = new Actor
         {
-            Movie = movieModel, MovieContainerId = movieModel.Id, Person = person, PersonId = person.Id,
+            //Movie = movieModel,
+            MovieContainerId = movieModel.Id,
+            //Person = person,
+            PersonId = person.Id,
             Role = castMember.Role,
         };
         
@@ -135,13 +192,19 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         await using (context.ConfigureAwait(false))
         {
             var person = await context.Persons
-            .FirstOrDefaultAsync(x =>
-                x.UniqueIds.Any(y =>
-                    y.Name == UniqueId.ValidNames.Tmdb &&
-                    y.Id == actor.TmdbId.ToString(CultureInfo.InvariantCulture)))
-            .ConfigureAwait(false);
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x =>
+                    x.UniqueIds.Any(y =>
+                        y.Name == UniqueId.ValidNames.Tmdb &&
+                        y.Id == actor.TmdbId.ToString(CultureInfo.InvariantCulture)))
+                .ConfigureAwait(false);
 
-            return person ?? new Person
+            if (person is not null)
+            {
+                return person;
+            }
+            
+            var newPerson = new Person
             {
                 Name = actor.Name,
                 Profile = actor.Profile,
@@ -155,6 +218,91 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
                     },
                 },
             };
+
+            context.Add(newPerson);
+            await context.SaveChangesAsync().ConfigureAwait(false);
+
+            return newPerson;
+        }
+    }
+
+    private async Task UpdateUniqueIdsAsync(Guid movieContainerId, Movie movie)
+    {
+        if (movie.UniqueIds.Count == 0)
+        {
+            return;
+        }
+        
+        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var movieContainer = await context.Movies
+                .Include(x => x.UniqueIds)
+                .FirstAsync(x => x.Id == movieContainerId)
+                .ConfigureAwait(false);
+
+            movieContainer.UniqueIds.Clear();
+            var uniqueIds = movie.UniqueIds.ConvertAll(value => new UniqueId { Name = value.Type, Id = value.Text });
+            foreach (var uniqueId in uniqueIds)
+            {
+                context.Add(uniqueId);
+                movieContainer.UniqueIds.Add(uniqueId);
+            }
+
+            await context.SaveChangesAsync().ConfigureAwait(false);
+        }
+    }
+
+    private async Task UpdateRatingsAsync(Guid movieContainerId, Movie movie)
+    {
+        if (movie.RatingsContainer is null || movie.RatingsContainer?.Rating.Count == 0)
+        {
+            return;
+        }
+        
+        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var movieContainer = await context.Movies
+                .Include(x => x.Ratings)
+                .FirstAsync(x => x.Id == movieContainerId)
+                .ConfigureAwait(false);
+
+            movieContainer.Ratings.Clear();
+            
+            var ratings = movie.RatingsContainer.Rating.ConvertAll(rating => new Rating
+            {
+                Default = rating.Default,
+                Max = rating.Max,
+                Name = rating.Name,
+                Value = rating.Value,
+                Votes = rating.Votes,
+            });
+            
+            foreach (var rating in ratings)
+            {
+                context.Add(rating);
+                movieContainer.Ratings.Add(rating);
+            }
+            
+            await context.SaveChangesAsync().ConfigureAwait(false);
+        }
+    }
+
+    private static async Task<string?> GetNfoPathAsync(Guid movieContainerId, IDbContextFactory<MediaManagerDatabaseContext> factory)
+    {
+        var context = await factory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var nfoFile = await context.Movies
+                .Where(movie => movie.Id == movieContainerId)
+                .Select(movie => movie.Files)
+                .SelectMany(files => files)
+                .Where(file => file is NfoFile)
+                .FirstOrDefaultAsync()
+                .ConfigureAwait(false);
+
+            return nfoFile?.FilePath;
         }
     }
 }
