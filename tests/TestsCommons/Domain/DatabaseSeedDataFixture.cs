@@ -1,5 +1,5 @@
-﻿using Domain;
-using Domain.Models;
+﻿using System.Diagnostics;
+using Domain;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,39 +9,29 @@ public sealed class DatabaseSeedDataFixture : IDisposable
 {
     private readonly StorageFixture _storageFixture = new();
     public Func<MediaManagerDatabaseContext> MediaManagerDatabaseContextFactory { get; }
-    private readonly string _databasePath;
+    private readonly DbContextOptions<MediaManagerDatabaseContext> _contextOptions;
 
     public DatabaseSeedDataFixture()
     {
-        _databasePath = _storageFixture.GetTemporalFileName(".db");
+        var databasePath = _storageFixture.GetTemporalFileName(".db");
+        
+        var builder = new SqliteConnectionStringBuilder { DataSource =  databasePath};
+
+        var options = new DbContextOptionsBuilder<MediaManagerDatabaseContext>();
+        options.UseSqlite(builder.ConnectionString);
+        options.EnableSensitiveDataLogging();
+        options.LogTo(s => Debug.WriteLine(s));
+        
+        _contextOptions = options.Options;
         
         using var databaseContext = GetContext();
 
         databaseContext.Database.EnsureCreated();
 
-        databaseContext.Persons.Add(new Person
-        {
-            Name = "Matt Schulze", Profile = "https://www.themoviedb.org/person/31841",
-            Thumb = "https://image.tmdb.org/t/p/h632/wFOVJr3dxEs5kC2rtS5iV3XbU0C.jpg", UniqueIds = new List<UniqueId>
-            {
-                new() { Name = UniqueId.ValidNames.Tmdb, Id = "31841" },
-            },
-        });
-
-        databaseContext.SaveChanges();
-
         MediaManagerDatabaseContextFactory = GetContext;
     }
 
-    private MediaManagerDatabaseContext GetContext()
-    {
-        var builder = new SqliteConnectionStringBuilder { DataSource =  _databasePath};
-
-        var options = new DbContextOptionsBuilder<MediaManagerDatabaseContext>();
-        options.UseSqlite(builder.ConnectionString);
-
-        return new MediaManagerDatabaseContext(options.Options);
-    }
+    private MediaManagerDatabaseContext GetContext() => new(_contextOptions);
 
     public void Dispose()
     {
