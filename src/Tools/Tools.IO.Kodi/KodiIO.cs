@@ -68,9 +68,6 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
 
         // Cast (actors)
         await UpdateCastAsync(movieContainerId, movie).ConfigureAwait(false);
-
-        //     await context.SaveChangesAsync().ConfigureAwait(false);
-        // }
     }
 
     private async Task UpdateSingleInfoAsync(Guid movieContainerId, Movie movie)
