@@ -11,7 +11,8 @@ using Movie = Tools.IO.Kodi.Models.Movie;
 
 namespace Tools.IO.Kodi;
 
-public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseContext> databaseContextFactory, IMovieContainerManager movieContainerManager) : IOInterface
+public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseContext> databaseContextFactory,
+    IMovieContainerManager movieContainerManager, IMovieContainerProvider movieContainerProvider) : IOInterface
 {
     private readonly IXmlRead _xmlRead = xmlRead ?? throw new ArgumentNullException(nameof(xmlRead));
     private readonly IDbContextFactory<MediaManagerDatabaseContext> _databaseContextFactory = databaseContextFactory ?? throw new ArgumentNullException(nameof(databaseContextFactory));
@@ -46,17 +47,10 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
             return;
         }
 
-        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
-        await using (context.ConfigureAwait(false))
+        var dontExist = await MovieContainerDontExistAsync(movieContainerId).ConfigureAwait(false);
+        if (dontExist)
         {
-            var movieContainer = await context.Movies
-                .FirstOrDefaultAsync(x => x.Id == movieContainerId)
-                .ConfigureAwait(false);
-
-            if (movieContainer is null)
-            {
-                return;
-            }
+            return;
         }
 
         await UpdateSingleInfoAsync(movieContainerId, movie).ConfigureAwait(false);
@@ -93,6 +87,12 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         // Trailer
             
         // Fileinfo
+    }
+
+    private async Task<bool> MovieContainerDontExistAsync(Guid movieContainerId)
+    {
+        var exist = await movieContainerProvider.ExistAsync(movieContainerId).ConfigureAwait(false);
+        return !exist;
     }
 
     private async Task UpdateSingleInfoAsync(Guid movieContainerId, Movie movie) =>

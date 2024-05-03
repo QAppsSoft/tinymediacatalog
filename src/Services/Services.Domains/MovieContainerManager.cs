@@ -35,4 +35,16 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
             return movieContainer;
         }
     }
+
+    public async Task<bool> ExistAsync(Guid movieContainerId)
+    {
+        var context = await databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            return await context.Movies
+                .AsNoTracking()
+                .AnyAsync(x => x.Id == movieContainerId)
+                .ConfigureAwait(false);
+        }
+    }
 }
