@@ -64,6 +64,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools.IO.Kodi", "src\Tools\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools.IO.KodiTests", "tests\Tools.IO.KodiTests\Tools.IO.KodiTests.csproj", "{CD2529BD-04DE-4F25-8D2F-903AF9162C07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Domains", "src\Services\Services.Domains\Services.Domains.csproj", "{32F26676-2D18-46BE-927B-3B6C54D158FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,7 @@ Global
 		{9ED540E3-802C-4DAB-9119-6F4ACDBE3CD1} = {D7147423-2CD8-4E2A-9BD0-536352723581}
 		{E5FF7AA4-E7B1-4F90-95A0-9057C5472604} = {C2F67F1D-33AB-4ACD-B8B8-FC42B0D5DFDA}
 		{CD2529BD-04DE-4F25-8D2F-903AF9162C07} = {FE1F5C38-3826-4EE8-B297-CA995B1E9A57}
+		{32F26676-2D18-46BE-927B-3B6C54D158FB} = {C7514221-4C5A-4F4F-87DA-79654BB0D865}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4914F4A5-51F6-4C4E-9F7A-CC3F89496058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -161,5 +164,9 @@ Global
 		{CD2529BD-04DE-4F25-8D2F-903AF9162C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD2529BD-04DE-4F25-8D2F-903AF9162C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD2529BD-04DE-4F25-8D2F-903AF9162C07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32F26676-2D18-46BE-927B-3B6C54D158FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32F26676-2D18-46BE-927B-3B6C54D158FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32F26676-2D18-46BE-927B-3B6C54D158FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32F26676-2D18-46BE-927B-3B6C54D158FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

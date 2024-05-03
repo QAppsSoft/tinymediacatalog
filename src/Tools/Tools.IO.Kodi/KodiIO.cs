@@ -4,13 +4,14 @@ using Domain.Models;
 using Domain.Models.Movie;
 using Domain.Models.Multimedia;
 using Microsoft.EntityFrameworkCore;
+using Services.Abstractions.Domains;
 using Tools.Enums;
 using Tools.XML.Interfaces;
 using Movie = Tools.IO.Kodi.Models.Movie;
 
 namespace Tools.IO.Kodi;
 
-public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseContext> databaseContextFactory) : IOInterface
+public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseContext> databaseContextFactory, IMovieContainerManager movieContainerManager) : IOInterface
 {
     private readonly IXmlRead _xmlRead = xmlRead ?? throw new ArgumentNullException(nameof(xmlRead));
     private readonly IDbContextFactory<MediaManagerDatabaseContext> _databaseContextFactory = databaseContextFactory ?? throw new ArgumentNullException(nameof(databaseContextFactory));
@@ -68,52 +69,42 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
 
         // Cast (actors)
         await UpdateCastAsync(movieContainerId, movie).ConfigureAwait(false);
+        
+        // Sets
+
+        // Thumb
+
+        // Mpaa
+
+        // Certification
+
+        // Countries
+
+        // Watched
+
+        // Play count
+
+        // Genres
+
+        // Studios
+
+        // Tags
+
+        // Trailer
+            
+        // Fileinfo
     }
 
-    private async Task UpdateSingleInfoAsync(Guid movieContainerId, Movie movie)
-    {
-        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
-        await using (context.ConfigureAwait(false))
-        {
-            var movieContainer = await context.Movies
-                .FirstAsync(x => x.Id == movieContainerId)
-                .ConfigureAwait(false);
-
+    private async Task UpdateSingleInfoAsync(Guid movieContainerId, Movie movie) =>
+        await movieContainerManager.UpdateAsync(movieContainerId, movieContainer =>
             movieContainer.SetTitle(movie.Title)
                 .SetOriginalTitle(movie.OriginalTitle)
                 .SetSlogan(movie.TagLine)
                 .SetRuntime(movie.Runtime)
                 .SetReleaseDate(movie.Premiered)
                 .SetOriginalLanguage(movie.Languages)
-                .SetDateAdded(movie.DateAdded);
-
-            // Sets
-
-            // Thumb
-
-            // Mpaa
-
-            // Certification
-
-            // Countries
-
-            // Watched
-
-            // Play count
-
-            // Genres
-
-            // Studios
-
-            // Tags
-
-            // Trailer
-            
-            // Fileinfo
-
-            await context.SaveChangesAsync().ConfigureAwait(false);
-        }
-    }
+                .SetDateAdded(movie.DateAdded)
+        ).ConfigureAwait(false);
 
     public Task SaveMovieAsync(Guid movieContainerId)
     {
