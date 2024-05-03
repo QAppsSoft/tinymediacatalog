@@ -89,6 +89,11 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         // Fileinfo
     }
 
+    public Task SaveMovieAsync(Guid movieContainerId)
+    {
+        throw new NotImplementedException();
+    }
+
     private async Task<bool> MovieContainerDontExistAsync(Guid movieContainerId)
     {
         var exist = await movieContainerProvider.ExistAsync(movieContainerId).ConfigureAwait(false);
@@ -105,11 +110,6 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
                 .SetOriginalLanguage(movie.Languages)
                 .SetDateAdded(movie.DateAdded)
         ).ConfigureAwait(false);
-
-    public Task SaveMovieAsync(Guid movieContainerId)
-    {
-        throw new NotImplementedException();
-    }
 
     private async Task UpdateUniqueIdsAsync(Guid movieContainerId, Movie movie)
     {
