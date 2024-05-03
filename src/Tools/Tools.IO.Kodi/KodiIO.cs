@@ -111,6 +111,12 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         throw new NotImplementedException();
     }
 
+    private async Task UpdateUniqueIdsAsync(Guid movieContainerId, Movie movie)
+    {
+        var ids = movie.UniqueIds.ConvertAll(value => (value.Type, value.Text));
+        await movieContainerManager.UpdateUniqueIdsAsync(movieContainerId, ids).ConfigureAwait(false);
+    }
+
     private async Task UpdateCastAsync(Guid movieContainerId, Movie movie)
     {
         if (movie.Cast.Count == 0)
@@ -193,33 +199,6 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
             await context.SaveChangesAsync().ConfigureAwait(false);
 
             return newPerson;
-        }
-    }
-
-    private async Task UpdateUniqueIdsAsync(Guid movieContainerId, Movie movie)
-    {
-        if (movie.UniqueIds.Count == 0)
-        {
-            return;
-        }
-        
-        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
-        await using (context.ConfigureAwait(false))
-        {
-            var movieContainer = await context.Movies
-                .Include(x => x.UniqueIds)
-                .FirstAsync(x => x.Id == movieContainerId)
-                .ConfigureAwait(false);
-
-            movieContainer.UniqueIds.Clear();
-            var uniqueIds = movie.UniqueIds.ConvertAll(value => new UniqueId { Name = value.Type, Id = value.Text });
-            foreach (var uniqueId in uniqueIds)
-            {
-                context.Add(uniqueId);
-                movieContainer.UniqueIds.Add(uniqueId);
-            }
-
-            await context.SaveChangesAsync().ConfigureAwait(false);
         }
     }
 

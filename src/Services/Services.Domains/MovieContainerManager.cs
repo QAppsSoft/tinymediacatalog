@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Models;
 using Domain.Models.Movie;
 using Microsoft.EntityFrameworkCore;
 using Services.Abstractions.Domains;
@@ -18,6 +19,33 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
 
             update(movieContainer);
 
+            await context.SaveChangesAsync().ConfigureAwait(false);
+        }
+    }
+
+    public async Task UpdateUniqueIdsAsync(Guid movieContainerId, IReadOnlyCollection<(string Name, string Id)> uniqueIds)
+    {
+        if (uniqueIds.Count == 0)
+        {
+            return;
+        }
+
+        var context = await databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var movieContainer = await context.Movies
+                .Include(x => x.UniqueIds)
+                .FirstAsync(x => x.Id == movieContainerId)
+                .ConfigureAwait(false);
+        
+            movieContainer.UniqueIds.Clear();
+            var newUniqueIds = uniqueIds.Select(value => new UniqueId { Name = value.Name, Id = value.Id });
+            foreach (var uniqueId in newUniqueIds)
+            {
+                context.Add(uniqueId);
+                movieContainer.UniqueIds.Add(uniqueId);
+            }
+        
             await context.SaveChangesAsync().ConfigureAwait(false);
         }
     }
