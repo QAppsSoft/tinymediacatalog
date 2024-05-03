@@ -79,35 +79,23 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
                 .FirstAsync(x => x.Id == movieContainerId)
                 .ConfigureAwait(false);
 
-            // Title
-            movieContainer.Title = movie.Title;
-
-            // Original title
-            movieContainer.OriginalTitle = movie.OriginalTitle;
-
-            // Year
-            movieContainer.Year = movie.Year;
+            movieContainer.SetTitle(movie.Title)
+                .SetOriginalTitle(movie.OriginalTitle)
+                .SetSlogan(movie.TagLine)
+                .SetRuntime(movie.Runtime)
+                .SetReleaseDate(movie.Premiered)
+                .SetOriginalLanguage(movie.Languages)
+                .SetDateAdded(movie.DateAdded);
 
             // Sets
-
-            // Slogan
-            movieContainer.Slogan = movie.TagLine;
-
-            // Runtime
-            movieContainer.Runtime = movie.Runtime;
 
             // Thumb
 
             // Mpaa
-            //movieContainer.Mpaa = movie.Mpaa;
 
             // Certification
-            //movieModel.Certification = movie.Certification;
 
             // Countries
-
-            // Premiered
-            movieContainer.ReleaseDate = DateOnly.Parse(movie.Premiered, CultureInfo.InvariantCulture);
 
             // Watched
 
@@ -120,13 +108,7 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
             // Tags
 
             // Trailer
-
-            // Languages (original)
-            movieContainer.OriginalLanguage = movie.Languages;
-
-            // Date added
-            movieContainer.DateAdded = DateTime.Parse(movie.DateAdded, CultureInfo.InvariantCulture);
-
+            
             // Fileinfo
 
             await context.SaveChangesAsync().ConfigureAwait(false);
