@@ -87,6 +87,7 @@ public class KodiIO(IXmlRead xmlRead, IMovieContainerManager movieContainerManag
             movieContainer.SetTitle(movie.Title)
                 .SetOriginalTitle(movie.OriginalTitle)
                 .SetSlogan(movie.TagLine)
+                .SetYear(movie.Year)
                 .SetRuntime(movie.Runtime)
                 .SetReleaseDate(movie.Premiered)
                 .SetOriginalLanguage(movie.Languages)
