@@ -13,6 +13,10 @@ using Microsoft.Extensions.Logging;
 using Pure.DI;
 using Serilog;
 using Serilog.Extensions.Logging;
+using Services.Abstractions.Domains;
+using Services.Domains;
+using Tools.IO;
+using Tools.IO.Kodi;
 using Tools.XML;
 using Tools.XML.Interfaces;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -75,6 +79,14 @@ internal partial class Composition
         // Database
         .Bind<IDbContextFactory<MediaManagerDatabaseContext>>().As(Lifetime.Singleton).To<DbContextFactory>()
 
+        // Services
+        .Bind<MovieContainerManager>().As(Lifetime.Singleton)
+        .Bind<IMovieContainerProvider>().As(Lifetime.Singleton).To<MovieContainerManager>()
+        .Bind<IMovieContainerManager>().As(Lifetime.Singleton).To<MovieContainerManager>()
+        
+        // Tools
+        .Bind<IOInterface>().To<KodiIO>()
+        
         .Root<MainViewViewModel>("MainViewViewModel");
 
     private static string GetLogFileName(IAppInfo appInfo, LoggingConfiguration config) =>

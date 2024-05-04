@@ -34,6 +34,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Services\Services.Abstractions\Services.Abstractions.csproj" />
+    <ProjectReference Include="..\Services\Services.Domains\Services.Domains.csproj" />
+    <ProjectReference Include="..\Tools\Tools.IO.Kodi\Tools.IO.Kodi.csproj" />
     <ProjectReference Include="..\Tools\Tools\Tools.csproj" />
   </ItemGroup>
 
