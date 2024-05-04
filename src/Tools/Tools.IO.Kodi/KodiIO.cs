@@ -65,27 +65,16 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         await UpdateCastAsync(movieContainerId, movie).ConfigureAwait(false);
         
         // Sets
-
         // Thumb
-
         // Mpaa
-
         // Certification
-
         // Countries
-
         // Watched
-
         // Play count
-
         // Genres
-
         // Studios
-
         // Tags
-
         // Trailer
-            
         // Fileinfo
     }
 
