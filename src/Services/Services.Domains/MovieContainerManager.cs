@@ -2,6 +2,7 @@
 using Domain;
 using Domain.Models;
 using Domain.Models.Movie;
+using Domain.Models.Multimedia;
 using Microsoft.EntityFrameworkCore;
 using Services.Abstractions.Domains;
 
@@ -113,7 +114,24 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
                 .ConfigureAwait(false);
         }
     }
-    
+
+    public async Task<string?> GetNfoPathAsync(Guid movieContainerId)
+    {
+            var context = await databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+            await using (context.ConfigureAwait(false))
+            {
+                var nfoFile = await context.Movies
+                    .Where(movie => movie.Id == movieContainerId)
+                    .Select(movie => movie.Files)
+                    .SelectMany(files => files)
+                    .Where(file => file is NfoFile)
+                    .FirstOrDefaultAsync()
+                    .ConfigureAwait(false);
+
+                return nfoFile?.FilePath;
+            }
+    }
+
     public async Task UpdateCastAsync(Guid movieContainerId, IReadOnlyCollection<CastMemberDto> castMembers)
     {
         if (castMembers.Count == 0)

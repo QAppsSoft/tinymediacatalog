@@ -1,7 +1,4 @@
-﻿using Domain;
-using Domain.Models.Movie;
-using Domain.Models.Multimedia;
-using Microsoft.EntityFrameworkCore;
+﻿using Domain.Models.Movie;
 using Services.Abstractions.Domains;
 using Tools.Enums;
 using Tools.XML.Interfaces;
@@ -9,11 +6,9 @@ using Movie = Tools.IO.Kodi.Models.Movie;
 
 namespace Tools.IO.Kodi;
 
-public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseContext> databaseContextFactory,
-    IMovieContainerManager movieContainerManager, IMovieContainerProvider movieContainerProvider) : IOInterface
+public class KodiIO(IXmlRead xmlRead, IMovieContainerManager movieContainerManager, IMovieContainerProvider movieContainerProvider) : IOInterface
 {
     private readonly IXmlRead _xmlRead = xmlRead ?? throw new ArgumentNullException(nameof(xmlRead));
-    private readonly IDbContextFactory<MediaManagerDatabaseContext> _databaseContextFactory = databaseContextFactory ?? throw new ArgumentNullException(nameof(databaseContextFactory));
     
     public bool ShowInSettings { get; set; } = true;
     public NfoType Type { get; set; } = NfoType.KODI;
@@ -25,7 +20,7 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
     {
         Movie? movie;
         
-        var nfoPath = await GetNfoPathAsync(movieContainerId, _databaseContextFactory).ConfigureAwait(false);
+        var nfoPath = await GetNfoPathAsync(movieContainerId).ConfigureAwait(false);
         if (nfoPath is null)
         {
             return;
@@ -135,20 +130,5 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
         await movieContainerManager.UpdateRatingsAsync(movieContainerId, ratings).ConfigureAwait(false);
     }
 
-    private static async Task<string?> GetNfoPathAsync(Guid movieContainerId, IDbContextFactory<MediaManagerDatabaseContext> factory)
-    {
-        var context = await factory.CreateDbContextAsync().ConfigureAwait(false);
-        await using (context.ConfigureAwait(false))
-        {
-            var nfoFile = await context.Movies
-                .Where(movie => movie.Id == movieContainerId)
-                .Select(movie => movie.Files)
-                .SelectMany(files => files)
-                .Where(file => file is NfoFile)
-                .FirstOrDefaultAsync()
-                .ConfigureAwait(false);
-
-            return nfoFile?.FilePath;
-        }
-    }
+    private Task<string?> GetNfoPathAsync(Guid movieContainerId) => movieContainerProvider.GetNfoPathAsync(movieContainerId);
 }
