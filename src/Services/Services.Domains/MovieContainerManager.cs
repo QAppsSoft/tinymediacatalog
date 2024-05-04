@@ -50,6 +50,43 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
         }
     }
 
+    public async Task UpdateRatingsAsync(Guid movieContainerId, IReadOnlyCollection<RatingDto> ratingsCollection)
+    {
+        if (ratingsCollection.Count == 0)
+        {
+            return;
+        }
+        
+        var context = await databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var movieContainer = await context.Movies
+                .Include(x => x.Ratings)
+                .FirstAsync(x => x.Id == movieContainerId)
+                .ConfigureAwait(false);
+
+            movieContainer.Ratings.Clear();
+            
+            var ratings = ratingsCollection.Select(rating => new Rating
+            {
+                Name = rating.Name,
+                Default = rating.Default,
+                Max = rating.Max,
+                Value = rating.Value,
+                Votes = rating.Votes,
+            });
+
+
+            foreach (var rating in ratings)
+            {
+                context.Add(rating);
+                movieContainer.Ratings.Add(rating);
+            }
+            
+            await context.SaveChangesAsync().ConfigureAwait(false);
+        }
+    }
+
     public async Task<MovieContainer?> GetAsync(Guid movieContainerId)
     {
         var context = await databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);

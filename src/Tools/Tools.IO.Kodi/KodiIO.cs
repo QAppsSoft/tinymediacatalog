@@ -204,38 +204,20 @@ public class KodiIO(IXmlRead xmlRead, IDbContextFactory<MediaManagerDatabaseCont
 
     private async Task UpdateRatingsAsync(Guid movieContainerId, Movie movie)
     {
-        if (movie.RatingsContainer is null || movie.RatingsContainer?.Rating.Count == 0)
+        if (movie.RatingsContainer is null)
         {
             return;
         }
-        
-        var context = await _databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
-        await using (context.ConfigureAwait(false))
-        {
-            var movieContainer = await context.Movies
-                .Include(x => x.Ratings)
-                .FirstAsync(x => x.Id == movieContainerId)
-                .ConfigureAwait(false);
 
-            movieContainer.Ratings.Clear();
-            
-            var ratings = movie.RatingsContainer.Rating.ConvertAll(rating => new Rating
-            {
-                Default = rating.Default,
-                Max = rating.Max,
-                Name = rating.Name,
-                Value = rating.Value,
-                Votes = rating.Votes,
-            });
-            
-            foreach (var rating in ratings)
-            {
-                context.Add(rating);
-                movieContainer.Ratings.Add(rating);
-            }
-            
-            await context.SaveChangesAsync().ConfigureAwait(false);
+        if (movie.RatingsContainer.Rating.Count == 0)
+        {
+            return;
         }
+
+        var ratings = movie.RatingsContainer.Rating.ConvertAll(rating =>
+            new RatingDto(rating.Name, rating.Default, rating.Max, rating.Value, rating.Votes));
+
+        await movieContainerManager.UpdateRatingsAsync(movieContainerId, ratings).ConfigureAwait(false);
     }
 
     private static async Task<string?> GetNfoPathAsync(Guid movieContainerId, IDbContextFactory<MediaManagerDatabaseContext> factory)
