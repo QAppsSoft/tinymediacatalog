@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System.Globalization;
+using Domain;
 using Domain.Models;
 using Domain.Models.Movie;
 using Microsoft.EntityFrameworkCore;
@@ -110,6 +111,89 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
                 .AsNoTracking()
                 .AnyAsync(x => x.Id == movieContainerId)
                 .ConfigureAwait(false);
+        }
+    }
+    
+    public async Task UpdateCastAsync(Guid movieContainerId, IReadOnlyCollection<CastMemberDto> castMembers)
+    {
+        if (castMembers.Count == 0)
+        {
+            return;
+        }
+        
+        var context = await databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var movieContainer = await context.Movies
+                .Include(x => x.Cast)
+                .FirstAsync(x => x.Id == movieContainerId)
+                .ConfigureAwait(false);
+            
+            var order = 0;
+            movieContainer.Cast.Clear();
+            foreach (var castMember in castMembers)
+            {
+                ++order;
+                var actor = await GetActorAsync(movieContainer, castMember).ConfigureAwait(false);
+                actor.Order = order;
+                context.Add(actor);
+                movieContainer.Cast.Add(actor);
+            }
+
+            await context.SaveChangesAsync().ConfigureAwait(false);
+        }
+    }
+
+    private async Task<Actor> GetActorAsync(MovieContainer movieModel, CastMemberDto castMember)
+    {
+        var personId = await GetPersonAsync(castMember).ConfigureAwait(false);
+        var actor = new Actor
+        {
+            MovieContainerId = movieModel.Id,
+            PersonId = personId,
+            Role = castMember.Role,
+        };
+        
+        return actor;
+    }
+
+    private async Task<Guid> GetPersonAsync(CastMemberDto castMember)
+    {
+        var context = await databaseContextFactory.CreateDbContextAsync().ConfigureAwait(false);
+        await using (context.ConfigureAwait(false))
+        {
+            var existingPerson = await context.Persons
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x =>
+                    x.UniqueIds.Any(y =>
+                        y.Name == UniqueId.ValidNames.Tmdb &&
+                        y.Id == castMember.TmdbId.ToString(CultureInfo.InvariantCulture)))
+                .ConfigureAwait(false);
+
+            if (existingPerson is not null)
+            {
+                return existingPerson.Id;
+            }
+            
+            var newPerson = new Person
+            {
+                Name = castMember.Name,
+                Profile = castMember.Profile,
+                Thumb = castMember.Thumb,
+                UniqueIds = new List<UniqueId>
+                {
+                    new()
+                    {
+                        Id = castMember.TmdbId.ToString(CultureInfo.InvariantCulture),
+                        Name = UniqueId.ValidNames.Tmdb,
+                    },
+                },
+            };
+
+            context.Add(newPerson);
+            await context.SaveChangesAsync().ConfigureAwait(false);
+
+            return newPerson.Id;
         }
     }
 }

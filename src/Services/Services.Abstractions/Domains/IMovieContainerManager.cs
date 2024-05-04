@@ -9,4 +9,6 @@ public interface IMovieContainerManager
     Task UpdateUniqueIdsAsync(Guid movieContainerId, IReadOnlyCollection<(string Name, string Id)> uniqueIds);
     
     Task UpdateRatingsAsync(Guid movieContainerId, IReadOnlyCollection<RatingDto> ratingsCollection);
+
+    Task UpdateCastAsync(Guid movieContainerId, IReadOnlyCollection<CastMemberDto> castMembers);
 }
