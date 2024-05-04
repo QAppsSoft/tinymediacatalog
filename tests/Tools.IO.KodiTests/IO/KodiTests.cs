@@ -3,6 +3,7 @@ using Domain.Models;
 using Domain.Models.Movie;
 using Domain.Models.Multimedia;
 using Microsoft.EntityFrameworkCore;
+using Services.Domains;
 using TestsCommons;
 using TestsCommons.Domain;
 using Tools.IO.Kodi;
@@ -16,12 +17,13 @@ public class KodiTests
 {
     private readonly IXmlRead _xmlRead = new XmlRead();
     private DbContextFactoryFixture _factory;
-    
+    private MovieContainerManager _movieContainerManager;
+
     [SetUp]
     public async Task OnStartAsync()
     {
         _factory = new DbContextFactoryFixture();
-
+        _movieContainerManager = new MovieContainerManager(_factory);
         await using var db = _factory.CreateDbContext();
     }
 
@@ -35,7 +37,7 @@ public class KodiTests
     public async Task LoadMovie_NFO_with_Kodi_should_return_correct_basic_data_Async()
     {
         var mc = await InitializeMovieContainerAsync(_factory);
-        var kodi = new KodiIO(_xmlRead, _factory);
+        var kodi = new KodiIO(_xmlRead, _movieContainerManager,_movieContainerManager);
     
         await kodi.LoadMovieAsync(mc.Id);
         var updated = await GetUpdatedMovieContainerAsync(mc.Id);
@@ -56,7 +58,7 @@ public class KodiTests
     public async Task LoadMovie_NFO_with_Kodi_should_return_correct_cast_data_Async()
     {
         var mc = await InitializeMovieContainerAsync(_factory);
-        var kodi = new KodiIO(_xmlRead, _factory);
+        var kodi = new KodiIO(_xmlRead, _movieContainerManager,_movieContainerManager);
     
         await kodi.LoadMovieAsync(mc.Id);
         var updated = await GetUpdatedMovieContainerAsync(mc.Id);
@@ -79,7 +81,7 @@ public class KodiTests
     public async Task LoadMovie_NFO_with_Kodi_should_return_correct_languages_data_Async()
     {
         var mc = await InitializeMovieContainerAsync(_factory);
-        var kodi = new KodiIO(_xmlRead, _factory);
+        var kodi = new KodiIO(_xmlRead, _movieContainerManager,_movieContainerManager);
     
         await kodi.LoadMovieAsync(mc.Id);
         var updated = await GetUpdatedMovieContainerAsync(mc.Id);
@@ -95,7 +97,7 @@ public class KodiTests
         using var storage = new StorageFixture();
         var emptyFile = storage.GetEmptyFile(".nfo");
         var mc = await InitializeEmptyNfoMovieContainerAsync(_factory, emptyFile, defaultTitle);
-        var kodi = new KodiIO(_xmlRead, _factory);
+        var kodi = new KodiIO(_xmlRead, _movieContainerManager,_movieContainerManager);
 
         await kodi.LoadMovieAsync(mc.Id);
         var updated = await GetUpdatedMovieContainerAsync(mc.Id);

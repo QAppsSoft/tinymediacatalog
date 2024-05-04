@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Services\Services.Domains\Services.Domains.csproj" />
       <ProjectReference Include="..\..\src\Tools\Tools.IO.Kodi\Tools.IO.Kodi.csproj" />
       <ProjectReference Include="..\..\src\Tools\Tools\Tools.csproj" />
       <ProjectReference Include="..\TestsCommons\TestsCommons.csproj" />
