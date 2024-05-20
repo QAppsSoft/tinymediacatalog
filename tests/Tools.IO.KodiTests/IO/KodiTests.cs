@@ -110,11 +110,12 @@ public class KodiTests
     {
         await using var context = _factory.CreateDbContext();
 
-        return context.Movies
+        return await context.Movies
             .Include(x => x.UniqueIds)
             .Include(x => x.Cast).ThenInclude(x => x.Person).ThenInclude(x => x.UniqueIds)
             .Include(x => x.Ratings)
-            .First(x => x.Id == id);
+            .FirstAsync(x => x.Id == id)
+            .ConfigureAwait(false);
     }
 
     private static async Task<MovieContainer> InitializeEmptyNfoMovieContainerAsync(DbContextFactoryFixture factory, string emptyFile, string defaultTitle)
@@ -130,7 +131,7 @@ public class KodiTests
             }
         };
 
-        db.Add(mc);
+        await db.AddAsync(mc);
         await db.SaveChangesAsync();
 
         return mc;
@@ -148,7 +149,7 @@ public class KodiTests
             }
         };
 
-        db.Add(mc);
+        await db.AddAsync(mc);
         await db.SaveChangesAsync();
 
         return mc;
