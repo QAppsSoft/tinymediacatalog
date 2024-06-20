@@ -44,7 +44,7 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
             var newUniqueIds = uniqueIds.Select(value => new UniqueId { Name = value.Name, Id = value.Id });
             foreach (var uniqueId in newUniqueIds)
             {
-                context.Add(uniqueId);
+                await context.AddAsync(uniqueId).ConfigureAwait(false);
                 movieContainer.UniqueIds.Add(uniqueId);
             }
         
@@ -81,7 +81,7 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
 
             foreach (var rating in ratings)
             {
-                context.Add(rating);
+                await context.AddAsync(rating).ConfigureAwait(false);
                 movieContainer.Ratings.Add(rating);
             }
             
@@ -154,7 +154,7 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
                 ++order;
                 var actor = await GetActorAsync(movieContainer, castMember).ConfigureAwait(false);
                 actor.Order = order;
-                context.Add(actor);
+                await context.AddAsync(actor).ConfigureAwait(false);
                 movieContainer.Cast.Add(actor);
             }
 
@@ -208,7 +208,7 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
                 },
             };
 
-            context.Add(newPerson);
+            await context.AddAsync(newPerson).ConfigureAwait(false);
             await context.SaveChangesAsync().ConfigureAwait(false);
 
             return newPerson.Id;
