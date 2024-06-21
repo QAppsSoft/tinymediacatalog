@@ -2,7 +2,7 @@
 
 namespace MediaManager.ViewModels;
 
-public class TvShowsViewModel : ViewModelBase, IPageViewModel
+public class TvShows : ViewModelBase, IPage
 {
     public string Name => "Programas de Televisión";
     public string IconKey => "TvShowsIcon";

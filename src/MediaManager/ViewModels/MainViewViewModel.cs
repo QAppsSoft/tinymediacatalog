@@ -12,14 +12,14 @@ public partial class MainViewViewModel : ViewModelBase
     private readonly ILogger _logger;
 
     [ObservableProperty]
-    private IPageViewModel _current;
+    private IPage _current;
 
-    public MainViewViewModel(IEnumerable<IPageViewModel> pages, ILogger<MainViewViewModel> logger)
+    public MainViewViewModel(IEnumerable<IPage> pages, ILogger<MainViewViewModel> logger)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         Pages = pages.ToArray();
         Current = Pages[0];
     }
     
-    public IPageViewModel[] Pages { get; set; }
+    public IPage[] Pages { get; set; }
 }

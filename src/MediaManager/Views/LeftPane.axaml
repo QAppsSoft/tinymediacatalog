@@ -23,7 +23,7 @@
         </ListBox.Styles>
 
         <ListBox.DataTemplates>
-            <DataTemplate x:DataType="interfaces:IPageViewModel">
+            <DataTemplate x:DataType="interfaces:IPage">
                 <Image
                     Source="{Binding IconKey, Converter={x:Static converter:StaticResourceConverters.ToDrawingImage}}"
                     Width="32" Height="32"
