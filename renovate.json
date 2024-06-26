@@ -20,5 +20,6 @@
   },
   "pin": {
     "automerge": true
-  }
+  },
+  "automergeType": "pr"
 }
