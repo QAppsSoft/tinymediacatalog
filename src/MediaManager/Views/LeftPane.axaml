@@ -8,7 +8,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MediaManager.Views.LeftPane"
              x:DataType="viewModels:MainViewViewModel">
-    <ListBox ItemsSource="{Binding Pages}"
+    <ListBox ItemsSource="{Binding ContentPages}"
              SelectedItem="{Binding Current}"
              Background="Transparent">
 

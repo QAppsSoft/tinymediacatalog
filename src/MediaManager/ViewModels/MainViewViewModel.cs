@@ -17,9 +17,13 @@ public partial class MainViewViewModel : ViewModelBase
     public MainViewViewModel(IEnumerable<IPage> pages, ILogger<MainViewViewModel> logger)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        Pages = pages.ToArray();
-        Current = Pages[0];
+        var pagesArray = pages.ToArray();
+
+        ContentPages = pagesArray.OfType<IContentPage>().ToArray();
+        SettingPages = pagesArray.OfType<ISettingsPage>().ToArray();
+        Current = ContentPages[0];
     }
     
-    public IPage[] Pages { get; set; }
+    public IPage[] ContentPages { get; set; }
+    public ISettingsPage[] SettingPages { get; set; }
 }
