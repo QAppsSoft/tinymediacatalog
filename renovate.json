@@ -3,6 +3,9 @@
   "extends": [
     "config:recommended"
   ],
+  "assignees": [
+    "alex6dj"
+  ],  
   "major": {
     "dependencyDashboardApproval": true
   },
