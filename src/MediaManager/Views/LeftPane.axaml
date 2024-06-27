@@ -22,7 +22,7 @@
         </Style>
     </UserControl.Styles>
     
-    <ListBox ItemsSource="{Binding Pages}"
+    <ListBox ItemsSource="{Binding Pages, Mode=OneTime}"
              SelectedItem="{Binding Current}"
              Classes="AppNav">
         <ListBox.DataTemplates>
