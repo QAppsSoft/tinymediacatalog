@@ -24,6 +24,6 @@ public partial class MainViewViewModel : ViewModelBase
         Current = ContentPages[0];
     }
     
-    public IPage[] ContentPages { get; set; }
+    public IContentPage[] ContentPages { get; set; }
     public ISettingsPage[] SettingPages { get; set; }
 }
