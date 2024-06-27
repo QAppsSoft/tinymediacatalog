@@ -1,6 +1,6 @@
 ﻿namespace MediaManager.ViewModels.Interfaces;
 
-public interface IPageViewModel
+public interface IPage
 {
     string Name { get; }
     string IconKey { get; }

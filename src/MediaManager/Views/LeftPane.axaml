@@ -8,22 +8,25 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MediaManager.Views.LeftPane"
              x:DataType="viewModels:MainViewViewModel">
-    <ListBox ItemsSource="{Binding Pages}"
+    <UserControl.Styles>
+        <Style Selector="ListBox.AppNav > ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="MinWidth" Value="40" />
+            <Setter Property="MinHeight" Value="40" />
+        </Style>
+        
+        <Style Selector="ListBox.AppNav">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+    </UserControl.Styles>
+    
+    <ListBox ItemsSource="{Binding Pages, Mode=OneTime}"
              SelectedItem="{Binding Current}"
-             Background="Transparent">
-
-        <ListBox.Styles>
-            <Style Selector="ListBoxItem">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="Margin" Value="4" />
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="MinWidth" Value="40" />
-                <Setter Property="MinHeight" Value="40" />
-            </Style>
-        </ListBox.Styles>
-
+             Classes="AppNav">
         <ListBox.DataTemplates>
-            <DataTemplate x:DataType="interfaces:IPageViewModel">
+            <DataTemplate x:DataType="interfaces:IPage">
                 <Image
                     Source="{Binding IconKey, Converter={x:Static converter:StaticResourceConverters.ToDrawingImage}}"
                     Width="32" Height="32"

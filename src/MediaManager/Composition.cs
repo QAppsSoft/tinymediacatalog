@@ -31,9 +31,10 @@ internal partial class Composition
         .Bind().As(Lifetime.Singleton).To<MainViewViewModel>()
         
         // Main menú
-        .Bind<IPageViewModel>(1).As(Lifetime.Singleton).To<MoviesViewModel>()
-        .Bind<IPageViewModel>(2).As(Lifetime.Singleton).To<MovieCollectionsViewModel>()
-        .Bind<IPageViewModel>(3).As(Lifetime.Singleton).To<TvShowsViewModel>()
+        .Bind<IPage>(1).As(Lifetime.Singleton).To<MoviesViewModek>()
+        .Bind<IPage>(2).As(Lifetime.Singleton).To<MovieCollectionsViewModel>()
+        .Bind<IPage>(3).As(Lifetime.Singleton).To<TvShowsViewModels>()
+        .Bind<IPage>(4).As(Lifetime.Singleton).To<GeneralSettings>()
         
         // Models
         .Bind<IAppInfo>().As(Lifetime.Singleton).To<AppInfo>()

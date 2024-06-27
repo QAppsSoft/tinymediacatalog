@@ -27,6 +27,9 @@ public class InternalAppBuilder(Func<AppBuilder> builder)
         }
         catch (Exception exception)
         {
+#if DEBUG
+            throw;
+#endif
             LogAndClose(exception);
         }
         finally
