@@ -6,7 +6,7 @@ using MediaManager.ViewModels;
 
 namespace MediaManager.Views;
 
-public partial class TvShowsView : ReactiveUserControl<TvShows>
+public partial class TvShowsView : ReactiveUserControl<TvShowsViewModels>
 {
     public TvShowsView()
     {
