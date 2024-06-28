@@ -7,6 +7,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Common;
+using CommunityToolkit.Mvvm.ComponentModel;
 using DynamicData;
 using DynamicData.Binding;
 using ReactiveUI;
@@ -15,54 +16,70 @@ using Services.Settings.Models;
 
 namespace MediaManager.ViewModels.Settings;
 
-public class MovieSettingsViewModel : ViewModelBase, ISettingsGroup
+public partial class MovieSettingsViewModel : ViewModelBase, ISettingsGroup, IActivatableViewModel 
 {
     private readonly SourceList<string> _sources = new();
-    private readonly CompositeDisposable _cleanup = new();
+    
+    [ObservableProperty]
+    private ReadOnlyObservableCollection<string> _paths  = null!; // Will be initialized during activation
 
     public MovieSettingsViewModel(ISchedulerProvider schedulerProvider, ISetting<GeneralSettings> setting)
     {
-        _ = _sources.Connect()
-            .ObserveOn(schedulerProvider.Dispatcher)
-            .Bind(out var paths)
-            .Subscribe()
-            .DisposeWith(_cleanup);
+        Activator = new ViewModelActivator();
 
-        Paths = paths;
+        this.WhenActivated(disposables =>
+        {
+            // Use WhenActivated to execute logic
+            // when the view model gets activated.
+            HandleActivation();
+            
+            // Or use WhenActivated to execute logic
+            // when the view model gets deactivated.
+            Disposable
+                .Create(() => HandleDeactivation())
+                .DisposeWith(disposables);
+        
+            _ = _sources.Connect()
+                .ObserveOn(schedulerProvider.Dispatcher)
+                .Bind(out var paths)
+                .Subscribe()
+                .DisposeWith(disposables);
 
-        _ = setting.Value
-            .Select(settings => settings.MovieSources)
-            .ObserveOn(schedulerProvider.Dispatcher)
-            .Subscribe(items => _sources.Edit(values =>
-            {
-                values.Clear();
-                values.AddRange(items);
-            })).DisposeWith(_cleanup);
+            Paths = paths;
 
-        _ = _sources.Connect()
-            .ToSortedCollection(SortExpressionComparer<string>.Ascending(x => x))
-            .WithLatestFrom(setting.Value)
-            .Subscribe(tuple =>
-            {
-                var (updatedPaths, generalSettings) = tuple;
-                setting.Write(generalSettings with { MovieSources = updatedPaths.ToArray() });
-            }).DisposeWith(_cleanup);
+            _ = setting.Value
+                .Select(settings => settings.MovieSources)
+                .ObserveOn(schedulerProvider.Dispatcher)
+                .Subscribe(items => _sources.Edit(values =>
+                {
+                    values.Clear();
+                    values.AddRange(items);
+                })).DisposeWith(disposables);
+
+            _ = _sources.Connect()
+                .ToSortedCollection(SortExpressionComparer<string>.Ascending(x => x))
+                .WithLatestFrom(setting.Value)
+                .Subscribe(tuple =>
+                {
+                    var (updatedPaths, generalSettings) = tuple;
+                    setting.Write(generalSettings with { MovieSources = updatedPaths.ToArray() });
+                }).DisposeWith(disposables);
+        });
         
         AddPath = ReactiveCommand.CreateFromTask(GetPathAsync);
         RemovePath = ReactiveCommand.Create<string>(RemoveFromPaths);
     }
 
-
     public string Name => "Películas";
 
     public string IconKey => throw new NotImplementedException();
-
-    public ReadOnlyObservableCollection<string> Paths { get; }
 
     public Interaction<Unit, string?> AddPathInteraction { get; } = new();
 
     public ReactiveCommand<Unit, Unit> AddPath { get; set; }
     public ReactiveCommand<string, Unit> RemovePath { get; set; }
+
+    public ViewModelActivator Activator { get; }
 
     private async Task GetPathAsync()
     {
@@ -81,5 +98,12 @@ public class MovieSettingsViewModel : ViewModelBase, ISettingsGroup
         {
             _sources.Remove(path);
         }
+    }
+
+    private void HandleActivation() { }
+
+    private void HandleDeactivation()
+    {
+        Paths = null!; // Will be initialized during activation
     }
 }
