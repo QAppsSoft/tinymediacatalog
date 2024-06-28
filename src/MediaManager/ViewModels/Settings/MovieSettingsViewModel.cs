@@ -8,7 +8,10 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Common;
 using DynamicData;
+using DynamicData.Binding;
 using ReactiveUI;
+using Services.Abstractions.Settings;
+using Services.Settings.Models;
 
 namespace MediaManager.ViewModels.Settings;
 
@@ -17,11 +20,8 @@ public class MovieSettingsViewModel : ViewModelBase, ISettingsGroup
     private readonly SourceList<string> _sources = new();
     private readonly CompositeDisposable _cleanup = new();
 
-    public MovieSettingsViewModel(ISchedulerProvider schedulerProvider)
+    public MovieSettingsViewModel(ISchedulerProvider schedulerProvider, ISetting<GeneralSettings> setting)
     {
-        _sources.Add("1");
-        _sources.Add("2");
-
         _ = _sources.Connect()
             .ObserveOn(schedulerProvider.Dispatcher)
             .Bind(out var paths)
@@ -29,6 +29,24 @@ public class MovieSettingsViewModel : ViewModelBase, ISettingsGroup
             .DisposeWith(_cleanup);
 
         Paths = paths;
+
+        _ = setting.Value
+            .Select(settings => settings.MovieSources)
+            .ObserveOn(schedulerProvider.Dispatcher)
+            .Subscribe(items => _sources.Edit(values =>
+            {
+                values.Clear();
+                values.AddRange(items);
+            })).DisposeWith(_cleanup);
+
+        _ = _sources.Connect()
+            .ToSortedCollection(SortExpressionComparer<string>.Ascending(x => x))
+            .WithLatestFrom(setting.Value)
+            .Subscribe(tuple =>
+            {
+                var (updatedPaths, generalSettings) = tuple;
+                setting.Write(generalSettings with { MovieSources = updatedPaths.ToArray() });
+            }).DisposeWith(_cleanup);
         
         AddPath = ReactiveCommand.CreateFromTask(GetPathAsync);
         RemovePath = ReactiveCommand.Create<string>(RemoveFromPaths);
