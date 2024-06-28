@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:MediaManager.ViewModels"
              xmlns:views="clr-namespace:MediaManager.Views"
+             xmlns:settings="clr-namespace:MediaManager.ViewModels.Settings"
+             xmlns:settings1="clr-namespace:MediaManager.Views.Settings"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MediaManager.Views.RightPane"
              x:DataType="viewModels:MainViewViewModel"
@@ -18,8 +20,8 @@
         <DataTemplate x:DataType="viewModels:TvShowsViewModels">
             <views:TvShowsView />
         </DataTemplate>
-        <DataTemplate x:DataType="viewModels:SettingsViewModel">
-            <views:SettingsView />
+        <DataTemplate x:DataType="settings:SettingsViewModel">
+            <settings1:SettingsView />
         </DataTemplate>
     </UserControl.DataTemplates>
 </UserControl>
