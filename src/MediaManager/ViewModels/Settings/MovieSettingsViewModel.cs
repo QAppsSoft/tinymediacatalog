@@ -54,7 +54,8 @@ public partial class MovieSettingsViewModel : ViewModelBase, ISettingsGroup, IAc
                 {
                     values.Clear();
                     values.AddRange(items);
-                })).DisposeWith(disposables);
+                }))
+                .DisposeWith(disposables);
 
             _ = _sources.Connect()
                 .ToSortedCollection(SortExpressionComparer<string>.Ascending(x => x))
@@ -63,7 +64,8 @@ public partial class MovieSettingsViewModel : ViewModelBase, ISettingsGroup, IAc
                 {
                     var (updatedPaths, generalSettings) = tuple;
                     setting.Write(generalSettings with { MovieSources = updatedPaths.ToArray() });
-                }).DisposeWith(disposables);
+                })
+                .DisposeWith(disposables);
         });
         
         AddPath = ReactiveCommand.CreateFromTask(GetPathAsync);
