@@ -6,7 +6,7 @@ using MediaManager.ViewModels;
 
 namespace MediaManager.Views;
 
-public partial class MoviesView : ReactiveUserControl<MoviesViewModek>
+public partial class MoviesView : ReactiveUserControl<MoviesViewModel>
 {
     public MoviesView()
     {

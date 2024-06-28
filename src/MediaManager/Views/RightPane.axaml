@@ -9,7 +9,7 @@
              x:DataType="viewModels:MainViewViewModel"
              Content="{Binding Current}">
     <UserControl.DataTemplates>
-        <DataTemplate x:DataType="viewModels:MoviesViewModek">
+        <DataTemplate x:DataType="viewModels:MoviesViewModel">
             <views:MoviesView />
         </DataTemplate>
         <DataTemplate x:DataType="viewModels:MovieCollectionsViewModel">
