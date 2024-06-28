@@ -18,5 +18,8 @@
         <DataTemplate x:DataType="viewModels:TvShowsViewModels">
             <views:TvShowsView />
         </DataTemplate>
+        <DataTemplate x:DataType="viewModels:SettingsViewModel">
+            <views:SettingsView />
+        </DataTemplate>
     </UserControl.DataTemplates>
 </UserControl>
