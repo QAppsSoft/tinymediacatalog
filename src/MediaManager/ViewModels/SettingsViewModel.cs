@@ -2,7 +2,7 @@
 
 namespace MediaManager.ViewModels;
 
-public class GeneralSettings : ViewModelBase, ISettingsPage
+public class SettingsViewModel : ViewModelBase, ISettingsPage
 {
     public string Name => "Opciones";
     public string IconKey => "SettingsIcon";
