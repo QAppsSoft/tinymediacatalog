@@ -36,7 +36,7 @@ public partial class MovieSettingsViewModel : ViewModelBase, ISettingsGroup, IAc
             // Or use WhenActivated to execute logic
             // when the view model gets deactivated.
             Disposable
-                .Create(() => HandleDeactivation())
+                .Create(HandleDeactivation, action => action())
                 .DisposeWith(disposables);
         
             _ = _sources.Connect()
