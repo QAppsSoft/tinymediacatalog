@@ -19,6 +19,7 @@ namespace MediaManager.ViewModels.Settings;
 public partial class MovieSettingsViewModel : ViewModelBase, ISettingsGroup, IActivatableViewModel 
 {
     private readonly SourceList<string> _sources = new();
+    private readonly TimeSpan _changeDetectionDelay = TimeSpan.FromMilliseconds(250);
     
     [ObservableProperty]
     private ReadOnlyObservableCollection<string> _paths  = null!; // Will be initialized during activation
@@ -59,6 +60,7 @@ public partial class MovieSettingsViewModel : ViewModelBase, ISettingsGroup, IAc
 
             _ = _sources.Connect()
                 .ToSortedCollection(SortExpressionComparer<string>.Ascending(x => x))
+                .Throttle(_changeDetectionDelay, schedulerProvider.CurrentThread)
                 .WithLatestFrom(setting.Value)
                 .Subscribe(tuple =>
                 {
