@@ -104,7 +104,10 @@ public partial class MovieSettingsViewModel : ViewModelBase, ISettingsGroup, IAc
         }
     }
 
-    private void HandleActivation() { }
+    private static void HandleActivation()
+    {
+        // Method intentionally left empty.
+    }
 
     private void HandleDeactivation()
     {
