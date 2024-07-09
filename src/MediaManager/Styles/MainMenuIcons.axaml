@@ -7,6 +7,7 @@
                 <Image Source="{DynamicResource MoviesIcon}" Width="32" Height="32" Margin="8" />
                 <Image Source="{DynamicResource MovieCollectionsIcon}" Width="32" Height="32" Margin="8" />
                 <Image Source="{DynamicResource TvShowsIcon}" Width="32" Height="32" Margin="8" />
+                <Image Source="{DynamicResource SettingsIcon}" Width="32" Height="32" Margin="8" />
             </StackPanel>
         </Border>
     </Design.PreviewWith>
