@@ -21,5 +21,13 @@
   "pin": {
     "automerge": true
   },
-  "automergeType": "pr"
+  "automergeType": "pr",
+  "packageRules": [
+    {      
+      "groupName": "Avalonia packages",
+      "matchPackagePrefixes": [
+        "Avalonia"
+      ]
+    }
+  ]
 }
