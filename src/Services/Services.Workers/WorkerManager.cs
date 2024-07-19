@@ -36,6 +36,7 @@ public class WorkerManager : IWorkerManager, IDisposable
         anyWorkerRunning.CombineLatest(idleWorkers)
             .Where(NotRunningAndSomeQueued)
             .Select(x => x.Second)
+            .Throttle(TimeSpan.FromSeconds(1))
             .SelectMany(StartIdleWorker)
             .Subscribe()
             .DisposeWith(_cleanup);
