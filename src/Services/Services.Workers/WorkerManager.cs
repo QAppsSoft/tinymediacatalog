@@ -35,6 +35,7 @@ public class WorkerManager : IWorkerManager, IDisposable
 
         anyWorkerRunning.CombineLatest(idleWorkers)
             .Where(NotRunningAndSomeQueued)
+            .Select(x => x.Second)
             .SelectMany(StartIdleWorker)
             .Subscribe()
             .DisposeWith(_cleanup);
@@ -56,9 +57,8 @@ public class WorkerManager : IWorkerManager, IDisposable
     public IObservable<IChangeSet<IChangeSet<IWorker>>> Workers { get; }
     public IObservable<int> Enqueued { get; }
 
-    private IObservable<Unit> StartIdleWorker((bool First, IReadOnlyCollection<IWorker> Second) tuple)
+    private IObservable<Unit> StartIdleWorker(IReadOnlyCollection<IWorker> idle)
     {
-        var (_, idle) = tuple;
         return Observable.FromAsync(_ => idle.First().StartWorkerAsync(), _schedulerProvider.TaskPool);
     }
 
