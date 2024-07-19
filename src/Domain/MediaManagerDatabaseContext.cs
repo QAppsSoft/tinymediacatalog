@@ -46,6 +46,7 @@ public class MediaManagerDatabaseContext : DbContext
         modelBuilder.ApplyConfiguration(new OtherFileEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new SubtitleFileEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new VideoFileEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new MovieContainerEntityTypeConfiguration());
         
         base.OnModelCreating(modelBuilder);
     }

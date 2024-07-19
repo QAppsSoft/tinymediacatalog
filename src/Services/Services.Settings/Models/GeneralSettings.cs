@@ -1,8 +1,23 @@
 ﻿namespace Services.Settings.Models;
 
-public record GeneralSettings(string[] MovieSources, string[] TvShowSources)
+public record GeneralSettings(string[] MovieSources, string[] TvShowSources, AudioType[] SupportedAudioTypes, VideoType[] SupportedVideoTypes)
 {
-    public static GeneralSettings Default { get; } = new([], []);
+    private static readonly AudioType[] DefaultAudios =
+    [
+        new AudioType(".mp3"),
+        new AudioType(".m4a"),
+    ];
+    
+    private static readonly VideoType[] DefaultVideos =
+    [
+        new VideoType(".mkv"),
+        new VideoType(".mp4"),
+        new VideoType(".avi"),
+        new VideoType(".mpg"),
+        new VideoType(".mpeg"),
+    ];
+
+    public static GeneralSettings Default { get; } = new([], [], DefaultAudios, DefaultVideos);
 
     public override int GetHashCode()
     {
