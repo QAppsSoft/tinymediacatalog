@@ -125,10 +125,10 @@ public class MovieContainerManager(IDbContextFactory<MediaManagerDatabaseContext
                     .Select(movie => movie.Files)
                     .SelectMany(files => files)
                     .Where(file => file is NfoFile)
-                    .FirstOrDefaultAsync()
+                    .FirstAsync()
                     .ConfigureAwait(false);
 
-                return nfoFile?.FilePath;
+                return nfoFile.FilePath;
             }
     }
 

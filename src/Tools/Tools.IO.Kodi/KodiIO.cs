@@ -20,10 +20,6 @@ public class KodiIO(IXmlRead xmlRead, IMovieContainerManager movieContainerManag
         Movie? movie;
         
         var nfoPath = await GetNfoPathAsync(movieContainerId).ConfigureAwait(false);
-        if (nfoPath is null)
-        {
-            return;
-        }
         
         try
         {
@@ -130,5 +126,5 @@ public class KodiIO(IXmlRead xmlRead, IMovieContainerManager movieContainerManag
         await movieContainerManager.UpdateRatingsAsync(movieContainerId, ratings).ConfigureAwait(false);
     }
 
-    private Task<string?> GetNfoPathAsync(Guid movieContainerId) => movieContainerProvider.GetNfoPathAsync(movieContainerId);
+    private Task<string> GetNfoPathAsync(Guid movieContainerId) => movieContainerProvider.GetNfoPathAsync(movieContainerId);
 }
