@@ -21,7 +21,7 @@ public class VideoFileProcessor : NoMediaFileBase<VideoFile>
         {
             var video = mediaInfo.PrimaryVideoStream;
 
-            file.BitRate = (int)video.BitRate; // TODO: Make bitrate long maybe
+            file.BitRate = video.BitRate;
             file.Codec = video.CodecName;
             file.Duration = video.Duration;
             file.Resolution = new Resolution(video.Width, video.Height);

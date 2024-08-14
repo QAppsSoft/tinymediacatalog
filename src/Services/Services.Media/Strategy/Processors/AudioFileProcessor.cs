@@ -17,7 +17,7 @@ public class AudioFileProcessor : NoMediaFileBase<AudioFile>
         {
             var audio = mediaInfo.PrimaryAudioStream;
 
-            file.BitRate = (int)audio.BitRate; // TODO: Make bitrate long maybe
+            file.BitRate = audio.BitRate;
             file.Codec = audio.CodecName;
             file.Duration = audio.Duration;
             file.Language = audio.Language ?? string.Empty;
