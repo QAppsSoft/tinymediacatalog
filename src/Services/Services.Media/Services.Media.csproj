@@ -13,4 +13,9 @@
       <ProjectReference Include="..\Services.Settings\Services.Settings.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Avalonia" />
+      <PackageReference Include="FFMpegCore" />
+    </ItemGroup>
+
 </Project>
