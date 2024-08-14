@@ -1,6 +1,13 @@
-﻿namespace Services.Media.Strategy.Processors;
+﻿using Domain.Models.Multimedia;
 
-public sealed class SubtitleProcessor : NoMediaFileBase
+namespace Services.Media.Strategy.Processors;
+
+public sealed class SubtitleProcessor : NoMediaFileBase<SubtitleFile>
 {
     public override FileKind MediaKind { get; } = FileKind.Subtitle;
+    
+    public override Task<MultimediaFile> PrepareAsync(string path)
+    {
+        return Task.FromResult<MultimediaFile>(GetBasicData(path));
+    }
 }

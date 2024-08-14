@@ -1,6 +1,12 @@
-﻿namespace Services.Media.Strategy.Processors;
+﻿using Domain.Models.Multimedia;
 
-public sealed class OtherFileProcessor : NoMediaFileBase
+namespace Services.Media.Strategy.Processors;
+
+public sealed class OtherFileProcessor : NoMediaFileBase<OtherFile>
 {
     public override FileKind MediaKind { get; } = FileKind.Other;
+    public override Task<MultimediaFile> PrepareAsync(string path)
+    {
+        return Task.FromResult<MultimediaFile>(GetBasicData(path));
+    }
 }
