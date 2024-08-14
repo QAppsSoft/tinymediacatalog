@@ -21,7 +21,6 @@ public class AudioFileProcessor : NoMediaFileBase<AudioFile>
             file.Codec = audio.CodecName;
             file.Duration = audio.Duration;
             file.Language = audio.Language ?? string.Empty;
-            file.BitRate = (int)audio.BitRate;
         }
 
         return file;
