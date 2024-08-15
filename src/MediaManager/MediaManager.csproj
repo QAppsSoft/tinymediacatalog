@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
@@ -36,6 +35,7 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Services\Services.Abstractions\Services.Abstractions.csproj" />
     <ProjectReference Include="..\Services\Services.Domains\Services.Domains.csproj" />
+    <ProjectReference Include="..\Services\Services.Settings\Services.Settings.csproj" />
     <ProjectReference Include="..\Tools\Tools.IO.Kodi\Tools.IO.Kodi.csproj" />
     <ProjectReference Include="..\Tools\Tools\Tools.csproj" />
   </ItemGroup>
@@ -47,5 +47,12 @@
     <None Update=".portable">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Settings\SettingsView.axaml.cs">
+      <DependentUpon>SettingsView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

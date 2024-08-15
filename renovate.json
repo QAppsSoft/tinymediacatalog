@@ -5,7 +5,7 @@
   ],
   "assignees": [
     "alex6dj"
-  ],  
+  ],
   "major": {
     "dependencyDashboardApproval": true
   },
@@ -23,10 +23,10 @@
   },
   "automergeType": "pr",
   "packageRules": [
-    {      
+    {
       "groupName": "Avalonia packages",
-      "matchPackagePrefixes": [
-        "Avalonia"
+      "matchPackageNames": [
+        "Avalonia{/,}**"
       ]
     }
   ]

@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MediaManager.ViewModels.Interfaces;
-using ReactiveUI;
 
 namespace MediaManager.ViewModels;
 

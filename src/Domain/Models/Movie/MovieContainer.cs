@@ -10,7 +10,7 @@ public partial class MovieContainer : GuidEntityBase, ITrackedEntity
     public DateTime Created { get; set; } = DateTime.Now;
     public DateTime Updated { get; set; }
     
-    public string NfoPath { get; set; } = string.Empty;
+    public string BasePath { get; set; } = string.Empty;
     
     public string Title { get; set; } = string.Empty;
     public string OriginalTitle { get; set; } = string.Empty;

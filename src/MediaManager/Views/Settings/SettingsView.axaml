@@ -1,0 +1,28 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:settings="clr-namespace:MediaManager.ViewModels.Settings"
+             xmlns:settings1="clr-namespace:MediaManager.Views.Settings"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MediaManager.Views.Settings.SettingsView"
+             x:DataType="settings:SettingsViewModel">
+    <UserControl.DataTemplates>
+        <DataTemplate x:DataType="settings:MovieSettingsViewModel">
+            <settings1:MovieSettingsView />
+        </DataTemplate>
+    </UserControl.DataTemplates>
+    <TabControl ItemsSource="{Binding Groups}">
+        <TabControl.ItemTemplate>
+            <DataTemplate x:DataType="settings:ISettingsGroup">
+                <StackPanel Orientation="Horizontal">
+                    <Image />
+                    <TextBlock Text="{Binding Name}" />
+                </StackPanel>
+            </DataTemplate>
+        </TabControl.ItemTemplate>
+        <TabControl.ContentTemplate>
+            
+        </TabControl.ContentTemplate>
+    </TabControl>
+</UserControl>

@@ -7,6 +7,7 @@ using MediaManager.DependencyInjection;
 using MediaManager.Infrastructure;
 using MediaManager.ViewModels;
 using MediaManager.ViewModels.Interfaces;
+using MediaManager.ViewModels.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,11 @@ using Pure.DI;
 using Serilog;
 using Serilog.Extensions.Logging;
 using Services.Abstractions.Domains;
+using Services.Abstractions.Settings;
 using Services.Domains;
+using Services.Settings;
+using Services.Settings.Converters;
+using Services.Settings.Models;
 using Tools.IO;
 using Tools.IO.Kodi;
 using Tools.XML;
@@ -31,10 +36,13 @@ internal partial class Composition
         .Bind().As(Lifetime.Singleton).To<MainViewViewModel>()
         
         // Main menú
-        .Bind<IPage>(1).As(Lifetime.Singleton).To<MoviesViewModek>()
+        .Bind<IPage>(1).As(Lifetime.Singleton).To<MoviesViewModel>()
         .Bind<IPage>(2).As(Lifetime.Singleton).To<MovieCollectionsViewModel>()
         .Bind<IPage>(3).As(Lifetime.Singleton).To<TvShowsViewModels>()
-        .Bind<IPage>(4).As(Lifetime.Singleton).To<GeneralSettings>()
+        .Bind<IPage>(4).As(Lifetime.Singleton).To<SettingsViewModel>()
+        
+        // General Settings
+        .Bind<ISettingsGroup>(1).As(Lifetime.Singleton).To<MovieSettingsViewModel>()
         
         // Models
         .Bind<IAppInfo>().As(Lifetime.Singleton).To<AppInfo>()
@@ -51,6 +59,18 @@ internal partial class Composition
             return configuration.GetSection(LoggingConfiguration.Logging).Get<LoggingConfiguration>();
         })
         .Bind<IXmlRead>().As(Lifetime.Singleton).To<XmlRead>()
+        
+        // Settings
+        .Bind<ISettingFactory>().As(Lifetime.Singleton).To<SettingFactory>()
+        .Bind<ISettingsStore>().As(Lifetime.Singleton).To<FileSettingsStore>()
+        .Bind<IConverter<GeneralSettings>>().As(Lifetime.Singleton).To<GeneralSettingsConverter>()
+        .Bind<ISetting<TT>>().As(Lifetime.Singleton).To(x =>
+        {
+            x.Inject<ISettingFactory>(out var settingFactory);
+            x.Inject<IConverter<TT>>(out var converter);
+
+            return settingFactory.Create(converter, nameof(TT));
+        })
         
         // Logging
         .Bind<ILoggerFactory>().As(Lifetime.Singleton).To(x =>
