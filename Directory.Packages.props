@@ -46,7 +46,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.1.8" />
+    <PackageVersion Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.1.9" />
     <PackageVersion Include="System.Management" Version="8.0.0" />
     <PackageVersion Include="System.Reactive" Version="6.0.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
