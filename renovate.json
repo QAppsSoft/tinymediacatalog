@@ -26,7 +26,7 @@
     {      
       "groupName": "Avalonia packages",
       "matchPackagePrefixes": [
-        "Avalonia", "FluentAvaloniaUI"
+        "Avalonia"
       ]
     }
   ]
