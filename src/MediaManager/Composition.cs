@@ -15,8 +15,12 @@ using Pure.DI;
 using Serilog;
 using Serilog.Extensions.Logging;
 using Services.Abstractions.Domains;
+using Services.Abstractions.Media;
 using Services.Abstractions.Settings;
 using Services.Domains;
+using Services.Media;
+using Services.Media.Strategy;
+using Services.Media.Strategy.Processors;
 using Services.Settings;
 using Services.Settings.Converters;
 using Services.Settings.Models;
@@ -104,6 +108,18 @@ internal partial class Composition
         .Bind<MovieContainerManager>().As(Lifetime.Singleton)
         .Bind<IMovieContainerProvider>().As(Lifetime.Singleton).To<MovieContainerManager>()
         .Bind<IMovieContainerManager>().As(Lifetime.Singleton).To<MovieContainerManager>()
+        
+        // Media Services
+        .Bind<IFileStrategy>().To<FileStrategy>()
+        .Bind<FileKindSelector>().To<FileKindSelector>()
+        .Bind<IFileProcessor<FileKind>>().To<AudioFileProcessor>()
+        .Bind<IFileProcessor<FileKind>>().To<ImageFileProcessor>()
+        .Bind<IFileProcessor<FileKind>>().To<AudioFileProcessor>()
+        .Bind<IFileProcessor<FileKind>>().To<OtherFileProcessor>()
+        .Bind<IFileProcessor<FileKind>>().To<SubtitleProcessor>()
+        .Bind<IFileProcessor<FileKind>>().To<VideoFileProcessor>()
+        .Bind<IMediaEnumerator>().To<MediaEnumerator>()
+        .Bind<IMultimediaLoader>().To<MultimediaLoader>()
         
         // Tools
         .Bind<IOInterface>().To<KodiIO>()
