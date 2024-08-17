@@ -114,7 +114,6 @@ internal partial class Composition
         .Bind<FileKindSelector>().To<FileKindSelector>()
         .Bind<IFileProcessor<FileKind>>().To<AudioFileProcessor>()
         .Bind<IFileProcessor<FileKind>>().To<ImageFileProcessor>()
-        .Bind<IFileProcessor<FileKind>>().To<AudioFileProcessor>()
         .Bind<IFileProcessor<FileKind>>().To<OtherFileProcessor>()
         .Bind<IFileProcessor<FileKind>>().To<SubtitleProcessor>()
         .Bind<IFileProcessor<FileKind>>().To<VideoFileProcessor>()
