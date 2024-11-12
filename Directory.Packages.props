@@ -14,7 +14,7 @@
     <PackageVersion Include="FluentAssertions" Version="6.12.2" />
     <PackageVersion Include="FluentAssertions.Analyzers" Version="0.34.1" />
     <PackageVersion Include="FluentAvaloniaUI" Version="2.1.0" />
-    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.177">
+    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.178">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
