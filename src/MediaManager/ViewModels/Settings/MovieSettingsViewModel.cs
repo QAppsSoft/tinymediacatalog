@@ -7,10 +7,10 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Common;
-using CommunityToolkit.Mvvm.ComponentModel;
 using DynamicData;
 using DynamicData.Binding;
 using ReactiveUI;
+using ReactiveUI.SourceGenerators;
 using Services.Abstractions.Settings;
 using Services.Settings.Models;
 
@@ -21,7 +21,7 @@ public partial class MovieSettingsViewModel : ViewModelBase, ISettingsGroup, IAc
     private readonly SourceList<string> _sources = new();
     private readonly TimeSpan _changeDetectionDelay = TimeSpan.FromMilliseconds(250);
     
-    [ObservableProperty]
+    [Reactive]
     private ReadOnlyObservableCollection<string> _paths  = null!; // Will be initialized during activation
 
     public MovieSettingsViewModel(ISchedulerProvider schedulerProvider, ISetting<GeneralSettings> setting)

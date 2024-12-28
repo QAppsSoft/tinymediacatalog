@@ -1,7 +1,7 @@
 ﻿using System;
-using CommunityToolkit.Mvvm.ComponentModel;
 using MediaManager.ViewModels.Interfaces;
 using Microsoft.Extensions.Logging;
+using ReactiveUI.SourceGenerators;
 
 namespace MediaManager.ViewModels;
 
@@ -9,7 +9,7 @@ public partial class MainViewViewModel : ViewModelBase
 {
     private readonly ILogger _logger;
 
-    [ObservableProperty]
+    [Reactive]
     private IPage _current;
 
     public MainViewViewModel(IPage[] pages, ILogger<MainViewViewModel> logger)
