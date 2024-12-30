@@ -42,7 +42,7 @@
     </PackageVersion>
     <PackageVersion Include="Serilog.Extensions.Logging" Version="8.0.0" />
     <PackageVersion Include="Serilog.Sinks.File" Version="6.0.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.32.0.97167">
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.4.0.108396">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
