@@ -29,7 +29,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
     <PackageVersion Include="Moq.AutoMock" Version="3.5.0" />
-    <PackageVersion Include="PublishAotCompressed" Version="1.0.3" />
+    <PackageVersion Include="PublishAotCompressed" Version="1.0.5" />
     <PackageVersion Include="Pure.DI" Version="2.1.59">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
